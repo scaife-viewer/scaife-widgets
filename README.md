@@ -1,29 +1,49 @@
-# scaife-widgets
+# Scaife Widgets
 
-## Project setup
-```
-npm install
-```
+[![npm version](https://badge.fury.io/js/%40scaife-viewer%2Fscaife-widgets.svg)](https://badge.fury.io/js/%40scaife-viewer%2Fscaife-widgets)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Module for building modular Scaife Viewer components.
 
-### Compiles and minifies for production
-```
-npm run build
+## Getting Started
+
+```sh
+$ npm install @scaife-viewer/scaife-widgets
 ```
 
-### Run your unit tests
-```
-npm run test:unit
+Import components like so:
+
+```sh
+import HelloWorld from "scaife-widgets"
 ```
 
-### Lints and fixes files
+## Development
+
+Project setup:
+
+```sh
+$ npm install
 ```
+
+Compile and hot-reload for development:
+
+```sh
+$ npm run serve
+```
+
+Compile and minifie for production:
+
+```sh
+$ npm run build
+```
+
+Run unit tests:
+
+```sh
+$ npm run test:unit
+```
+
+Lint and fix files:
+
+```sh
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
