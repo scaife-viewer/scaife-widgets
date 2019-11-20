@@ -13,7 +13,7 @@ $ npm install @scaife-viewer/scaife-widgets
 Import components like so:
 
 ```sh
-import HelloWorld from "scaife-widgets"
+import { HelloWorld } from "@scaife-viewer/scaife-widgets";
 ```
 
 ## Development
@@ -45,5 +45,5 @@ $ npm run test:unit
 Lint and fix files:
 
 ```sh
-npm run lint
+$ npm run lint
 ```
