@@ -39,7 +39,7 @@ $ npm run build
 Run unit tests:
 
 ```sh
-$ npm run test:unit
+$ npm run test
 ```
 
 Lint and fix files:
