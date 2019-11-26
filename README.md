@@ -12,9 +12,17 @@ $ npm install @scaife-viewer/scaife-widgets
 
 Import components like so:
 
-```sh
+```js
 import { HelloWorld } from "@scaife-viewer/scaife-widgets";
 ```
+
+Import css like so:
+
+```js
+<style src='@scaife-viewer/scaife-widgets/dist/scaife-widgets.css'></style>
+```
+
+> See [_example/sample](https://github.com/scaife-viewer/scaife-widgets/tree/master/_example/sample) for more examples.
 
 ## Development
 
@@ -30,7 +38,7 @@ Compile and hot-reload for development:
 $ npm run serve
 ```
 
-Compile and minifie for production:
+Compile and minify for production:
 
 ```sh
 $ npm run build

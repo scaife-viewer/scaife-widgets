@@ -12,3 +12,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.hello {
+  color: red;
+}
+</style>
