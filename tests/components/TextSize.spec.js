@@ -1,5 +1,5 @@
 /* global describe, expect, it  */
-import { mount } from "@vue/test-utils";
+import { shallowMount } from "@vue/test-utils";
 
 import TextSize from "@/components/TextSize.vue";
 
@@ -11,9 +11,10 @@ describe("TextSize.vue", () => {
     ["text-lg", 'text-lg selected">Αα'],
     ["text-xl", 'text-xl selected">Αα']
   ])("it renders selected correctly via props", (value, expected) => {
-    const wrapper = mount(TextSize, {
+    const wrapper = shallowMount(TextSize, {
       propsData: { value, size: value }
     });
+
     expect(wrapper.html()).toContain(expected);
   });
 });
@@ -26,9 +27,10 @@ describe("TextSize.vue", () => {
     ["text-lg", 'text-lg">Αα'],
     ["text-xl", 'text-xl">Αα']
   ])("it renders without selected correctly via props", (value, expected) => {
-    const wrapper = mount(TextSize, {
+    const wrapper = shallowMount(TextSize, {
       propsData: { value: "different", size: value }
     });
+
     expect(wrapper.html()).toContain(expected);
   });
 });

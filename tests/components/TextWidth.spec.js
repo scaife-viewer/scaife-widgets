@@ -1,5 +1,5 @@
 /* global describe, expect, it  */
-import { mount } from "@vue/test-utils";
+import { shallowMount } from "@vue/test-utils";
 
 import TextWidth from "@/components/TextWidth.vue";
 
@@ -10,9 +10,10 @@ describe("TextWidth.vue", () => {
     ["wide", 'active">Wide'],
     ["full", 'active">Full']
   ])("it renders active correctly via props", (value, expected) => {
-    const wrapper = mount(TextWidth, {
+    const wrapper = shallowMount(TextWidth, {
       propsData: { value, width: value }
     });
+
     expect(wrapper.html()).toContain(expected);
   });
 
@@ -21,9 +22,10 @@ describe("TextWidth.vue", () => {
     ["normal", 'text-width-control">Normal'],
     ["wide", 'text-width-control">Wide']
   ])("it renders without active correctly via props", (value, expected) => {
-    const wrapper = mount(TextWidth, {
+    const wrapper = shallowMount(TextWidth, {
       propsData: { value: "different", width: value }
     });
+
     expect(wrapper.html()).toContain(expected);
   });
 });

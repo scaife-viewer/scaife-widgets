@@ -23,7 +23,7 @@ export default {
 
 <style scoped>
 .text-width-control {
-  font-family: "Noto Serif";
+  font-family: "Noto Serif", serif;
   cursor: pointer;
   color: #adb5bd;
   font-size: 14px;

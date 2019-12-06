@@ -22,10 +22,10 @@ export default {
 <style scoped>
 .text-size-control {
   cursor: pointer;
-  font-family: "Noto Serif";
+  font-family: "Noto Serif", serif;
   color: #adb5bd;
 }
-text-size-control.selected {
+.text-size-control.selected {
   color: #343a40;
 }
 </style>
