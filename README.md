@@ -1,7 +1,7 @@
 # Scaife Widgets
 
 [![npm version](https://badge.fury.io/js/%40scaife-viewer%2Fscaife-widgets.svg)](https://badge.fury.io/js/%40scaife-viewer%2Fscaife-widgets)
-![](https://github.com/scaife-viewer/scaife-widgets/workflows/Node%20CI/badge.svg)
+[![github actions](https://github.com/scaife-viewer/scaife-widgets/workflows/Node%20CI/badge.svg)](https://github.com/scaife-viewer/scaife-widgets/actions?query=workflow%3A%22Node+CI%22)
 
 Module for building modular Scaife Viewer components.
 
