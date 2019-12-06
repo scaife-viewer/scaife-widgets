@@ -5,11 +5,14 @@
   "main": "./dist/scaife-widgets.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name scaife-widgets ./src/components/index.js",
+    "build": "vue-cli-service build --target lib --name scaife-widgets ./src/index.js",
     "test": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@fortawesome/vue-fontawesome": "^0.1.8",
     "core-js": "^3.3.2",
     "vue": "^2.6.10"
   },

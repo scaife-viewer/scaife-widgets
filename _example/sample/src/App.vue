@@ -1,27 +1,33 @@
 <template>
   <div id="app">
     <HelloWorld msg="hi!"></HelloWorld>
-    <Metadata :metadata="{work_title: 'Test'}" />
-    <Reader :lines="lines" :textSize="textSize" :textWidth="textWidth" />
+    <Icon name="chevron-left" fixed-width />
+    <Metadata workTitle="test" />
+    <Paginator :urn="previous" direction="left" />
     <TextSize :value="textSize" @input="changeTextSize" size="xs" />{{ " " }}
     <TextWidth :value="textWidth" @input="changeTextWidth" width="narrow" />
   </div>
 </template>
 
 <script>
-  import Vue from "vue"
-  import { HelloWorld } from "@scaife-viewer/scaife-widgets";
-  import { Metadata } from "@scaife-viewer/scaife-widgets";
-  import { Reader } from "@scaife-viewer/scaife-widgets";
-  import { TextSize } from "@scaife-viewer/scaife-widgets";
-  import { TextWidth } from "@scaife-viewer/scaife-widgets";
+  import Vue from "vue";
+  import {
+    HelloWorld,
+    Icon,
+    Metadata,
+    Paginator,
+    TextSize,
+    TextWidth,
+    URN
+  } from "@scaife-viewer/scaife-widgets";
 
   export default {
     name: "app",
     components: {
       HelloWorld,
+      Icon,
       Metadata,
-      Reader,
+      Paginator,
       TextSize,
       TextWidth
     },
@@ -32,12 +38,9 @@
       textWidth() {
         return "normal"
       },
-      lines() {
-        return [
-          { label: "1", textContent: "Some text" },
-          { label: "2", textContent: "More text" }
-        ];
-      }
+      previous() {
+        return new URN("urn:cts:greekLit:tlg0012.tlg001.msA:1.1");
+      },
     },
     methods: {
       changeTextSize(size) {
