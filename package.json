@@ -2,6 +2,11 @@
   "name": "@scaife-viewer/scaife-widgets",
   "version": "0.3.0",
   "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scaife-viewer/scaife-widgets.git"
+  },
+  "homepage": "https://github.com/scaife-viewer/scaife-widgets#readme",
   "main": "./dist/scaife-widgets.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
