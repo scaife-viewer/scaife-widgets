@@ -5,3 +5,5 @@ export { default as TextSize } from "@/components/TextSize.vue";
 export { default as TextWidth } from "@/components/TextWidth.vue";
 export { default as Icon } from "@/components/Icon.vue";
 export { default as URN } from "@/utils/URN";
+export { default as TextSizeWidget } from "@/widgets/TextSizeWidget.vue";
+export { default as scaifeWidgets } from "@/store";
