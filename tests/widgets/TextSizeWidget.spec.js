@@ -11,7 +11,9 @@ localVue.use(Vuex);
 
 describe("TextSizeWidget.vue", () => {
   const store = new Vuex.Store({
-    modules: { scaifeWidgets }
+    modules: {
+      [MODULE_NS]: scaifeWidgets.store
+    }
   });
 
   it("sets the correct default data", () => {

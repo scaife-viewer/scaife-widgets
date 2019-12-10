@@ -38,6 +38,12 @@ Import utils like so:
 import { URN } from "@scaife-viewer/scaife-widgets";
 ```
 
+Import constants like so:
+
+```js
+import MODULE_NS from "@scaife-viewer/scaife-widgets";
+```
+
 Import and initialize the store like so:
 
 ```js
@@ -45,12 +51,13 @@ import Vue from "vue";
 import Vuex from "vuex";
 import App from "./App.vue";
 import { scaifeWidgets } from "@scaife-viewer/scaife-widgets";
+import MODULE_NS from "@scaife-viewer/scaife-widgets";
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
   modules: {
-    scaifeWidgets
+    [MODULE_NS]: scaifeWidgets.store
   }
 });
 
