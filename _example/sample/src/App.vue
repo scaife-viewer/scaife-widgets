@@ -6,51 +6,52 @@
     <Paginator :urn="previous" direction="left" />
     <TextSize :value="textSize" @input="changeTextSize" size="xs" />{{ " " }}
     <TextWidth :value="textWidth" @input="changeTextWidth" width="narrow" />
+    <TextSizeWidget />
   </div>
 </template>
 
 <script>
-  import Vue from "vue";
-  import {
+import {
+  HelloWorld,
+  Icon,
+  Metadata,
+  Paginator,
+  TextSize,
+  TextWidth,
+  URN,
+  TextSizeWidget
+} from "@scaife-viewer/scaife-widgets";
+export default {
+  name: "app",
+  components: {
     HelloWorld,
     Icon,
     Metadata,
     Paginator,
     TextSize,
     TextWidth,
-    URN
-  } from "@scaife-viewer/scaife-widgets";
-
-  export default {
-    name: "app",
-    components: {
-      HelloWorld,
-      Icon,
-      Metadata,
-      Paginator,
-      TextSize,
-      TextWidth
+    TextSizeWidget
+  },
+  computed: {
+    textSize() {
+      return "md";
     },
-    computed: {
-      textSize() {
-        return "md"
-      },
-      textWidth() {
-        return "normal"
-      },
-      previous() {
-        return new URN("urn:cts:greekLit:tlg0012.tlg001.msA:1.1");
-      },
+    textWidth() {
+      return "normal";
     },
-    methods: {
-      changeTextSize(size) {
-        console.log(size);
-      },
-      changeTextWidth(width) {
-        console.log(width)
-      }
+    previous() {
+      return new URN("urn:cts:greekLit:tlg0012.tlg001.msA:1.1");
+    }
+  },
+  methods: {
+    changeTextSize(size) {
+      console.log(size);
+    },
+    changeTextWidth(width) {
+      console.log(width);
     }
   }
+};
 </script>
 
 <style src="@scaife-viewer/scaife-widgets/dist/scaife-widgets.css"></style>
