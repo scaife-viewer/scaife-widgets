@@ -7,8 +7,6 @@
     <TextSize :value="textSize" @input="changeTextSize" size="xs" />{{ " " }}
     <TextWidth :value="textWidth" @input="changeTextWidth" width="narrow" />
     <TextSizeWidget />
-    <PassageChildrenWidget />
-    <PassageAncestorsWidget />
   </div>
 </template>
 
@@ -21,9 +19,7 @@ import {
   TextSize,
   TextWidth,
   URN,
-  TextSizeWidget,
-  PassageChildrenWidget,
-  PassageAncestorsWidget
+  TextSizeWidget
 } from "@scaife-viewer/scaife-widgets";
 export default {
   name: "app",
@@ -34,9 +30,7 @@ export default {
     Paginator,
     TextSize,
     TextWidth,
-    TextSizeWidget,
-    PassageChildrenWidget,
-    PassageAncestorsWidget
+    TextSizeWidget
   },
   computed: {
     textSize() {
