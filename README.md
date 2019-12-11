@@ -31,6 +31,7 @@ import {
   TextWidth,
   URN,
   TextSizeWidget,
+  TextWidthWidget,
   PassageAncestorsWidget,
   PassageChildrenWidget,
   PassageReferenceWidget
