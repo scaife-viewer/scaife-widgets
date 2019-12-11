@@ -11,6 +11,3 @@ export { default as TextSizeWidget } from "@/widgets/TextSizeWidget.vue";
 export { default as scaifeWidgets } from "@/store";
 // utils
 export { default as URN } from "@/utils/URN";
-// constants
-import { MODULE_NS } from "@/store/constants";
-export default MODULE_NS;

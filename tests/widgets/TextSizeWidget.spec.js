@@ -12,7 +12,7 @@ localVue.use(Vuex);
 describe("TextSizeWidget.vue", () => {
   const store = new Vuex.Store({
     modules: {
-      [MODULE_NS]: scaifeWidgets.store
+      [scaifeWidgets.namespace]: scaifeWidgets.store
     }
   });
 

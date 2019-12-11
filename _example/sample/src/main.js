@@ -2,13 +2,12 @@ import Vue from "vue";
 import Vuex from "vuex";
 import App from "./App.vue";
 import { scaifeWidgets } from "@scaife-viewer/scaife-widgets";
-import MODULE_NS from "@scaife-viewer/scaife-widgets";
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
   modules: {
-    [MODULE_NS]: scaifeWidgets.store
+    [scaifeWidgets.namespace]: scaifeWidgets.store
   }
 });
 
