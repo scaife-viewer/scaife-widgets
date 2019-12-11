@@ -19,6 +19,8 @@
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/vue-fontawesome": "^0.1.8",
     "core-js": "^3.3.2",
+    "graphql": "^14.5.8",
+    "graphql-tag": "^2.10.1",
     "vue": "^2.6.10"
   },
   "devDependencies": {

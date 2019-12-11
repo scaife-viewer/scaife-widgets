@@ -1,6 +1,7 @@
 /* global describe, expect, it  */
 import Vuex from "vuex";
 import { shallowMount, createLocalVue } from "@vue/test-utils";
+
 import TextSizeWidget from "@/widgets/TextSizeWidget.vue";
 import scaifeWidgets from "@/store";
 import { MODULE_NS, SET_TEXT_SIZE } from "@/store/constants";

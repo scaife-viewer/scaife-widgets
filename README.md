@@ -7,6 +7,8 @@ Component library for building applications in the [Scaife Viewer](https://githu
 
 ## Citizens
 
+Everything is a component in the Vue sense but we try to distinguish between:
+
 1. **Components** - stateless, presentation-only components
 1. **Widgets** - stateful, Vuex-backed components
 1. **Stores** - Vuex state stores
@@ -28,7 +30,8 @@ import {
   TextSize,
   TextWidth,
   URN,
-  TextSizeWidget
+  TextSizeWidget,
+  PassageAncestorsWidget
 } from "@scaife-viewer/scaife-widgets";
 ```
 
