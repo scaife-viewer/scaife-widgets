@@ -1,15 +1,14 @@
-<template v-if="ancestors">
-  <div class="passage-ancestors-widget u-grid">
+<template v-if="children">
+  <div class="passage-children-widget u-grid">
     <div
       class="grid-cell-square"
-      v-for="ancestor in ancestors"
-      :key="ancestor.absolute"
+      v-for="child in children"
+      :key="child.absolute"
     >
       <router-link
-        :key="`${ancestor.absolute}`"
-        :to="{ path: 'reader', query: { urn: `${ancestor.absolute}` } }"
+        :to="{ path: 'reader', query: { urn: `${child.absolute}` } }"
       >
-        {{ ancestor.node }}
+        {{ child.node }}
       </router-link>
     </div>
   </div>
@@ -21,9 +20,9 @@ import URN from "@/utils/URN";
 import { MODULE_NS } from "@/store/constants";
 
 export default {
-  name: "PassageAncestorsWidget",
+  name: "PassageChildrenWidget",
   scaifeConfig: {
-    displayName: "Ancestors"
+    displayName: "Children"
   },
   computed: {
     passage() {
@@ -39,12 +38,12 @@ export default {
             }`
         : null;
     },
-    ancestorsLens() {
-      return this.gqlData.passageLines.metadata.ancestors;
+    childrenLens() {
+      return this.gqlData.passageLines.metadata.children;
     },
-    ancestors() {
-      return this.gqlData && this.ancestorsLens
-        ? this.ancestorsLens.map(node => new URN(node.urn))
+    children() {
+      return this.gqlData && this.childrenLens
+        ? this.childrenLens.map(node => new URN(node.urn))
         : [];
     }
   }
@@ -55,7 +54,7 @@ export default {
 a {
   text-decoration: none;
 }
-.passage-ancestors-widget {
+.passage-children-widget {
   width: 100%;
   margin: 0 0.33em;
   margin: 0.5em 0 1em 0;
@@ -68,6 +67,6 @@ a {
   justify-content: center;
   align-items: center;
   border: 1px solid #e9ecef;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
 }
 </style>

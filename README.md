@@ -31,7 +31,8 @@ import {
   TextWidth,
   URN,
   TextSizeWidget,
-  PassageAncestorsWidget
+  PassageAncestorsWidget,
+  PassageChildrenWidget
 } from "@scaife-viewer/scaife-widgets";
 ```
 

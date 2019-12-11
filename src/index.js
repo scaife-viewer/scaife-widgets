@@ -8,6 +8,7 @@ export { default as Icon } from "@/components/Icon.vue";
 // widgets
 export { default as TextSizeWidget } from "@/widgets/TextSizeWidget.vue";
 export { default as PassageAncestorsWidget } from "@/widgets/PassageAncestorsWidget.vue";
+export { default as PassageChildrenWidget } from "@/widgets/PassageChildrenWidget.vue";
 // store
 export { default as scaifeWidgets } from "@/store";
 // utils
