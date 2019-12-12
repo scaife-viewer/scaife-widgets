@@ -9,7 +9,7 @@
 
 <script>
 import TextWidth from "@/components/TextWidth";
-import { MODULE_NS, SET_TEXT_WIDTH } from "@/store/constants";
+import { MODULE_NS as READER_NS, SET_TEXT_WIDTH } from "@/store/constants";
 
 export default {
   name: "TextWidthWidget",
@@ -19,12 +19,12 @@ export default {
   },
   computed: {
     textWidth() {
-      return this.$store.getters[`${MODULE_NS}/readerTextWidth`];
+      return this.$store.getters[`${READER_NS}/readerTextWidth`];
     }
   },
   methods: {
     changeTextWidth(width) {
-      this.$store.dispatch(`${MODULE_NS}/${SET_TEXT_WIDTH}`, { width });
+      this.$store.dispatch(`${READER_NS}/${SET_TEXT_WIDTH}`, { width });
     }
   }
 };

@@ -4,7 +4,7 @@ import { mount, createLocalVue } from "@vue/test-utils";
 
 import TextWidthWidget from "@/widgets/TextWidthWidget.vue";
 import scaifeWidgets from "@/store";
-import { MODULE_NS } from "@/store/constants";
+import { MODULE_NS as READER_NS } from "@/store/constants";
 
 const localVue = createLocalVue();
 
@@ -27,7 +27,7 @@ describe("TextWidthWidget.vue", () => {
     const wideSpan = wrapper.findAll("span").at(2);
     const fullSpan = wrapper.findAll("span").at(3);
 
-    expect(store.state[MODULE_NS].readerTextWidth).toContain("normal");
+    expect(store.state[READER_NS].readerTextWidth).toContain("normal");
     expect(narrowSpan.html()).toContain(
       'class="text-width-control">Narrow</span>'
     );
@@ -38,7 +38,7 @@ describe("TextWidthWidget.vue", () => {
     expect(fullSpan.html()).toContain('class="text-width-control">Full</span>');
 
     wideSpan.trigger("click");
-    expect(store.state[MODULE_NS].readerTextWidth).toContain("wide");
+    expect(store.state[READER_NS].readerTextWidth).toContain("wide");
     expect(narrowSpan.html()).toContain(
       'class="text-width-control">Narrow</span>'
     );
@@ -51,7 +51,7 @@ describe("TextWidthWidget.vue", () => {
     expect(fullSpan.html()).toContain('class="text-width-control">Full</span>');
 
     narrowSpan.trigger("click");
-    expect(store.state[MODULE_NS].readerTextWidth).toContain("narrow");
+    expect(store.state[READER_NS].readerTextWidth).toContain("narrow");
     expect(narrowSpan.html()).toContain(
       'class="text-width-control active">Narrow</span>'
     );
@@ -62,7 +62,7 @@ describe("TextWidthWidget.vue", () => {
     expect(fullSpan.html()).toContain('class="text-width-control">Full</span>');
 
     normalSpan.trigger("click");
-    expect(store.state[MODULE_NS].readerTextWidth).toContain("normal");
+    expect(store.state[READER_NS].readerTextWidth).toContain("normal");
     expect(narrowSpan.html()).toContain(
       'class="text-width-control">Narrow</span>'
     );
@@ -73,7 +73,7 @@ describe("TextWidthWidget.vue", () => {
     expect(fullSpan.html()).toContain('class="text-width-control">Full</span>');
 
     fullSpan.trigger("click");
-    expect(store.state[MODULE_NS].readerTextWidth).toContain("full");
+    expect(store.state[READER_NS].readerTextWidth).toContain("full");
     expect(narrowSpan.html()).toContain(
       'class="text-width-control">Narrow</span>'
     );

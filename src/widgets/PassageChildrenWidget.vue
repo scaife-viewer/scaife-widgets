@@ -17,7 +17,7 @@
 <script>
 import gql from "graphql-tag";
 import URN from "@/utils/URN";
-import { MODULE_NS } from "@/store/constants";
+import { MODULE_NS as READER_NS } from "@/store/constants";
 
 export default {
   name: "PassageChildrenWidget",
@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     passage() {
-      return this.$store.getters[`${MODULE_NS}/passage`];
+      return this.$store.getters[`${READER_NS}/passage`];
     },
     gqlQuery() {
       return this.passage
