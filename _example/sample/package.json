@@ -7,7 +7,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "@scaife-viewer/scaife-widgets": "^0.4.0",
+    "@scaife-viewer/scaife-widgets": "0.5.1",
     "core-js": "^3.3.2",
     "vue": "^2.6.10",
     "vuex": "^3.1.2"
