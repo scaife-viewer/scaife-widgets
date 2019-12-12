@@ -7,10 +7,11 @@ export { default as TextWidth } from "@/components/TextWidth.vue";
 export { default as Icon } from "@/components/Icon.vue";
 // widgets
 export { default as TextSizeWidget } from "@/widgets/TextSizeWidget.vue";
+export { default as PassageAncestorsWidget } from "@/widgets/PassageAncestorsWidget.vue";
+export { default as PassageChildrenWidget } from "@/widgets/PassageChildrenWidget.vue";
+export { default as PassageReferenceWidget } from "@/widgets/PassageReferenceWidget.vue";
+export { default as TextWidthWidget } from "@/widgets/TextWidthWidget.vue";
 // store
 export { default as scaifeWidgets } from "@/store";
 // utils
 export { default as URN } from "@/utils/URN";
-// constants
-import { MODULE_NS } from "@/store/constants";
-export default MODULE_NS;

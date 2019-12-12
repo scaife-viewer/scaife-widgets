@@ -3,7 +3,15 @@
 [![npm version](https://badge.fury.io/js/%40scaife-viewer%2Fscaife-widgets.svg)](https://badge.fury.io/js/%40scaife-viewer%2Fscaife-widgets)
 [![github actions](https://github.com/scaife-viewer/scaife-widgets/workflows/Node%20CI/badge.svg)](https://github.com/scaife-viewer/scaife-widgets/actions?query=workflow%3A%22Node+CI%22)
 
-Module for building modular Scaife Viewer components.
+Component library for building applications in the [Scaife Viewer](https://github.com/scaife-viewer) ecosystem.
+
+## Citizens
+
+Everything is a component in the Vue sense but we try to distinguish between:
+
+1. **Components** - stateless, presentation-only components
+1. **Widgets** - stateful, Vuex-backed components
+1. **Stores** - Vuex state stores
 
 ## Getting Started
 
@@ -11,7 +19,7 @@ Module for building modular Scaife Viewer components.
 $ npm install @scaife-viewer/scaife-widgets
 ```
 
-Import components like so:
+Import components and widgets like so:
 
 ```js
 import {
@@ -22,7 +30,11 @@ import {
   TextSize,
   TextWidth,
   URN,
-  TextSizeWidget
+  TextSizeWidget,
+  TextWidthWidget,
+  PassageAncestorsWidget,
+  PassageChildrenWidget,
+  PassageReferenceWidget
 } from "@scaife-viewer/scaife-widgets";
 ```
 
@@ -38,12 +50,6 @@ Import utils like so:
 import { URN } from "@scaife-viewer/scaife-widgets";
 ```
 
-Import constants like so:
-
-```js
-import MODULE_NS from "@scaife-viewer/scaife-widgets";
-```
-
 Import and initialize the store like so:
 
 ```js
@@ -51,13 +57,12 @@ import Vue from "vue";
 import Vuex from "vuex";
 import App from "./App.vue";
 import { scaifeWidgets } from "@scaife-viewer/scaife-widgets";
-import MODULE_NS from "@scaife-viewer/scaife-widgets";
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
   modules: {
-    [MODULE_NS]: scaifeWidgets.store
+    [scaifeWidgets.namespace]: scaifeWidgets.store
   }
 });
 

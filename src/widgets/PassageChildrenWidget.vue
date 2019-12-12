@@ -1,0 +1,72 @@
+<template v-if="children">
+  <div class="passage-children-widget u-grid">
+    <div
+      class="grid-cell-square"
+      v-for="child in children"
+      :key="child.absolute"
+    >
+      <router-link
+        :to="{ path: 'reader', query: { urn: `${child.absolute}` } }"
+      >
+        {{ child.node }}
+      </router-link>
+    </div>
+  </div>
+</template>
+
+<script>
+import gql from "graphql-tag";
+import URN from "@/utils/URN";
+import { MODULE_NS } from "@/store/constants";
+
+export default {
+  name: "PassageChildrenWidget",
+  scaifeConfig: {
+    displayName: "Children"
+  },
+  computed: {
+    passage() {
+      return this.$store.getters[`${MODULE_NS}/passage`];
+    },
+    gqlQuery() {
+      return this.passage
+        ? gql`
+            {
+              passageLines(reference: "${this.passage.absolute}") {
+                metadata
+              }
+            }`
+        : null;
+    },
+    childrenLens() {
+      return this.gqlData.passageLines.metadata.children;
+    },
+    children() {
+      return this.gqlData && this.childrenLens
+        ? this.childrenLens.map(node => new URN(node.urn))
+        : [];
+    }
+  }
+};
+</script>
+
+<style scoped>
+a {
+  text-decoration: none;
+}
+.passage-children-widget {
+  width: 100%;
+  margin: 0 0.33em;
+  margin: 0.5em 0 1em 0;
+  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(1.6em, 1fr));
+  grid-gap: 0.0825em;
+}
+.passage-ancestors-widget * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #e9ecef;
+  font-size: 0.8rem;
+}
+</style>

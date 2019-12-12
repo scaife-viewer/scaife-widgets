@@ -11,6 +11,7 @@
 <script>
 import TextSize from "@/components/TextSize";
 import { MODULE_NS, SET_TEXT_SIZE, SET_TEXT_WIDTH } from "@/store/constants";
+
 export default {
   name: "TextSizeWidget",
   components: { TextSize },
