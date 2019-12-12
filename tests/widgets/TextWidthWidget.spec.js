@@ -7,7 +7,6 @@ import scaifeWidgets from "@/store";
 import { MODULE_NS } from "@/store/constants";
 
 const localVue = createLocalVue();
-
 localVue.use(Vuex);
 
 describe("TextWidthWidget.vue", () => {

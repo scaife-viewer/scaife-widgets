@@ -7,7 +7,6 @@ import scaifeWidgets from "@/store";
 import { MODULE_NS, SET_TEXT_SIZE } from "@/store/constants";
 
 const localVue = createLocalVue();
-
 localVue.use(Vuex);
 
 describe("TextSizeWidget.vue", () => {

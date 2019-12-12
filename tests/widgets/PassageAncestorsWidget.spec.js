@@ -7,7 +7,6 @@ import scaifeWidgets from "@/store";
 import URN from "@/utils/URN";
 
 const localVue = createLocalVue();
-
 localVue.use(Vuex);
 
 describe("PassageAncestorsWidget.vue", () => {

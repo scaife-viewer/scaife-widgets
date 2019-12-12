@@ -9,10 +9,9 @@ import URN from "@/utils/URN";
 import mockRouter from "../mockRouter";
 
 const localVue = createLocalVue();
-const router = mockRouter.mock();
-
-localVue.use(VueRouter);
 localVue.use(Vuex);
+const router = mockRouter.mock();
+localVue.use(VueRouter);
 
 describe("PassageReferenceWidget.vue", () => {
   it("pushes a new URN to the correct route", async () => {
