@@ -10,7 +10,7 @@
 
 <script>
 import TextSize from "@/components/TextSize";
-import { MODULE_NS, SET_TEXT_SIZE, SET_TEXT_WIDTH } from "@/store/constants";
+import { WIDGETS_NS, SET_TEXT_SIZE, SET_TEXT_WIDTH } from "@/store/constants";
 
 export default {
   name: "TextSizeWidget",
@@ -20,13 +20,13 @@ export default {
   },
   computed: {
     textSize() {
-      return this.$store.getters[`${MODULE_NS}/readerTextSize`];
+      return this.$store.getters[`${WIDGETS_NS}/readerTextSize`];
     }
   },
   methods: {
     changeTextSize(size) {
-      this.$store.dispatch(`${MODULE_NS}/${SET_TEXT_SIZE}`, { size });
-      this.$store.dispatch(`${MODULE_NS}/${SET_TEXT_WIDTH}`, {
+      this.$store.dispatch(`${WIDGETS_NS}/${SET_TEXT_SIZE}`, { size });
+      this.$store.dispatch(`${WIDGETS_NS}/${SET_TEXT_WIDTH}`, {
         width: "normal"
       });
     }

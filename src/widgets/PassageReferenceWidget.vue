@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { MODULE_NS } from "@/store/constants";
+import { WIDGETS_NS } from "@/store/constants";
 
 export default {
   name: "PassageReferenceWidget",
@@ -26,10 +26,10 @@ export default {
   },
   computed: {
     firstPassageUrn() {
-      return this.$store.getters[`${MODULE_NS}/firstPassageUrn`];
+      return this.$store.getters[`${WIDGETS_NS}/firstPassageUrn`];
     },
     passage() {
-      return this.$store.getters[`${MODULE_NS}/passage`];
+      return this.$store.getters[`${WIDGETS_NS}/passage`];
     }
   },
   data() {

@@ -17,7 +17,7 @@
 <script>
 import gql from "graphql-tag";
 import URN from "@/utils/URN";
-import { MODULE_NS } from "@/store/constants";
+import { WIDGETS_NS } from "@/store/constants";
 
 export default {
   name: "PassageChildrenWidget",
@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     passage() {
-      return this.$store.getters[`${MODULE_NS}/passage`];
+      return this.$store.getters[`${WIDGETS_NS}/passage`];
     },
     gqlQuery() {
       return this.passage
@@ -62,7 +62,7 @@ a {
   grid-template-columns: repeat(auto-fill, minmax(1.6em, 1fr));
   grid-gap: 0.0825em;
 }
-.passage-ancestors-widget * {
+.passage-children-widget * {
   display: flex;
   justify-content: center;
   align-items: center;

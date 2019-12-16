@@ -50,6 +50,12 @@ Import utils like so:
 import { URN } from "@scaife-viewer/scaife-widgets";
 ```
 
+Import constants like so:
+
+```js
+import WIDGETS_NS from "@scaife-viewer/scaife-widgets";
+```
+
 Import and initialize the store like so:
 
 ```js

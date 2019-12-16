@@ -15,3 +15,6 @@ export { default as TextWidthWidget } from "@/widgets/TextWidthWidget.vue";
 export { default as scaifeWidgets } from "@/store";
 // utils
 export { default as URN } from "@/utils/URN";
+// constants
+import { WIDGETS_NS } from "@/store/constants";
+export default WIDGETS_NS;

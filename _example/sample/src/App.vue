@@ -8,6 +8,7 @@
     <TextWidth :value="textWidth" @input="changeTextWidth" width="narrow" />
     <TextSizeWidget />
     <TextWidthWidget />
+    <p>Namespace: {{ namespace }}</p>
   </div>
 </template>
 
@@ -23,6 +24,7 @@ import {
   TextSizeWidget,
   TextWidthWidget
 } from "@scaife-viewer/scaife-widgets";
+import WIDGETS_NS from "@scaife-viewer/scaife-widgets";
 export default {
   name: "app",
   components: {
@@ -34,6 +36,11 @@ export default {
     TextWidth,
     TextSizeWidget,
     TextWidthWidget
+  },
+  data() {
+    return {
+      namespace: WIDGETS_NS
+    }
   },
   computed: {
     textSize() {
