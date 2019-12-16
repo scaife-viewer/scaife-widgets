@@ -69,4 +69,7 @@ a {
   border: 1px solid #e9ecef;
   font-size: 0.8rem;
 }
+.passage-children-widget a {
+  border: none;
+}
 </style>
