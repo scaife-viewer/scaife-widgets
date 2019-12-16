@@ -62,7 +62,7 @@ a {
   grid-template-columns: repeat(auto-fill, minmax(1.6em, 1fr));
   grid-gap: 0.0825em;
 }
-.passage-ancestors-widget * {
+.passage-children-widget * {
   display: flex;
   justify-content: center;
   align-items: center;
