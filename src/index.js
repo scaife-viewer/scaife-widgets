@@ -16,5 +16,5 @@ export { default as scaifeWidgets } from "@/store";
 // utils
 export { default as URN } from "@/utils/URN";
 // constants
-import { MODULE_NS } from "@/store/constants";
-export default MODULE_NS;
+import { WIDGETS_NS } from "@/store/constants";
+export default WIDGETS_NS;

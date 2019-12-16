@@ -24,7 +24,7 @@ import {
   TextSizeWidget,
   TextWidthWidget
 } from "@scaife-viewer/scaife-widgets";
-import MODULE_NS from "@scaife-viewer/scaife-widgets";
+import WIDGETS_NS from "@scaife-viewer/scaife-widgets";
 export default {
   name: "app",
   components: {
@@ -39,7 +39,7 @@ export default {
   },
   data() {
     return {
-      namespace: MODULE_NS
+      namespace: WIDGETS_NS
     }
   },
   computed: {

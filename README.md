@@ -53,7 +53,7 @@ import { URN } from "@scaife-viewer/scaife-widgets";
 Import constants like so:
 
 ```js
-import MODULE_NS from "@scaife-viewer/scaife-widgets";
+import WIDGETS_NS from "@scaife-viewer/scaife-widgets";
 ```
 
 Import and initialize the store like so:
