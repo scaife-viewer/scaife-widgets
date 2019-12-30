@@ -23,13 +23,14 @@ Import components and widgets like so:
 
 ```js
 import {
+  // components
   HelloWorld,
   Icon,
   Metadata,
   Paginator,
   TextSize,
   TextWidth,
-  URN,
+  // widgets
   TextSizeWidget,
   TextWidthWidget,
   PassageAncestorsWidget,
