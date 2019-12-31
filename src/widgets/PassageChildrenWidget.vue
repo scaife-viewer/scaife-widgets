@@ -15,61 +15,61 @@
 </template>
 
 <script>
-import gql from "graphql-tag";
-import URN from "@/utils/URN";
-import { WIDGETS_NS } from "@/store/constants";
+  import gql from 'graphql-tag';
+  import URN from '@/utils/URN';
+  import { WIDGETS_NS } from '@/store/constants';
 
-export default {
-  name: "PassageChildrenWidget",
-  scaifeConfig: {
-    displayName: "Children"
-  },
-  computed: {
-    passage() {
-      return this.$store.getters[`${WIDGETS_NS}/passage`];
+  export default {
+    name: 'PassageChildrenWidget',
+    scaifeConfig: {
+      displayName: 'Children',
     },
-    gqlQuery() {
-      return this.passage
-        ? gql`
+    computed: {
+      passage() {
+        return this.$store.getters[`${WIDGETS_NS}/passage`];
+      },
+      gqlQuery() {
+        return this.passage
+          ? gql`
             {
               passageLines(reference: "${this.passage.absolute}") {
                 metadata
               }
             }`
-        : null;
+          : null;
+      },
+      childrenLens() {
+        return this.gqlData.passageLines.metadata.children;
+      },
+      children() {
+        return this.gqlData && this.childrenLens
+          ? this.childrenLens.map(node => new URN(node.urn))
+          : [];
+      },
     },
-    childrenLens() {
-      return this.gqlData.passageLines.metadata.children;
-    },
-    children() {
-      return this.gqlData && this.childrenLens
-        ? this.childrenLens.map(node => new URN(node.urn))
-        : [];
-    }
-  }
-};
+  };
 </script>
 
 <style scoped>
-a {
-  text-decoration: none;
-}
-.passage-children-widget {
-  width: 100%;
-  margin: 0 0.33em;
-  margin: 0.5em 0 1em 0;
-  grid-auto-rows: 1fr;
-  grid-template-columns: repeat(auto-fill, minmax(1.6em, 1fr));
-  grid-gap: 0.0825em;
-}
-.passage-children-widget * {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #e9ecef;
-  font-size: 0.8rem;
-}
-.passage-children-widget a {
-  border: none;
-}
+  a {
+    text-decoration: none;
+  }
+  .passage-children-widget {
+    width: 100%;
+    margin: 0 0.33em;
+    margin: 0.5em 0 1em 0;
+    grid-auto-rows: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(1.6em, 1fr));
+    grid-gap: 0.0825em;
+  }
+  .passage-children-widget * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #e9ecef;
+    font-size: 0.8rem;
+  }
+  .passage-children-widget a {
+    border: none;
+  }
 </style>

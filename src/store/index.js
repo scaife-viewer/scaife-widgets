@@ -1,11 +1,11 @@
-import actions from "@/store/actions";
-import getters from "@/store/getters";
-import mutations from "@/store/mutations";
-import { WIDGETS_NS } from "@/store/constants";
+import actions from '@/store/actions';
+import getters from '@/store/getters';
+import mutations from '@/store/mutations';
+import { WIDGETS_NS } from '@/store/constants';
 
 const state = {
-  readerTextSize: "md",
-  readerTextWidth: "normal"
+  readerTextSize: 'md',
+  readerTextWidth: 'normal',
 };
 
 export default {
@@ -15,6 +15,6 @@ export default {
     state,
     actions,
     getters,
-    mutations
-  }
+    mutations,
+  },
 };

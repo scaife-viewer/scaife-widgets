@@ -1,7 +1,7 @@
 export default class URN {
   constructor(urn) {
     this.absolute = urn;
-    this.delimiter = ":";
+    this.delimiter = ':';
     this.inclusiveRangeRe = /\d+-\d+$/;
     this.subRangeRe = /\d+\.\d+-\d+\.\d+$/;
     this.scheme = null;
@@ -18,8 +18,8 @@ export default class URN {
 
   expandRange() {
     const [start, stop] = this.range
-      .split("-")
-      .map(node => node.split(".")[0])
+      .split('-')
+      .map(node => node.split('.')[0])
       .map(boundary => parseInt(boundary, 10));
     return [...Array(stop - start + 1)]
       .map((x, y) => y + start)
@@ -42,13 +42,13 @@ export default class URN {
   }
 
   destructureReference() {
-    if (this.reference.includes("-")) {
+    if (this.reference.includes('-')) {
       if (this.inclusiveRangeRe.exec(this.reference)) {
         // An inclusive range between macro boundaries.
         // Don't include the range values in the node hierarchy as they
         // shouldn't be considered ancestors of themselves or each other.
         // eg. 1.3-4
-        const split = this.reference.split(".");
+        const split = this.reference.split('.');
         this.range = split[split.length - 1];
         this.hierarchy = split.slice(0, -1);
       } else {
@@ -65,12 +65,12 @@ export default class URN {
         }
         this.range = match.shift();
         const ancestors = this.reference
-          .replace(`${this.range}`, "")
-          .split(".")
-          .filter(x => x !== "");
+          .replace(`${this.range}`, '')
+          .split('.')
+          .filter(x => x !== '');
         const [start, end] = this.range
-          .split("-")
-          .map(node => node.split(".")[0]);
+          .split('-')
+          .map(node => node.split('.')[0]);
         this.hierarchy =
           start === end
             ? [...ancestors, start]
@@ -78,10 +78,10 @@ export default class URN {
       }
     } else {
       this.hierarchy =
-        this.reference.length > 1 ? this.reference.split(".").slice(0, -1) : [];
+        this.reference.length > 1 ? this.reference.split('.').slice(0, -1) : [];
       this.node = this.reference
         ? this.reference
-            .split(".")
+            .split('.')
             .slice(-1)
             .shift()
         : false;

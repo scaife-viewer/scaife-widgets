@@ -3,5 +3,5 @@ export default {
   readerTextWidth: state => state.readerTextWidth,
   passage: (state, getters, rootState, rootGetters) => rootGetters.passage,
   firstPassageUrn: (state, getters, rootState, rootGetters) =>
-    rootGetters.firstPassageUrn
+    rootGetters.firstPassageUrn,
 };

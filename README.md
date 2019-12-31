@@ -103,7 +103,7 @@ Run unit tests:
 $ npm run test
 ```
 
-Lint and fix files:
+Lint:
 
 ```sh
 $ npm run lint
