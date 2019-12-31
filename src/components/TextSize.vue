@@ -19,13 +19,15 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/styles/_variables.scss";
+
 .text-size-control {
   cursor: pointer;
-  font-family: "Noto Serif", serif;
-  color: #adb5bd;
+  font-family: $font-family-serif;
+  color: $gray-500;
 }
 .text-size-control.selected {
-  color: #343a40;
+  color: $gray-800;
 }
 </style>

@@ -21,15 +21,18 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/styles/_variables.scss";
+
 .text-width-control {
-  font-family: "Noto Serif", serif;
+  font-family: $font-family-serif;
   cursor: pointer;
-  color: #adb5bd;
+  color: $gray-500;
   font-size: 14px;
   padding-right: 5px;
 }
+
 .text-width-control.active {
-  color: #000;
+  color: $gray-800;
 }
 </style>
