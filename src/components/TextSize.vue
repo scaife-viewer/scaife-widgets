@@ -19,13 +19,15 @@
   };
 </script>
 
-<style scoped>
-  .text-size-control {
-    cursor: pointer;
-    font-family: 'Noto Serif', serif;
-    color: #adb5bd;
-  }
-  .text-size-control.selected {
-    color: #343a40;
-  }
+<style lang="scss" scoped>
+@import "@/styles/_variables.scss";
+
+.text-size-control {
+  cursor: pointer;
+  font-family: $font-family-serif;
+  color: $gray-500;
+}
+.text-size-control.selected {
+  color: $gray-800;
+}
 </style>
