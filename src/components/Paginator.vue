@@ -11,27 +11,27 @@
 </template>
 
 <script>
-import Icon from "@/components/Icon";
+  import Icon from '@/components/Icon.vue';
 
-export default {
-  name: "Paginator",
-  props: ["urn", "direction"],
-  components: {
-    Icon
-  },
-  computed: {
-    icon() {
-      return `chevron-${this.direction}`;
-    }
-  }
-};
+  export default {
+    name: 'Paginator',
+    props: ['urn', 'direction'],
+    components: {
+      Icon,
+    },
+    computed: {
+      icon() {
+        return `chevron-${this.direction}`;
+      },
+    },
+  };
 </script>
 
 <style scoped>
-nav.paginator {
-  min-width: 5em;
-  width: auto;
-  position: sticky;
-  top: 2em;
-}
+  nav.paginator {
+    min-width: 5em;
+    width: auto;
+    position: sticky;
+    top: 2em;
+  }
 </style>

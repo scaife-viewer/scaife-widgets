@@ -8,24 +8,24 @@
 </template>
 
 <script>
-export default {
-  name: "TextSize",
-  props: ["value", "size"],
-  computed: {
-    selected() {
-      return this.value === this.size;
-    }
-  }
-};
+  export default {
+    name: 'TextSize',
+    props: ['value', 'size'],
+    computed: {
+      selected() {
+        return this.value === this.size;
+      },
+    },
+  };
 </script>
 
 <style scoped>
-.text-size-control {
-  cursor: pointer;
-  font-family: "Noto Serif", serif;
-  color: #adb5bd;
-}
-.text-size-control.selected {
-  color: #343a40;
-}
+  .text-size-control {
+    cursor: pointer;
+    font-family: 'Noto Serif', serif;
+    color: #adb5bd;
+  }
+  .text-size-control.selected {
+    color: #343a40;
+  }
 </style>

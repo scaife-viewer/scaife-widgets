@@ -1,20 +1,20 @@
 /* global describe, expect, it  */
-import { shallowMount, createLocalVue, RouterLinkStub } from "@vue/test-utils";
-import Vuex from "vuex";
+import { shallowMount, createLocalVue, RouterLinkStub } from '@vue/test-utils';
+import Vuex from 'vuex';
 
-import PassageChildrenWidget from "@/widgets/PassageChildrenWidget.vue";
-import scaifeWidgets from "@/store";
-import URN from "@/utils/URN";
+import PassageChildrenWidget from '@/widgets/PassageChildrenWidget.vue';
+import scaifeWidgets from '@/store';
+import URN from '@/utils/URN';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
-describe("PassageChildrenWidget.vue", () => {
-  it("renders nothing given no URNs", () => {
+describe('PassageChildrenWidget.vue', () => {
+  it('renders nothing given no URNs', () => {
     const store = new Vuex.Store({
       modules: {
-        [scaifeWidgets.namespace]: scaifeWidgets.store
-      }
+        [scaifeWidgets.namespace]: scaifeWidgets.store,
+      },
     });
 
     const wrapper = shallowMount(PassageChildrenWidget, {
@@ -23,20 +23,20 @@ describe("PassageChildrenWidget.vue", () => {
       computed: {
         children() {
           return [];
-        }
-      }
+        },
+      },
     });
 
     expect(wrapper.html()).toBe(
-      '<div class="passage-children-widget u-grid"></div>'
+      '<div class="passage-children-widget u-grid"></div>',
     );
   });
 
-  it("renders a single child from a single URN", () => {
+  it('renders a single child from a single URN', () => {
     const store = new Vuex.Store({
       modules: {
-        [scaifeWidgets.namespace]: scaifeWidgets.store
-      }
+        [scaifeWidgets.namespace]: scaifeWidgets.store,
+      },
     });
 
     const wrapper = shallowMount(PassageChildrenWidget, {
@@ -44,30 +44,30 @@ describe("PassageChildrenWidget.vue", () => {
       store,
       computed: {
         children() {
-          return [new URN("urn:cts:greekLit:tlg0012.tlg001.msA:1.1")];
-        }
+          return [new URN('urn:cts:greekLit:tlg0012.tlg001.msA:1.1')];
+        },
       },
       stubs: {
-        RouterLink: RouterLinkStub
-      }
+        RouterLink: RouterLinkStub,
+      },
     });
     const routes = wrapper.findAll(RouterLinkStub);
 
     expect(routes.length).toBe(1);
-    expect(wrapper.html()).toContain("1");
+    expect(wrapper.html()).toContain('1');
     expect(routes.at(0).props().to).toEqual({
-      path: "reader",
+      path: 'reader',
       query: {
-        urn: "urn:cts:greekLit:tlg0012.tlg001.msA:1.1"
-      }
+        urn: 'urn:cts:greekLit:tlg0012.tlg001.msA:1.1',
+      },
     });
   });
 
-  it("renders multiple children from multiple URNs", () => {
+  it('renders multiple children from multiple URNs', () => {
     const store = new Vuex.Store({
       modules: {
-        [scaifeWidgets.namespace]: scaifeWidgets.store
-      }
+        [scaifeWidgets.namespace]: scaifeWidgets.store,
+      },
     });
 
     const wrapper = shallowMount(PassageChildrenWidget, {
@@ -76,31 +76,31 @@ describe("PassageChildrenWidget.vue", () => {
       computed: {
         children() {
           return [
-            new URN("urn:cts:greekLit:tlg0012.tlg001.msA:1.1"),
-            new URN("urn:cts:greekLit:tlg0012.tlg001.msA:1.2")
+            new URN('urn:cts:greekLit:tlg0012.tlg001.msA:1.1'),
+            new URN('urn:cts:greekLit:tlg0012.tlg001.msA:1.2'),
           ];
-        }
+        },
       },
       stubs: {
-        RouterLink: RouterLinkStub
-      }
+        RouterLink: RouterLinkStub,
+      },
     });
     const routes = wrapper.findAll(RouterLinkStub);
 
     expect(routes.length).toBe(2);
-    expect(wrapper.html()).toContain("1");
+    expect(wrapper.html()).toContain('1');
     expect(routes.at(0).props().to).toEqual({
-      path: "reader",
+      path: 'reader',
       query: {
-        urn: "urn:cts:greekLit:tlg0012.tlg001.msA:1.1"
-      }
+        urn: 'urn:cts:greekLit:tlg0012.tlg001.msA:1.1',
+      },
     });
-    expect(wrapper.html()).toContain("2");
+    expect(wrapper.html()).toContain('2');
     expect(routes.at(1).props().to).toEqual({
-      path: "reader",
+      path: 'reader',
       query: {
-        urn: "urn:cts:greekLit:tlg0012.tlg001.msA:1.2"
-      }
+        urn: 'urn:cts:greekLit:tlg0012.tlg001.msA:1.2',
+      },
     });
   });
 });
