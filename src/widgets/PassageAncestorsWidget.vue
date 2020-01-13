@@ -33,14 +33,14 @@
         return this.passage
           ? gql`
             {
-              passageLines(reference: "${this.passage.absolute}") {
+              passageTextParts(reference: "${this.passage.absolute}") {
                 metadata
               }
             }`
           : null;
       },
       ancestorsLens() {
-        return this.gqlData.passageLines.metadata.ancestors;
+        return this.gqlData.passageTextParts.metadata.ancestors;
       },
       ancestors() {
         return this.gqlData && this.ancestorsLens
