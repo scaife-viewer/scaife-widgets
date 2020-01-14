@@ -32,14 +32,14 @@
         return this.passage
           ? gql`
             {
-              passageLines(reference: "${this.passage.absolute}") {
+              passageTextParts(reference: "${this.passage.absolute}") {
                 metadata
               }
             }`
           : null;
       },
       childrenLens() {
-        return this.gqlData.passageLines.metadata.children;
+        return this.gqlData.passageTextParts.metadata.children;
       },
       children() {
         return this.gqlData && this.childrenLens
