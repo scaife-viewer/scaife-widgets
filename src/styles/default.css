@@ -1,0 +1,32 @@
+/*
+  These are global, default styles for the reader body.
+*/
+
+.text-xs {
+  font-size: 12px;
+}
+.text-sm {
+  font-size: 14px;
+}
+.text-md {
+  font-size: 16px;
+}
+.text-lg {
+  font-size: 20px;
+}
+.text-xl {
+  font-size: 24px;
+}
+
+.text-width-narrow {
+  max-width: 20em;
+}
+.text-width-normal {
+  max-width: 30em;
+}
+.text-width-wide {
+  max-width: 40em;
+}
+.text-width-full {
+  max-width: 100%;
+}

@@ -83,6 +83,23 @@ new Vue({
 
 > See [_example/sample](https://github.com/scaife-viewer/scaife-widgets/tree/master/_example/sample) for more examples.
 
+## TextSizeWidget and TextWidthWidget
+
+The `TextSizeWidget` and `TextWidthWidget` widgets must be coupled with a "reader" component along with the appropriate class: `text-${textSize}` or `text-width-${textWidth}`, respectively.
+
+Example:
+
+```html
+<template>
+  <div
+    class="reader"
+    :class="[`text-${textSize}`, `text-width-${textWidth}`]"
+  >
+    <!-- reader here -->
+  </div>
+</template>
+```
+
 ## Development
 
 Project setup:
