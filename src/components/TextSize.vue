@@ -20,14 +20,14 @@
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/_variables.scss";
+  @import '@/styles/_variables.scss';
 
-.text-size-control {
-  cursor: pointer;
-  font-family: $font-family-serif;
-  color: $gray-500;
-}
-.text-size-control.selected {
-  color: $gray-800;
-}
+  .text-size-control {
+    cursor: pointer;
+    font-family: $font-family-serif;
+    color: $gray-500;
+  }
+  .text-size-control.selected {
+    color: $gray-800;
+  }
 </style>
