@@ -10,6 +10,7 @@
   "main": "./dist/scaife-widgets.common.js",
   "scripts": {
     "build": "vue-cli-service build --target lib --name scaife-widgets ./src/index.js",
+    "prepare": "npm run build",
     "test": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
