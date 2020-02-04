@@ -17,6 +17,6 @@
 <style scoped>
   h1.work-title {
     font-size: 1.75em;
-    margin: 0;
+    margin: 0 2em 1em 2em;
   }
 </style>

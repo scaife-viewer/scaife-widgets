@@ -33,5 +33,6 @@
     width: auto;
     position: sticky;
     top: 2em;
+    text-align: center;
   }
 </style>

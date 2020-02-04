@@ -29,13 +29,15 @@
 <style lang="scss">
   .library-widget {
     margin: 0 auto 0 0;
+    overflow: auto;
   }
   ul.node-tree {
     list-style: none;
     padding: 0;
-    margin-left: 0.66em;
+    flex-wrap: nowrap;
+    margin-left: 0.33em;
     &.root {
-      margin: 0 0 0.33em 1.8em;
+      margin: 0 0 0.33em 0;
     }
   }
 </style>

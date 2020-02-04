@@ -1,21 +1,23 @@
 <template>
   <li>
-    <template v-if="hasChildren">
-      <span class="open-toggle" @click.prevent="toggle">
-        <Icon :name="icon" class="fa-xs" fixed-width />
-      </span>
-    </template>
+    <div class="node-container u-flex">
+      <template v-if="hasChildren">
+        <span class="open-toggle" @click.prevent="toggle">
+          <Icon :name="icon" class="fa-xs" fixed-width />
+        </span>
+      </template>
 
-    <span class="node version" v-if="routable">
-      <router-link
-        :to="{ path: 'reader', query: { urn: metadata.firstPassageUrn } }"
-      >
-        {{ metadata.workTitle }}
-      </router-link>
-    </span>
-    <span v-else class="node monospace">
-      <tt>{{ urn }}</tt>
-    </span>
+      <span class="node version" v-if="routable">
+        <router-link
+          :to="{ path: 'reader', query: { urn: metadata.firstPassageUrn } }"
+        >
+          {{ metadata.workTitle }}
+        </router-link>
+      </span>
+      <span v-else class="node monospace">
+        <tt>{{ urn }}</tt>
+      </span>
+    </div>
 
     <ul class="node-tree" v-if="expanded">
       <Node
@@ -90,12 +92,8 @@
     }
   }
   .node {
-    font-size: 0.9rem;
-    &.monospace {
-      font-size: 1.1rem;
-    }
     &.version {
-      margin-left: 0.66em;
+      margin-left: 1em;
     }
   }
 </style>
