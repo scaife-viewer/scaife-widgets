@@ -5,9 +5,9 @@ import Metadata from '@/components/Metadata.vue';
 describe('Metadata.vue', () => {
   it('it renders the work title', () => {
     const wrapper = shallowMount(Metadata, {
-      context: { props: { workTitle: 'Some Title' } },
+      propsData: { workTitle: 'some title' },
     });
 
-    expect(wrapper.html()).toBe('<h1 class="work-title">Some Title</h1>');
+    expect(wrapper.html()).toContain('<h3 class="work-title">some title</h3>');
   });
 });

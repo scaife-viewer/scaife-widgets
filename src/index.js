@@ -13,9 +13,10 @@ export { default as TextWidth } from '@/components/TextWidth.vue';
 export { default as Icon } from '@/components/Icon.vue';
 
 // widgets
+export { default as LibraryWidget } from '@/widgets/LibraryWidget.vue';
+export { default as MetadataWidget } from '@/widgets/MetadataWidget.vue';
 export { default as TextSizeWidget } from '@/widgets/TextSizeWidget.vue';
 export { default as TextWidthWidget } from '@/widgets/TextWidthWidget.vue';
-export { default as LibraryWidget } from '@/widgets/LibraryWidget.vue';
 // eslint-disable-next-line max-len
 export { default as PassageAncestorsWidget } from '@/widgets/PassageAncestorsWidget.vue';
 // eslint-disable-next-line max-len

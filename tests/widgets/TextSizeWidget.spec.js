@@ -24,8 +24,7 @@ describe('TextSizeWidget.vue', () => {
     });
 
     expect(wrapper.html()).toContain(
-      // eslint-disable-next-line max-len
-      '<div class="text-size-widget"><textsize-stub size="xs" value="md"></textsize-stub>',
+      '<textsize-stub size="xs" value="md"></textsize-stub>',
     );
     expect(store.state[WIDGETS_NS].readerTextSize).toBe('md');
   });
@@ -38,32 +37,27 @@ describe('TextSizeWidget.vue', () => {
     });
 
     expect(wrapper.html()).toContain(
-      // eslint-disable-next-line max-len
-      '<div class="text-size-widget"><textsize-stub size="xs" value="md"></textsize-stub>',
+      '<textsize-stub size="xs" value="md"></textsize-stub>',
     );
     expect(store.state[WIDGETS_NS].readerTextSize).toBe('md');
     store.dispatch(`${WIDGETS_NS}/${SET_TEXT_SIZE}`, { size: 'sm' });
     expect(wrapper.html()).toContain(
-      // eslint-disable-next-line max-len
-      '<div class="text-size-widget"><textsize-stub size="xs" value="sm"></textsize-stub>',
+      '<textsize-stub size="xs" value="sm"></textsize-stub>',
     );
     expect(store.state[WIDGETS_NS].readerTextSize).toBe('sm');
     store.dispatch(`${WIDGETS_NS}/${SET_TEXT_SIZE}`, { size: 'lg' });
     expect(wrapper.html()).toContain(
-      // eslint-disable-next-line max-len
-      '<div class="text-size-widget"><textsize-stub size="xs" value="lg"></textsize-stub>',
+      '<textsize-stub size="xs" value="lg"></textsize-stub>',
     );
     expect(store.state[WIDGETS_NS].readerTextSize).toBe('lg');
     store.dispatch(`${WIDGETS_NS}/${SET_TEXT_SIZE}`, { size: 'xl' });
     expect(wrapper.html()).toContain(
-      // eslint-disable-next-line max-len
-      '<div class="text-size-widget"><textsize-stub size="xs" value="xl"></textsize-stub>',
+      '<textsize-stub size="xs" value="xl"></textsize-stub>',
     );
     expect(store.state[WIDGETS_NS].readerTextSize).toBe('xl');
     store.dispatch(`${WIDGETS_NS}/${SET_TEXT_SIZE}`, { size: 'md' });
     expect(wrapper.html()).toContain(
-      // eslint-disable-next-line max-len
-      '<div class="text-size-widget"><textsize-stub size="xs" value="md"></textsize-stub>',
+      '<textsize-stub size="xs" value="md"></textsize-stub>',
     );
     expect(store.state[WIDGETS_NS].readerTextSize).toBe('md');
 

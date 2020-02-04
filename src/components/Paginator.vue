@@ -27,7 +27,7 @@
   };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   nav.paginator {
     min-width: 5em;
     width: auto;

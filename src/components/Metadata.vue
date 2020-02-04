@@ -1,22 +1,21 @@
-<template functional>
-  <h1 class="work-title">{{ props.workTitle }}</h1>
+<template>
+  <aside class="metadata-container u-flex">
+    <h3 class="work-title">{{ workTitle }}</h3>
+  </aside>
 </template>
 
 <script>
   export default {
     name: 'Metadata',
-    props: {
-      workTitle: {
-        required: true,
-        type: String,
-      },
-    },
+    props: ['workTitle'],
   };
 </script>
 
-<style scoped>
-  h1.work-title {
-    font-size: 1.75em;
-    margin: 0 2em 1em 2em;
+<style lang="scss" scoped>
+  .metadata-container {
+    flex-direction: column;
+    > * {
+      margin: 0 0 0.33em 0;
+    }
   }
 </style>

@@ -1,5 +1,5 @@
 <template v-if="children">
-  <div class="passage-children-widget u-grid">
+  <div class="passage-children-widget u-widget u-grid">
     <div
       class="grid-cell-square"
       v-for="child in children"
@@ -50,14 +50,12 @@
   };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   a {
     text-decoration: none;
   }
   .passage-children-widget {
     width: 100%;
-    margin: 0 0.33em;
-    margin: 0.5em 0 1em 0;
     grid-auto-rows: 1fr;
     grid-template-columns: repeat(auto-fill, minmax(1.6em, 1fr));
     grid-gap: 0.0825em;

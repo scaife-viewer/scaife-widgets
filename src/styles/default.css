@@ -30,3 +30,7 @@
 .text-width-full {
   max-width: 100%;
 }
+
+.u-widget {
+  margin: 0 2em;
+}
