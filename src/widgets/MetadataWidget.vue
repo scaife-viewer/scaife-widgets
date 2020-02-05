@@ -1,6 +1,6 @@
 <template>
   <div class="metadata-widget u-widget u-flex">
-    <Metadata v-if="metadata" :workTitle="workTitle" />
+    <Metadata v-if="metadata" :workTitle="workTitle" :workUrn="workUrn" />
   </div>
 </template>
 
@@ -22,6 +22,9 @@
       },
       workTitle() {
         return this.metadata.workTitle;
+      },
+      workUrn() {
+        return this.metadata.workUrn;
       },
     },
   };

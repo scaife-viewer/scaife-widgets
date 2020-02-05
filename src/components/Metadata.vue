@@ -1,13 +1,14 @@
 <template>
   <aside class="metadata-container u-flex">
     <h3 class="work-title">{{ workTitle }}</h3>
+    <tt class="work-urn">{{ workUrn }}</tt>
   </aside>
 </template>
 
 <script>
   export default {
     name: 'Metadata',
-    props: ['workTitle'],
+    props: ['workTitle', 'workUrn'],
   };
 </script>
 

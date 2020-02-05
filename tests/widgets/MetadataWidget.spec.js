@@ -21,7 +21,7 @@ describe('MetadataWidget.vue', () => {
       localVue,
       computed: {
         metadata() {
-          return { workTitle: 'some title' };
+          return { workTitle: 'some title', workUrn: 'urn:cts:1:1.1:' };
         },
       },
     });
@@ -30,6 +30,7 @@ describe('MetadataWidget.vue', () => {
 
     expect(wrapper.find(Metadata).props()).toStrictEqual({
       workTitle: 'some title',
+      workUrn: 'urn:cts:1:1.1:',
     });
   });
 });
