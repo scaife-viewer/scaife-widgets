@@ -13,7 +13,7 @@
   };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .hello {
     color: red;
   }

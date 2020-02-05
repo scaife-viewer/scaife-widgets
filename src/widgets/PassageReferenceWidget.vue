@@ -1,5 +1,5 @@
 <template>
-  <div class="passage-reference-widget">
+  <div class="passage-reference-widget u-widget">
     <input
       v-model="reference"
       v-on:keyup="handleKeyUp"
@@ -65,7 +65,7 @@
   };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .passage-reference-widget {
     margin: 0 2em;
     flex: 1;

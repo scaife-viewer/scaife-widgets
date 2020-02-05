@@ -27,11 +27,12 @@
   };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   nav.paginator {
     min-width: 5em;
     width: auto;
     position: sticky;
     top: 2em;
+    text-align: center;
   }
 </style>

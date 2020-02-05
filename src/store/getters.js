@@ -6,4 +6,5 @@ export default {
     rootGetters.firstPassageUrn,
   libraryTree: (state, getters, rootState, rootGetters) =>
     rootGetters.libraryTree,
+  metadata: (state, getters, rootState, rootGetters) => rootGetters.metadata,
 };

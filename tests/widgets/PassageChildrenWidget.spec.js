@@ -28,7 +28,7 @@ describe('PassageChildrenWidget.vue', () => {
     });
 
     expect(wrapper.html()).toBe(
-      '<div class="passage-children-widget u-grid"></div>',
+      '<div class="passage-children-widget u-widget u-grid"></div>',
     );
   });
 

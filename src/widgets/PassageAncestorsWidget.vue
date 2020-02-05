@@ -1,5 +1,5 @@
 <template v-if="ancestors">
-  <div class="passage-ancestors-widget u-grid">
+  <div class="passage-ancestors-widget u-widget u-grid">
     <div
       class="grid-cell-square"
       v-for="ancestor in ancestors"
@@ -51,14 +51,13 @@
   };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   a {
     text-decoration: none;
   }
   .passage-ancestors-widget {
     width: 100%;
-    margin: 0 0.33em;
-    margin: 0.5em 0 1em 0;
+    margin: 0 2em;
     grid-auto-rows: 1fr;
     grid-template-columns: repeat(auto-fill, minmax(1.6em, 1fr));
     grid-gap: 0.0825em;
