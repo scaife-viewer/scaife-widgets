@@ -125,3 +125,31 @@ Lint:
 ```sh
 $ npm run lint
 ```
+
+
+## Develop `scaife-widgets` in parallel with a Scaife Viewer front end:
+
+Within the `scaife-widgets` repo root directory:
+
+```sh
+$ yarn link # @@@ resolve npm / yarn difference between projects
+$ npm run watch
+```
+
+Within the Scaife Viewer front end directory:
+
+```sh
+$ yarn link "@scaife-viewer/scaife-widgets"
+$ yarn serve
+```
+
+The `watch` script will re-build `scaife-widgets` when changes are made.
+
+Since the module has been linked via `yarn link`, the front end's `serve` script will detect the changes and recompile the front end.
+
+To revert to the canonical `scaife-widgets` installation within the Scaife Viewer front end:
+
+```sh
+yarn unlink "scaife-viewer/scaife-widgets"
+yarn install --force
+```
