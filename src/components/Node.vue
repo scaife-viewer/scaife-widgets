@@ -75,9 +75,6 @@
 <style lang="scss" scoped>
   @import '@/styles/_variables.scss';
 
-  a {
-    text-decoration: none;
-  }
   li {
     margin-top: 0.33em;
   }

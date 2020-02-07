@@ -39,6 +39,12 @@ describe('Node.vue', () => {
     expect(wrapper.html()).toContain('<span class="node version">');
     const route = wrapper.find('a');
     expect(route.text()).toBe('some title');
+    expect(route.props('to')).toStrictEqual({
+      path: 'reader',
+      query: {
+        urn: 'urn:cts:1:1.1.1:1',
+      },
+    });
     expect(wrapper.html()).not.toContain('<ul class="node-tree"');
   });
 
@@ -116,5 +122,11 @@ describe('Node.vue', () => {
     const route = wrapper.findAll('a');
     expect(route.length).toBe(1);
     expect(route.at(0).text()).toBe('some title');
+    expect(route.at(0).props('to')).toStrictEqual({
+      path: 'reader',
+      query: {
+        urn: 'urn:cts:1:1.1.1:1',
+      },
+    });
   });
 });
