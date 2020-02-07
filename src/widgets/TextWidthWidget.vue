@@ -1,5 +1,5 @@
 <template>
-  <div class="text-width-widget">
+  <div class="text-width-widget u-widget">
     <TextWidth :value="textWidth" @input="changeTextWidth" width="narrow" />
     <TextWidth :value="textWidth" @input="changeTextWidth" width="normal" />
     <TextWidth :value="textWidth" @input="changeTextWidth" width="wide" />
@@ -30,7 +30,7 @@
   };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .text-width-widget {
     margin: 0 2em;
     flex: 1;

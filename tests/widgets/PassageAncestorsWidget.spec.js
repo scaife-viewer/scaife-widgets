@@ -28,7 +28,7 @@ describe('PassageAncestorsWidget.vue', () => {
     });
 
     expect(wrapper.html()).toBe(
-      '<div class="passage-ancestors-widget u-grid"></div>',
+      '<div class="passage-ancestors-widget u-widget u-grid"></div>',
     );
   });
 

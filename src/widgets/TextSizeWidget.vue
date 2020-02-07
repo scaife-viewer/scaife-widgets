@@ -1,5 +1,5 @@
 <template>
-  <div class="text-size-widget">
+  <div class="text-size-widget u-widget">
     <TextSize :value="textSize" @input="changeTextSize" size="xs" />{{ ' ' }}
     <TextSize :value="textSize" @input="changeTextSize" size="sm" />{{ ' ' }}
     <TextSize :value="textSize" @input="changeTextSize" size="md" />{{ ' ' }}
@@ -34,7 +34,7 @@
   };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .text-size-widget {
     margin: 0 2em;
     flex: 1;
