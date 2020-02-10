@@ -28,6 +28,7 @@ const toc = {
 describe('TOCWidget.vue', () => {
   it('Parses a URL, passes props and renders a TOC.', () => {
     const fetchData = jest.fn();
+    const $route = { name: 'reader' };
 
     const store = new Vuex.Store({
       modules: {
@@ -38,11 +39,64 @@ describe('TOCWidget.vue', () => {
       store,
       localVue,
       methods: { fetchData },
+      mocks: { $route },
     });
     wrapper.setData({ toc });
 
     expect(fetchData).toHaveBeenCalledWith(
       'https://sv-mini-atlas.herokuapp.com/tocs/toc.oaf-1.json',
+    );
+
+    const container = wrapper.find('div');
+    expect(container.classes()).toContain('toc-widget');
+    expect(wrapper.find(TOC).props()).toStrictEqual({ toc: toc });
+  });
+
+  it('Conditionally renders a TOC based on the route and query.', () => {
+    const fetchData = jest.fn();
+    const $route = { name: 'tocs', query: { id: 1 } };
+
+    const store = new Vuex.Store({
+      modules: {
+        [scaifeWidgets.namespace]: scaifeWidgets.store,
+      },
+    });
+    const wrapper = shallowMount(TOCWidget, {
+      store,
+      localVue,
+      methods: { fetchData },
+      mocks: { $route },
+    });
+    wrapper.setData({ toc });
+
+    expect(fetchData).toHaveBeenCalledWith(
+      'https://sv-mini-atlas.herokuapp.com/tocs/toc.oaf-1.json',
+    );
+
+    const container = wrapper.find('div');
+    expect(container.classes()).toContain('toc-widget');
+    expect(wrapper.find(TOC).props()).toStrictEqual({ toc: toc });
+  });
+
+  it('Conditionally renders a TOC based on the route and query.', () => {
+    const fetchData = jest.fn();
+    const $route = { name: 'tocs', query: { id: 2 } };
+
+    const store = new Vuex.Store({
+      modules: {
+        [scaifeWidgets.namespace]: scaifeWidgets.store,
+      },
+    });
+    const wrapper = shallowMount(TOCWidget, {
+      store,
+      localVue,
+      methods: { fetchData },
+      mocks: { $route },
+    });
+    wrapper.setData({ toc });
+
+    expect(fetchData).toHaveBeenCalledWith(
+      'https://sv-mini-atlas.herokuapp.com/tocs/toc.crito-stephanus-jkt-1',
     );
 
     const container = wrapper.find('div');

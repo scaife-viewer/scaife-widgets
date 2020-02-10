@@ -22,13 +22,26 @@
       };
     },
     computed: {
+      endpoint() {
+        return 'https://sv-mini-atlas.herokuapp.com/tocs';
+      },
       url() {
-        return 'https://sv-mini-atlas.herokuapp.com/tocs/toc.oaf-1.json';
+        // TODO: Temporary logic until the TOC API hardens.
+        if (this.$route.name === 'reader') {
+          // TODO: Some kind of version specific TOC lookup logic here.
+          return `${this.endpoint}/toc.oaf-1.json`;
+        }
+        const rootToc = `${this.endpoint}/toc.demo-root.json`;
+        const tocMap = {
+          1: `${this.endpoint}/toc.oaf-1.json`,
+          2: `${this.endpoint}/toc.crito-stephanus-jkt-1`,
+        };
+        return this.$route.query.id ? tocMap[this.$route.query.id] : rootToc;
       },
     },
     methods: {
-      fetchData(url) {
-        fetch(url)
+      fetchData() {
+        fetch(this.url)
           .then(response => response.json())
           .then(data => {
             this.toc = data;
