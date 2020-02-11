@@ -26,13 +26,8 @@ const toc = {
 };
 
 describe('TOCWidget.vue', () => {
-  it('Passes props and renders a TOC.', () => {
-    // Mock out fetch.
-    // TODO: Be on the lookout for a more convenient way to do this.
-    const mockDataResponse = {};
-    const mockJsonPromise = Promise.resolve(mockDataResponse);
-    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise });
-    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
+  it('Parses a URL, passes props and renders a TOC.', () => {
+    const fetchData = jest.fn();
 
     const store = new Vuex.Store({
       modules: {
@@ -42,20 +37,16 @@ describe('TOCWidget.vue', () => {
     const wrapper = shallowMount(TOCWidget, {
       store,
       localVue,
+      methods: { fetchData },
     });
-    wrapper.setData({ toc: toc });
+    wrapper.setData({ toc });
 
-    expect(global.fetch).toHaveBeenCalledWith(
+    expect(fetchData).toHaveBeenCalledWith(
       'https://sv-mini-atlas.herokuapp.com/tocs/toc.oaf-1.json',
     );
 
     const container = wrapper.find('div');
     expect(container.classes()).toContain('toc-widget');
-
     expect(wrapper.find(TOC).props()).toStrictEqual({ toc: toc });
-
-    // Tear down.
-    global.fetch.mockClear();
-    delete global.fetch;
   });
 });

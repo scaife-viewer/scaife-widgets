@@ -14,16 +14,20 @@
       displayName: 'Table of Contents',
     },
     created() {
-      this.fetchData();
+      this.fetchData(this.url);
     },
     data() {
       return {
         toc: null,
       };
     },
+    computed: {
+      url() {
+        return 'https://sv-mini-atlas.herokuapp.com/tocs/toc.oaf-1.json';
+      },
+    },
     methods: {
-      fetchData() {
-        const url = 'https://sv-mini-atlas.herokuapp.com/tocs/toc.oaf-1.json';
+      fetchData(url) {
         fetch(url)
           .then(response => response.json())
           .then(data => {
