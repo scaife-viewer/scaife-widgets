@@ -7,6 +7,9 @@
 <script>
   export default {
     name: 'HelloWorld',
+    scaifeConfig: {
+      displayName: 'Hello, World',
+    },
     props: {
       msg: String,
     },
