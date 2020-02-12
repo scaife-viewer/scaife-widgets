@@ -6,23 +6,25 @@ import '@/styles/default.css';
 
 // components
 export { default as HelloWorld } from '@/components/HelloWorld.vue';
+export { default as Icon } from '@/components/Icon.vue';
 export { default as Metadata } from '@/components/Metadata.vue';
 export { default as Paginator } from '@/components/Paginator.vue';
 export { default as TextSize } from '@/components/TextSize.vue';
 export { default as TextWidth } from '@/components/TextWidth.vue';
-export { default as Icon } from '@/components/Icon.vue';
+export { default as TOC } from '@/components/TOC.vue';
 
 // widgets
 export { default as LibraryWidget } from '@/widgets/LibraryWidget.vue';
 export { default as MetadataWidget } from '@/widgets/MetadataWidget.vue';
-export { default as TextSizeWidget } from '@/widgets/TextSizeWidget.vue';
-export { default as TextWidthWidget } from '@/widgets/TextWidthWidget.vue';
 // eslint-disable-next-line max-len
 export { default as PassageAncestorsWidget } from '@/widgets/PassageAncestorsWidget.vue';
 // eslint-disable-next-line max-len
 export { default as PassageChildrenWidget } from '@/widgets/PassageChildrenWidget.vue';
 // eslint-disable-next-line max-len
 export { default as PassageReferenceWidget } from '@/widgets/PassageReferenceWidget.vue';
+export { default as TextSizeWidget } from '@/widgets/TextSizeWidget.vue';
+export { default as TextWidthWidget } from '@/widgets/TextWidthWidget.vue';
+export { default as TOCWidget } from '@/widgets/TOCWidget.vue';
 
 // store
 export { default as scaifeWidgets } from '@/store';

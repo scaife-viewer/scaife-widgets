@@ -1,6 +1,18 @@
 /*
-  These are global, default styles for the reader body.
+  These are global, default styles.
 */
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+h3 {
+  margin: 0;
+}
 
 .text-xs {
   font-size: 12px;
@@ -29,6 +41,10 @@
 }
 .text-width-full {
   max-width: 100%;
+}
+
+.u-flex {
+  display: flex;
 }
 
 .u-widget {

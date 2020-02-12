@@ -32,7 +32,6 @@
     overflow: auto;
   }
   ul.node-tree {
-    list-style: none;
     padding: 0;
     flex-wrap: nowrap;
     margin-left: 0.33em;

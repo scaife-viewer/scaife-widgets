@@ -1,6 +1,6 @@
 <template>
   <div class="metadata-widget u-widget u-flex">
-    <Metadata v-if="metadata" :workTitle="workTitle" :workUrn="workUrn" />
+    <Metadata v-if="metadata" :metadata="metadata" />
   </div>
 </template>
 
@@ -19,12 +19,6 @@
     computed: {
       metadata() {
         return this.$store.getters[`${WIDGETS_NS}/metadata`];
-      },
-      workTitle() {
-        return this.metadata.workTitle;
-      },
-      workUrn() {
-        return this.metadata.workUrn;
       },
     },
   };

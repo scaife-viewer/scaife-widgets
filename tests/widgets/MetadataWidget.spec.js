@@ -29,8 +29,7 @@ describe('MetadataWidget.vue', () => {
     expect(container.classes()).toContain('metadata-widget');
 
     expect(wrapper.find(Metadata).props()).toStrictEqual({
-      workTitle: 'some title',
-      workUrn: 'urn:cts:1:1.1:',
+      metadata: { workTitle: 'some title', workUrn: 'urn:cts:1:1.1:' },
     });
   });
 });
