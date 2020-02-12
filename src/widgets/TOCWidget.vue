@@ -23,20 +23,24 @@
     },
     computed: {
       endpoint() {
-        return 'https://sv-mini-atlas.herokuapp.com/tocs';
+        return 'https://sv-mini-atlas.herokuapp.com';
+      },
+      rootToc() {
+        return `${this.endpoint}/tocs/demo-root.json`;
       },
       url() {
-        // TODO: Temporary logic until the TOC API hardens.
+        // TODO: Temporary (hack) logic until the TOC API hardens.
         if (this.$route.name === 'reader') {
           // TODO: Some kind of version specific TOC lookup logic here.
-          return `${this.endpoint}/toc.oaf-1.json`;
+          return `${this.endpoint}/tocs/toc.oaf-1.json`;
         }
-        const rootToc = `${this.endpoint}/toc.demo-root.json`;
         const tocMap = {
-          1: `${this.endpoint}/toc.oaf-1.json`,
-          2: `${this.endpoint}/toc.crito-stephanus-jkt-1`,
+          1: `${this.endpoint}/tocs/toc.oaf-1.json`,
+          2: `${this.endpoint}/tocs/toc.crito-stephanus-jkt-1`,
         };
-        return this.$route.query.id ? tocMap[this.$route.query.id] : rootToc;
+        return this.$route.query.id
+          ? tocMap[this.$route.query.id]
+          : this.rootToc;
       },
     },
     methods: {
