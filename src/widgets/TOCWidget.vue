@@ -16,6 +16,9 @@
     created() {
       this.fetchData(this.url);
     },
+    watch: {
+      $route: 'fetchData',
+    },
     data() {
       return {
         toc: null,
@@ -29,17 +32,13 @@
         return `${this.endpoint}/tocs/demo-root.json`;
       },
       url() {
-        // TODO: Temporary (hack) logic until the TOC API hardens.
         if (this.$route.name === 'reader') {
-          // TODO: Some kind of version specific TOC lookup logic here.
+          // TODO: Some kind of version specific TOC lookup logic goes here.
           return `${this.endpoint}/tocs/toc.oaf-1.json`;
         }
-        const tocMap = {
-          1: `${this.endpoint}/tocs/toc.oaf-1.json`,
-          2: `${this.endpoint}/tocs/toc.crito-stephanus-jkt-1`,
-        };
-        return this.$route.query.id
-          ? tocMap[this.$route.query.id]
+        const urn = this.$route.query ? this.$route.query.urn : false;
+        return urn
+          ? `${this.endpoint}/tocs/${urn.split(':').slice(-1)}.json`
           : this.rootToc;
       },
     },
