@@ -9,6 +9,7 @@ import TOC from '@/components/TOC.vue';
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
+const endpoint = 'https://mini-stack-a-feature-se-j47yu0.herokuapp.com';
 const toc = {
   '@id': 'urn:cite:scaife-viewer:toc.1',
   title: 'Some Table of Contents',
@@ -43,9 +44,7 @@ describe('TOCWidget.vue', () => {
     });
     wrapper.setData({ toc });
 
-    expect(fetchData).toHaveBeenCalledWith(
-      'https://sv-mini-atlas.herokuapp.com/tocs/toc.oaf-1.json',
-    );
+    expect(fetchData).toHaveBeenCalledWith(`${endpoint}/tocs/toc.oaf-1.json`);
 
     const container = wrapper.find('div');
     expect(container.classes()).toContain('toc-widget');
@@ -70,7 +69,7 @@ describe('TOCWidget.vue', () => {
     wrapper.setData({ toc });
 
     expect(fetchData).toHaveBeenCalledWith(
-      'https://sv-mini-atlas.herokuapp.com/tocs/demo-root.json',
+      `${endpoint}/tocs/toc.demo-root.json`,
     );
 
     const container = wrapper.find('div');
@@ -98,9 +97,7 @@ describe('TOCWidget.vue', () => {
     });
     wrapper.setData({ toc });
 
-    expect(fetchData).toHaveBeenCalledWith(
-      'https://sv-mini-atlas.herokuapp.com/tocs/toc.oaf-1.json',
-    );
+    expect(fetchData).toHaveBeenCalledWith(`${endpoint}/tocs/toc.oaf-1.json`);
 
     const container = wrapper.find('div');
     expect(container.classes()).toContain('toc-widget');

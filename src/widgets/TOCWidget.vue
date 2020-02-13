@@ -26,10 +26,10 @@
     },
     computed: {
       endpoint() {
-        return 'https://sv-mini-atlas.herokuapp.com';
+        return 'https://mini-stack-a-feature-se-j47yu0.herokuapp.com';
       },
       rootToc() {
-        return `${this.endpoint}/tocs/demo-root.json`;
+        return `${this.endpoint}/tocs/toc.demo-root.json`;
       },
       url() {
         if (this.$route.name === 'reader') {
