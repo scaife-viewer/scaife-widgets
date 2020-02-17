@@ -13,6 +13,7 @@ export { default as Paginator } from '@/components/Paginator.vue';
 export { default as TextSize } from '@/components/TextSize.vue';
 export { default as TextWidth } from '@/components/TextWidth.vue';
 export { default as TOC } from '@/components/TOC.vue';
+export { default as WordList } from '@/components/WordList.vue';
 
 // widgets
 export { default as LibraryWidget } from '@/widgets/LibraryWidget.vue';
@@ -28,6 +29,7 @@ export { default as PassageReferenceWidget } from '@/widgets/PassageReferenceWid
 export { default as TextSizeWidget } from '@/widgets/TextSizeWidget.vue';
 export { default as TextWidthWidget } from '@/widgets/TextWidthWidget.vue';
 export { default as TOCWidget } from '@/widgets/TOCWidget.vue';
+export { default as WordListWidget } from '@/widgets/WordListWidget.vue';
 
 // store
 export { default as scaifeWidgets } from '@/store';

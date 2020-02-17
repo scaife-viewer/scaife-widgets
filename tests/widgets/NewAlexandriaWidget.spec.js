@@ -39,7 +39,7 @@ describe('NewAlexandriaWidget.vue', () => {
     });
     wrapper.setData({ comments });
 
-    expect(fetchData).toHaveBeenCalledWith(`${endpoint}?query=some-params`);
+    expect(fetchData).toBeCalledWith(`${endpoint}?query=some-params`);
 
     const container = wrapper.find('div');
     expect(container.classes()).toContain('new-alexandria-widget');
