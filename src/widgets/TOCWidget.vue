@@ -16,19 +16,35 @@
     created() {
       this.fetchData(this.url);
     },
+    watch: {
+      $route: 'fetchData',
+    },
     data() {
       return {
         toc: null,
       };
     },
     computed: {
+      endpoint() {
+        return 'https://mini-stack-a-feature-se-j47yu0.herokuapp.com';
+      },
+      rootToc() {
+        return `${this.endpoint}/tocs/toc.demo-root.json`;
+      },
       url() {
-        return 'https://sv-mini-atlas.herokuapp.com/tocs/toc.oaf-1.json';
+        if (this.$route.name === 'reader') {
+          // TODO: Some kind of version specific TOC lookup logic goes here.
+          return `${this.endpoint}/tocs/toc.oaf-1.json`;
+        }
+        const urn = this.$route.query ? this.$route.query.urn : false;
+        return urn
+          ? `${this.endpoint}/tocs/${urn.split(':').slice(-1)}.json`
+          : this.rootToc;
       },
     },
     methods: {
-      fetchData(url) {
-        fetch(url)
+      fetchData() {
+        fetch(this.url)
           .then(response => response.json())
           .then(data => {
             this.toc = data;

@@ -30,10 +30,10 @@ describe('TOC.vue', () => {
       '<p>A test fixture for a table of contents.</p>',
     );
 
-    const indexes = wrapper.findAll('span');
-    expect(indexes.length).toBe(2);
-    expect(indexes.at(0).text()).toBe('1.');
-    expect(indexes.at(1).text()).toBe('2.');
+    const refs = wrapper.findAll('span');
+    expect(refs.length).toBe(4);
+    expect(refs.at(0).text()).toBe('1.');
+    expect(refs.at(2).text()).toBe('2.');
 
     const titles = wrapper.findAll('a');
     expect(titles.length).toBe(2);
@@ -47,5 +47,10 @@ describe('TOC.vue', () => {
       path: 'reader',
       query: { urn: 'urn:cts:1:1.1.2:1-2' },
     });
+
+    const urns = wrapper.findAll('tt');
+    expect(urns.length).toBe(2);
+    expect(urns.at(0).text()).toBe('urn:cts:1:1.1.1:1-2');
+    expect(urns.at(1).text()).toBe('urn:cts:1:1.1.2:1-2');
   });
 });
