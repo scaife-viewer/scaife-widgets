@@ -70,4 +70,8 @@
   };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+  .word-list-widget {
+    width: 100%;
+  }
+</style>

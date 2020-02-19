@@ -49,4 +49,12 @@ h3 {
 
 .u-widget {
   margin: 0 2em;
+  max-height: 17em;
+  overflow-y: auto;
 }
+
+.u-legend {
+  font-family: "Noto Serif";
+  font-style: italic;
+}
+
