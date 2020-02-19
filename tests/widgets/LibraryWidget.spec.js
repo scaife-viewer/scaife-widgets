@@ -29,9 +29,9 @@ describe('LibraryWidget.vue', () => {
     expect(container.classes()).toContain('library-widget');
 
     const root = wrapper.find('ul');
-    expect(root.classes()).toStrictEqual(['node-tree', 'root']);
+    expect(root.classes()).toEqual(['node-tree', 'root']);
 
-    expect(wrapper.find(Node).props()).toStrictEqual({
+    expect(wrapper.find(Node).props()).toEqual({
       node: { some: 'data' },
     });
   });

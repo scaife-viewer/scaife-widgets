@@ -46,7 +46,7 @@ describe('WordListWidget.vue', () => {
     );
     const container = wrapper.find('div');
     expect(container.classes()).toContain('word-list-widget');
-    expect(wrapper.find(WordList).props()).toStrictEqual({
+    expect(wrapper.find(WordList).props()).toEqual({
       wordList: [{ text: 'lemma1', frequency: '1.00', shortdef: 'some def' }],
     });
 

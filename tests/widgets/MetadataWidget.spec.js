@@ -28,7 +28,7 @@ describe('MetadataWidget.vue', () => {
     const container = wrapper.find('div');
     expect(container.classes()).toContain('metadata-widget');
 
-    expect(wrapper.find(Metadata).props()).toStrictEqual({
+    expect(wrapper.find(Metadata).props()).toEqual({
       metadata: { workTitle: 'some title', workUrn: 'urn:cts:1:1.1:' },
     });
   });

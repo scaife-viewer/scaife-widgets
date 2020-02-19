@@ -129,6 +129,6 @@ describe('TOCWidget.vue', () => {
 
     const container = wrapper.find('div');
     expect(container.classes()).toContain('toc-widget');
-    expect(wrapper.find(TOC).props()).toStrictEqual({ toc: toc });
+    expect(wrapper.find(TOC).props()).toEqual({ toc });
   });
 });
