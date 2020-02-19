@@ -13,7 +13,6 @@ localVue.use(Vuex);
 const endpoint = 'https://vocab.perseus.org';
 const metadata = { lang: 'grc' };
 const passage = new URN('urn:cts:greekLit:tlg0012.tlg001.msA:1.1');
-const selectedLemmas = null;
 
 describe('WordListWidget.vue', () => {
   it('Renders data from a remote request.', async () => {
@@ -31,9 +30,6 @@ describe('WordListWidget.vue', () => {
       store,
       localVue,
       computed: {
-        selectedLemmas() {
-          return selectedLemmas;
-        },
         metadata() {
           return metadata;
         },
@@ -51,8 +47,6 @@ describe('WordListWidget.vue', () => {
     const container = wrapper.find('div');
     expect(container.classes()).toContain('word-list-widget');
     expect(wrapper.find(WordList).props()).toStrictEqual({
-      selectedLemmas,
-      usedFallbackAPI: false,
       wordList: [{ text: 'lemma1', frequency: '1.00', shortdef: 'some def' }],
     });
 
@@ -60,7 +54,7 @@ describe('WordListWidget.vue', () => {
     delete global.fetch;
   });
 
-  it('Halts on failures other than 404.', async () => {
+  it('Parses a URL, catches a failed request, renders nothing.', async () => {
     global.fetch = jest.fn().mockRejectedValue({ status: 500 });
 
     const store = new Vuex.Store({
@@ -72,9 +66,6 @@ describe('WordListWidget.vue', () => {
       store,
       localVue,
       computed: {
-        selectedLemmas() {
-          return selectedLemmas;
-        },
         metadata() {
           return metadata;
         },
@@ -99,8 +90,8 @@ describe('WordListWidget.vue', () => {
     delete global.fetch;
   });
 
-  it('Halts on 404 if no lemmas are selected.', async () => {
-    global.fetch = jest.fn().mockRejectedValue({ status: 404 });
+  it('Disables fetching and rendering if the language is incorrect.', () => {
+    global.fetch = jest.fn();
 
     const store = new Vuex.Store({
       modules: {
@@ -111,16 +102,11 @@ describe('WordListWidget.vue', () => {
       store,
       localVue,
       computed: {
-        selectedLemmas() {
-          return selectedLemmas;
+        enabled() {
+          return false;
         },
         metadata() {
-          return metadata;
-        },
-        metadata() {
-          return {
-            lang: 'eng';
-          },
+          return { lang: 'eng' };
         },
         passage() {
           return passage;
@@ -128,68 +114,10 @@ describe('WordListWidget.vue', () => {
       },
     });
 
-    await wrapper.vm.$nextTick();
-
-    expect(global.fetch).toBeCalledTimes(1);
-    expect(global.fetch).toBeCalledWith(
-      `${endpoint}/word-list/${passage.absolute}/json?page=all&amp;o=1`,
-    );
+    expect(global.fetch).toBeCalledTimes(0);
 
     const container = wrapper.find('div');
     expect(container.classes()).toContain('word-list-widget');
     expect(wrapper.find(WordList).exists()).toBeFalsy();
-
-    global.fetch.mockClear();
-    delete global.fetch;
-  });
-
-  it('Renders fallback data if 404 but with lemmas selected.', async () => {
-    const selectedLemmas = ['lemma2'];
-    const lemmas = [{ text: 'lemma2', shortdef: 'some def', frequency: '2.0' }];
-    global.fetch = jest
-      .fn()
-      .mockRejectedValueOnce({ status: 404 })
-      .mockResolvedValue({ json: () => ({ lemmas }) });
-
-    const store = new Vuex.Store({
-      modules: {
-        [scaifeWidgets.namespace]: scaifeWidgets.store,
-      },
-    });
-    const wrapper = shallowMount(WordListWidget, {
-      store,
-      localVue,
-      computed: {
-        selectedLemmas() {
-          return selectedLemmas;
-        },
-        metadata() {
-          return metadata;
-        },
-        passage() {
-          return passage;
-        },
-      },
-    });
-
-    await wrapper.vm.$nextTick();
-    await wrapper.vm.$nextTick();
-
-    expect(global.fetch).toBeCalledTimes(2);
-    expect(global.fetch).toBeCalledWith(
-      `${endpoint}/word-list/${passage.absolute}/json?page=all&amp;o=1`,
-    );
-    expect(global.fetch).toBeCalledWith(`${endpoint}/lemma/json?l=lemma2`);
-
-    const container = wrapper.find('div');
-    expect(container.classes()).toContain('word-list-widget');
-    expect(wrapper.find(WordList).props()).toStrictEqual({
-      selectedLemmas,
-      usedFallbackAPI: true,
-      wordList: [{ text: 'lemma2', frequency: '2.0', shortdef: 'some def' }],
-    });
-
-    global.fetch.mockClear();
-    delete global.fetch;
   });
 });

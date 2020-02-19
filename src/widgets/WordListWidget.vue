@@ -1,17 +1,10 @@
 <template>
   <div class="word-list-widget u-widget u-flex">
-    <WordList
-      :wordList="wordList"
-      :selectedLemmas="selectedLemmas"
-      :usedFallbackAPI="usedFallbackAPI"
-      v-if="wordList && wordList.length > 0"
-    />
+    <WordList :wordList="wordList" v-if="wordList && wordList.length > 0" />
   </div>
 </template>
 
 <script>
-  import qs from 'query-string';
-
   import WordList from '@/components/WordList.vue';
   import { WIDGETS_NS } from '@/store/constants';
 
@@ -30,7 +23,6 @@
     },
     data() {
       return {
-        usedFallbackAPI: false,
         wordList: [],
       };
     },
@@ -43,9 +35,6 @@
         // return this.metadata.lang === 'grc';
         return true;
       },
-      selectedLemmas() {
-        return this.$store.getters[`${WIDGETS_NS}/selectedLemmas`];
-      },
       metadata() {
         return this.$store.getters[`${WIDGETS_NS}/metadata`];
       },
@@ -55,10 +44,6 @@
       endpoint() {
         return 'https://vocab.perseus.org';
       },
-      fallbackUrl() {
-        const params = qs.stringify({ l: this.selectedLemmas });
-        return `${this.endpoint}/lemma/json?${params}`;
-      },
       url() {
         const url = `${this.endpoint}/word-list/${this.passage.absolute}/json`;
         const params = 'page=all&amp;o=1';
@@ -66,19 +51,6 @@
       },
     },
     methods: {
-      fetchFallbackData(url) {
-        // TODO: Removed json trailing / here...
-        fetch(url)
-          .then(response => response.json())
-          .then(data => {
-            this.usedFallbackAPI = true;
-            this.wordList = data.lemmas;
-          })
-          .catch(error => {
-            // eslint-disable-next-line no-console
-            console.error(error);
-          });
-      },
       fetchData(url) {
         fetch(url)
           .then(response => response.json())
@@ -90,14 +62,8 @@
             }));
           })
           .catch(error => {
-            if (error.status === 404) {
-              if (this.selectedLemmas && this.selectedLemmas.length > 0) {
-                this.fetchFallbackData(this.fallbackUrl);
-              } else {
-                // eslint-disable-next-line no-console
-                console.error(error);
-              }
-            }
+            // eslint-disable-next-line no-console
+            console.error(error);
           });
       },
     },
