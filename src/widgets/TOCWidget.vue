@@ -36,7 +36,10 @@
           : this.rootTocUrn;
       },
       endpoint() {
-        return 'http://localhost:8000';
+        return (
+          process.env.VUE_APP_TOC_ENDPOINT ||
+          'https://mini-stack-a-feature-se-j47yu0.herokuapp.com'
+        );
       },
       rootTocUrn() {
         return 'urn:cite:scaife-viewer:toc.demo-root';
