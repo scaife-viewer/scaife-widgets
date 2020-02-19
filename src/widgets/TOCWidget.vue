@@ -36,10 +36,7 @@
           : this.rootTocUrn;
       },
       endpoint() {
-        return (
-          process.env.VUE_APP_TOC_ENDPOINT ||
-          'https://mini-stack-a-feature-se-j47yu0.herokuapp.com'
-        );
+        return this.$store.state[`${WIDGETS_NS}`].tocEndpoint;
       },
       rootTocUrn() {
         return 'urn:cite:scaife-viewer:toc.demo-root';
