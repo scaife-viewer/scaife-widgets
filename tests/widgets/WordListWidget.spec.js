@@ -117,6 +117,11 @@ describe('WordListWidget.vue', () => {
         metadata() {
           return metadata;
         },
+        metadata() {
+          return {
+            lang: 'eng';
+          },
+        },
         passage() {
           return passage;
         },
@@ -140,9 +145,7 @@ describe('WordListWidget.vue', () => {
 
   it('Renders fallback data if 404 but with lemmas selected.', async () => {
     const selectedLemmas = ['lemma2'];
-    const lemmas = [
-      { text: 'lemma2', shortdef: 'some def', frequency: "2.0" },
-    ];
+    const lemmas = [{ text: 'lemma2', shortdef: 'some def', frequency: '2.0' }];
     global.fetch = jest
       .fn()
       .mockRejectedValueOnce({ status: 404 })

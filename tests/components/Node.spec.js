@@ -105,6 +105,7 @@ describe('Node.vue', () => {
     });
     const toggle = wrapper.find('span');
     toggle.trigger('click');
+
     await wrapper.vm.$nextTick();
 
     const spans = wrapper.findAll('span');
