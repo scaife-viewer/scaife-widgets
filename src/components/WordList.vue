@@ -27,6 +27,7 @@
 
   aside {
     flex-direction: column;
+    width: 100%;
   }
   .word-list > p {
     font-size: 0.85rem;
