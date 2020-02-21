@@ -5,6 +5,7 @@ import Vuex from 'vuex';
 import scaifeWidgets from '@/store';
 import TOCWidget from '@/widgets/TOCWidget.vue';
 import TOC from '@/components/TOC.vue';
+import Lookahead from '@/components/Lookahead.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -77,6 +78,38 @@ describe('TOCWidget.vue', () => {
     const container = wrapper.find('div');
     expect(container.classes()).toContain('toc-widget');
     expect(wrapper.find(TOC).props()).toEqual({ toc });
+  });
+
+  it('Renders a lookahead on the reader.', () => {
+    const fetchData = jest.fn();
+    const $route = { name: 'tocs' };
+    const lenses = { getField: item => item.field };
+
+    const store = new Vuex.Store({
+      modules: {
+        [scaifeWidgets.namespace]: scaifeWidgets.store,
+      },
+    });
+    const wrapper = shallowMount(TOCWidget, {
+      store,
+      localVue,
+      methods: { fetchData },
+      computed: {
+        lenses() {
+          return lenses;
+        },
+      },
+      mocks: { $route },
+    });
+    wrapper.setData({ toc });
+
+    const lookahead = wrapper.find(Lookahead);
+    expect(lookahead.exists()).toBeTruthy();
+    expect(lookahead.props()).toEqual({
+      lenses,
+      data: toc,
+      placeholder: 'Search this table of contents...',
+    });
   });
 
   it('Renders the root TOC when no query is given', async () => {

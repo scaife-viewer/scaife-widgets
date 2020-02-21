@@ -1,16 +1,26 @@
 <template>
   <div class="toc-widget u-widget u-flex">
-    <TOC :toc="toc" v-if="toc" />
+    <Lookahead
+      :placeholder="placeholder"
+      :lenses="lenses"
+      :data="toc"
+      @filter-data="filterData"
+    />
+    <TOC :toc="filtered || toc" v-if="toc" />
   </div>
 </template>
 
 <script>
+  import Lookahead from '@/components/Lookahead.vue';
   import TOC from '@/components/TOC.vue';
   import { WIDGETS_NS } from '@/store/constants';
 
   export default {
     name: 'TOCWidget',
-    components: { TOC },
+    components: {
+      Lookahead,
+      TOC,
+    },
     scaifeConfig: {
       displayName: 'Table of Contents',
     },
@@ -24,6 +34,7 @@
     data() {
       return {
         toc: null,
+        filtered: null,
       };
     },
     computed: {
@@ -34,6 +45,12 @@
         return this.metadata && this.metadata.defaultTocUrn
           ? this.metadata.defaultTocUrn
           : this.rootTocUrn;
+      },
+      placeholder() {
+        return 'Search this table of contents...';
+      },
+      lenses() {
+        return { getTitle: item => item.title, getUri: item => item.uri };
       },
       endpoint() {
         return this.$scaife.endpoints.tocEndpoint;
@@ -55,6 +72,9 @@
       },
     },
     methods: {
+      filterData(data) {
+        this.filtered = data;
+      },
       fetchData() {
         fetch(this.url)
           .then(response => response.json())
@@ -74,6 +94,7 @@
 
 <style lang="scss" scoped>
   .toc-widget {
+    flex-direction: column;
     justify-content: flex-start;
     width: 100%;
   }
