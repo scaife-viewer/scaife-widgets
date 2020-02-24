@@ -26,7 +26,8 @@
 <style lang="scss" scoped>
   aside {
     flex-direction: column;
-    h4,h5 {
+    h4,
+    h5 {
       margin: 0.33em 0;
     }
   }

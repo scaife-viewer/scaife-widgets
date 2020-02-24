@@ -32,8 +32,8 @@
     computed: {
       enabled() {
         // TODO: Stubbed until metadata ingestion update.
-        // return this.metadata.lang === 'grc';
-        return true;
+        // return this.passage && this.metadata.lang === 'grc';
+        return this.passage ? true : false;
       },
       metadata() {
         return this.$store.getters[`${WIDGETS_NS}/metadata`];
@@ -42,16 +42,21 @@
         return this.$store.getters[`${WIDGETS_NS}/passage`];
       },
       endpoint() {
-        return 'https://vocab.perseus.org';
+        return 'https://vocab.perseus.org/word-list';
       },
       url() {
-        const url = `${this.endpoint}/word-list/${this.passage.absolute}/json`;
         const params = 'page=all&amp;o=1';
-        return `${url}/?${params}`;
+        return this.passage ?
+          `${this.endpoint}/${this.passage.absolute}/json/?${params}`
+          : null;
       },
     },
     methods: {
       fetchData(url) {
+        /* eslint-disable no-console */
+        console.log(`WORD LIST ---> url passed in: ${JSON.stringify(url)}`);
+        console.log(`WORD LIST ---> this.url is: ${JSON.stringify(this.url)}`);
+        /* eslint-enable no-console */
         fetch(url)
           .then(response => response.json())
           .then(data => {
@@ -62,8 +67,7 @@
             }));
           })
           .catch(error => {
-            // eslint-disable-next-line no-console
-            console.error(error);
+            throw new Error(error.message);
           });
       },
     },

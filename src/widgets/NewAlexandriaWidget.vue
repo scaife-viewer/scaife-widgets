@@ -19,7 +19,9 @@
       NewAlexandria,
     },
     created() {
-      this.fetchData(this.url);
+      if (this.enabled) {
+        this.fetchData(this.url);
+      }
     },
     data() {
       return {
@@ -30,6 +32,9 @@
       passage: 'fetchData',
     },
     computed: {
+      enabled() {
+        return this.passage ? true : false;
+      },
       passage() {
         return this.$store.getters[`${WIDGETS_NS}/passage`];
       },
@@ -37,7 +42,8 @@
         return 'https://commentary-api.chs.harvard.edu/graphql';
       },
       params() {
-        const query = `{
+        return this.passage
+          ? qs.stringify({ query: `{
           commentsOn(urn: "${this.passage.absolute}") {
             _id
             updated
@@ -50,8 +56,8 @@
               name
             }
           }
-        }`;
-        return qs.stringify({ query });
+        }`})
+          : null;
       },
       url() {
         return `${this.endpoint}?${this.params}`;
@@ -59,14 +65,17 @@
     },
     methods: {
       fetchData(url) {
+        /* eslint-disable no-console */
+        console.log(`NEW ALEX ---> url passed in: ${JSON.stringify(url)}`);
+        console.log(`NEW ALEX ---> this.url is: ${JSON.stringify(this.url)}`);
+        /* eslint-enable no-console */
         fetch(url)
           .then(response => response.json())
           .then(data => {
             this.comments = data.data.commentsOn;
           })
           .catch(error => {
-            // eslint-disable-next-line no-console
-            console.error(error);
+            throw new Error(error.message);
           });
       },
     },
