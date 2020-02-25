@@ -44,7 +44,7 @@ describe('TOCWidget.vue', () => {
     });
     wrapper.setData({ toc });
 
-    expect(fetchData).toHaveBeenCalledWith(`${endpoint}/tocs/toc.oaf-1.json`);
+    expect(fetchData).toHaveBeenCalledWith(`${endpoint}/tocs/toc.demo-root.json`);
 
     const container = wrapper.find('div');
     expect(container.classes()).toContain('toc-widget');
@@ -53,7 +53,7 @@ describe('TOCWidget.vue', () => {
 
   it('Renders the root TOC when no query is given', () => {
     const fetchData = jest.fn();
-    const $route = { name: 'tocs' };
+    const $route = { name: 'tocs', query: { urn: '' } };
 
     const store = new Vuex.Store({
       modules: {
