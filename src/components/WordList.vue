@@ -30,6 +30,7 @@
     width: 100%;
   }
   .word-list > p {
+    font-family: $font-family-serif;
     font-size: 0.85rem;
     margin: 0.165em 0;
     span.w {
