@@ -36,7 +36,7 @@
           : this.rootTocUrn;
       },
       endpoint() {
-        return this.$store.state[`${WIDGETS_NS}`].tocEndpoint;
+        return this.$scaife.endpoints.tocEndpoint;
       },
       rootTocUrn() {
         return 'urn:cite:scaife-viewer:toc.demo-root';
