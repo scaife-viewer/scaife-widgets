@@ -32,3 +32,6 @@ export { default as scaifeWidgets } from '@/store';
 // utils
 export { default as URN } from '@/utils/URN';
 export default WIDGETS_NS;
+
+// endpoints
+export { default as EndpointsPlugin } from '@/endpoints/plugin';
