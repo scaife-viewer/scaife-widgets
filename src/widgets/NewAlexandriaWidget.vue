@@ -20,7 +20,7 @@
     },
     created() {
       if (this.enabled) {
-        this.fetchData(this.url);
+        this.fetchData();
       }
     },
     data() {
@@ -43,7 +43,8 @@
       },
       params() {
         return this.passage
-          ? qs.stringify({ query: `{
+          ? qs.stringify({
+            query: `{
           commentsOn(urn: "${this.passage.absolute}") {
             _id
             updated
@@ -56,7 +57,8 @@
               name
             }
           }
-        }`})
+        }`,
+          })
           : null;
       },
       url() {
@@ -64,12 +66,8 @@
       },
     },
     methods: {
-      fetchData(url) {
-        /* eslint-disable no-console */
-        console.log(`NEW ALEX ---> url passed in: ${JSON.stringify(url)}`);
-        console.log(`NEW ALEX ---> this.url is: ${JSON.stringify(this.url)}`);
-        /* eslint-enable no-console */
-        fetch(url)
+      fetchData() {
+        fetch(this.url)
           .then(response => response.json())
           .then(data => {
             this.comments = data.data.commentsOn;

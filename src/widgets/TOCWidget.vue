@@ -14,7 +14,7 @@
       displayName: 'Table of Contents',
     },
     created() {
-      this.fetchData(this.url);
+      this.fetchData();
     },
     watch: {
       $route: 'fetchData',

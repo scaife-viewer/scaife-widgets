@@ -18,7 +18,7 @@
     },
     created() {
       if (this.enabled) {
-        this.fetchData(this.url);
+        this.fetchData();
       }
     },
     data() {
@@ -46,18 +46,14 @@
       },
       url() {
         const params = 'page=all&amp;o=1';
-        return this.passage ?
-          `${this.endpoint}/${this.passage.absolute}/json/?${params}`
+        return this.passage
+          ? `${this.endpoint}/${this.passage.absolute}/json/?${params}`
           : null;
       },
     },
     methods: {
-      fetchData(url) {
-        /* eslint-disable no-console */
-        console.log(`WORD LIST ---> url passed in: ${JSON.stringify(url)}`);
-        console.log(`WORD LIST ---> this.url is: ${JSON.stringify(this.url)}`);
-        /* eslint-enable no-console */
-        fetch(url)
+      fetchData() {
+        fetch(this.url)
           .then(response => response.json())
           .then(data => {
             this.wordList = data.lemmas.map(lemma => ({

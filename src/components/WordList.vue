@@ -37,7 +37,7 @@
     }
     span.df {
       color: $gray-600;
-      margin-left: auto;
+      margin-left: 0.66em;
       margin-right: 0.66em;
     }
   }
