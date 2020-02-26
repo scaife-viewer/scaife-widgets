@@ -38,12 +38,12 @@ describe('TOC.vue', () => {
     const titles = wrapper.findAll('a');
     expect(titles.length).toBe(2);
     expect(titles.at(0).text()).toBe('Title 1');
-    expect(titles.at(0).props('to')).toStrictEqual({
+    expect(titles.at(0).props('to')).toEqual({
       path: 'reader',
       query: { urn: 'urn:cts:1:1.1.1:1-2' },
     });
     expect(titles.at(1).text()).toBe('Title 2');
-    expect(titles.at(1).props('to')).toStrictEqual({
+    expect(titles.at(1).props('to')).toEqual({
       path: 'reader',
       query: { urn: 'urn:cts:1:1.1.2:1-2' },
     });

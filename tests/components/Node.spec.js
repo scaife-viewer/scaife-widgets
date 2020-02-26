@@ -39,7 +39,7 @@ describe('Node.vue', () => {
     expect(wrapper.html()).toContain('<span class="node version">');
     const route = wrapper.find('a');
     expect(route.text()).toBe('some title');
-    expect(route.props('to')).toStrictEqual({
+    expect(route.props('to')).toEqual({
       path: 'reader',
       query: {
         urn: 'urn:cts:1:1.1.1:1',
@@ -71,8 +71,8 @@ describe('Node.vue', () => {
     });
 
     const spans = wrapper.findAll('span');
-    expect(spans.at(0).classes()).toStrictEqual(['open-toggle']);
-    expect(spans.at(1).classes()).toStrictEqual(['node', 'monospace']);
+    expect(spans.at(0).classes()).toEqual(['open-toggle']);
+    expect(spans.at(1).classes()).toEqual(['node', 'monospace']);
     const monospace = wrapper.findAll('tt');
     expect(monospace.length).toBe(1);
     expect(monospace.at(0).text()).toBe('urn:cts:1:1.1:');
@@ -105,24 +105,25 @@ describe('Node.vue', () => {
     });
     const toggle = wrapper.find('span');
     toggle.trigger('click');
+
     await wrapper.vm.$nextTick();
 
     const spans = wrapper.findAll('span');
-    expect(spans.at(0).classes()).toStrictEqual(['open-toggle']);
-    expect(spans.at(1).classes()).toStrictEqual(['node', 'monospace']);
+    expect(spans.at(0).classes()).toEqual(['open-toggle']);
+    expect(spans.at(1).classes()).toEqual(['node', 'monospace']);
     const monospace = wrapper.findAll('tt');
     expect(monospace.length).toBe(1);
     expect(monospace.at(0).text()).toBe('urn:cts:1:1.1:');
 
     const childList = wrapper.findAll('ul');
     expect(childList.length).toBe(1);
-    expect(childList.at(0).classes()).toStrictEqual(['node-tree']);
-    expect(spans.at(2).classes()).toStrictEqual(['node', 'version']);
+    expect(childList.at(0).classes()).toEqual(['node-tree']);
+    expect(spans.at(2).classes()).toEqual(['node', 'version']);
 
     const route = wrapper.findAll('a');
     expect(route.length).toBe(1);
     expect(route.at(0).text()).toBe('some title');
-    expect(route.at(0).props('to')).toStrictEqual({
+    expect(route.at(0).props('to')).toEqual({
       path: 'reader',
       query: {
         urn: 'urn:cts:1:1.1.1:1',

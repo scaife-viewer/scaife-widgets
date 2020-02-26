@@ -49,4 +49,18 @@ h3 {
 
 .u-widget {
   margin: 0 2em;
+  max-height: 17em;
+  overflow-y: auto;
+}
+
+.main-layout .u-widget {
+  max-height: none;
+}
+
+.u-legend {
+  font-size: 0.9rem;
+  font-family: "Noto Serif";
+  font-style: italic;
+  margin: 0 0 0.33em 0;
+  color: #868e96;
 }
