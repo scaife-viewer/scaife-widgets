@@ -29,6 +29,7 @@ const toc = {
 describe('TOCWidget.vue', () => {
   it('Parses a URL and catches a failed request.', async () => {
     const $route = { name: 'reader' };
+    const $scaife = { endpoints: { tocEndpoint: endpoint } };
     global.fetch = jest.fn().mockRejectedValue({ status: 500 });
 
     const store = new Vuex.Store({
@@ -39,12 +40,12 @@ describe('TOCWidget.vue', () => {
     const wrapper = shallowMount(TOCWidget, {
       store,
       localVue,
-      mocks: { $route },
+      mocks: { $route, $scaife },
     });
 
     await wrapper.vm.$nextTick();
 
-    expect(global.fetch).toBeCalledWith(`${endpoint}/tocs/toc.oaf-1.json`);
+    expect(global.fetch).toBeCalledWith(`${endpoint}/tocs/toc.demo-root.json`);
 
     const container = wrapper.find('div');
     expect(container.classes()).toContain('toc-widget');
@@ -53,6 +54,7 @@ describe('TOCWidget.vue', () => {
 
   it('Parses a URL, fetches data and renders a reader TOC.', async () => {
     const $route = { name: 'reader' };
+    const $scaife = { endpoints: { tocEndpoint: endpoint } };
     global.fetch = jest.fn().mockResolvedValue({ json: () => toc });
 
     const store = new Vuex.Store({
@@ -63,13 +65,13 @@ describe('TOCWidget.vue', () => {
     const wrapper = shallowMount(TOCWidget, {
       store,
       localVue,
-      mocks: { $route },
+      mocks: { $route, $scaife },
     });
 
     await wrapper.vm.$nextTick();
 
     expect(global.fetch).toHaveBeenCalledWith(
-      `${endpoint}/tocs/toc.oaf-1.json`,
+      `${endpoint}/tocs/toc.demo-root.json`,
     );
 
     const container = wrapper.find('div');
@@ -78,7 +80,8 @@ describe('TOCWidget.vue', () => {
   });
 
   it('Renders the root TOC when no query is given', async () => {
-    const $route = { name: 'tocs' };
+    const $route = { name: 'tocs', query: {} };
+    const $scaife = { endpoints: { tocEndpoint: endpoint } };
     global.fetch = jest.fn().mockResolvedValue({ json: () => toc });
 
     const store = new Vuex.Store({
@@ -89,7 +92,7 @@ describe('TOCWidget.vue', () => {
     const wrapper = shallowMount(TOCWidget, {
       store,
       localVue,
-      mocks: { $route },
+      mocks: { $route, $scaife },
     });
 
     await wrapper.vm.$nextTick();
@@ -108,6 +111,7 @@ describe('TOCWidget.vue', () => {
       name: 'tocs',
       query: { urn: 'urn:cite:scaife-viewer:toc.oaf-1' },
     };
+    const $scaife = { endpoints: { tocEndpoint: endpoint } };
     global.fetch = jest.fn().mockResolvedValue({ json: () => toc });
 
     const store = new Vuex.Store({
@@ -118,7 +122,7 @@ describe('TOCWidget.vue', () => {
     const wrapper = shallowMount(TOCWidget, {
       store,
       localVue,
-      mocks: { $route },
+      mocks: { $route, $scaife },
     });
 
     await wrapper.vm.$nextTick();

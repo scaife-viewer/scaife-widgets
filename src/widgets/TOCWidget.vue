@@ -6,6 +6,7 @@
 
 <script>
   import TOC from '@/components/TOC.vue';
+  import { WIDGETS_NS } from '@/store/constants';
 
   export default {
     name: 'TOCWidget',
@@ -18,6 +19,7 @@
     },
     watch: {
       $route: 'fetchData',
+      defaultTocUrn: 'fetchData',
     },
     data() {
       return {
@@ -25,21 +27,31 @@
       };
     },
     computed: {
-      endpoint() {
-        return 'https://mini-stack-a-feature-se-j47yu0.herokuapp.com';
+      metadata() {
+        return this.$store.getters[`${WIDGETS_NS}/metadata`];
       },
-      rootToc() {
-        return `${this.endpoint}/tocs/toc.demo-root.json`;
+      defaultTocUrn() {
+        return this.metadata && this.metadata.defaultTocUrn
+          ? this.metadata.defaultTocUrn
+          : this.rootTocUrn;
+      },
+      endpoint() {
+        return this.$scaife.endpoints.tocEndpoint;
+      },
+      rootTocUrn() {
+        return 'urn:cite:scaife-viewer:toc.demo-root';
+      },
+      rootTocUrl() {
+        return this.getTocUrl(this.rootTocUrn);
       },
       url() {
         if (this.$route.name === 'reader') {
-          // TODO: Some kind of version specific TOC lookup logic goes here.
-          return `${this.endpoint}/tocs/toc.oaf-1.json`;
+          return this.getTocUrl(this.defaultTocUrn);
         }
-        const urn = this.$route.query ? this.$route.query.urn : false;
-        return urn
-          ? `${this.endpoint}/tocs/${urn.split(':').slice(-1)}.json`
-          : this.rootToc;
+        const urn = this.$route.query.urn
+          ? this.$route.query.urn
+          : this.rootTocUrn;
+        return this.getTocUrl(urn);
       },
     },
     methods: {
@@ -52,6 +64,9 @@
           .catch(error => {
             throw new Error(error.message);
           });
+      },
+      getTocUrl(tocUrn) {
+        return `${this.endpoint}/tocs/${tocUrn.split(':').slice(-1)}.json`;
       },
     },
   };
