@@ -30,6 +30,7 @@ describe('TOCWidget.vue', () => {
   it('Parses a URL, passes props and renders a TOC on the reader.', () => {
     const fetchData = jest.fn();
     const $route = { name: 'reader' };
+    const $scaife = { endpoints: { tocEndpoint: endpoint } };
 
     const store = new Vuex.Store({
       modules: {
@@ -40,11 +41,13 @@ describe('TOCWidget.vue', () => {
       store,
       localVue,
       methods: { fetchData },
-      mocks: { $route },
+      mocks: { $route, $scaife },
     });
     wrapper.setData({ toc });
 
-    expect(fetchData).toHaveBeenCalledWith(`${endpoint}/tocs/toc.demo-root.json`);
+    expect(fetchData).toHaveBeenCalledWith(
+      `${endpoint}/tocs/toc.demo-root.json`,
+    );
 
     const container = wrapper.find('div');
     expect(container.classes()).toContain('toc-widget');
@@ -54,6 +57,7 @@ describe('TOCWidget.vue', () => {
   it('Renders the root TOC when no query is given', () => {
     const fetchData = jest.fn();
     const $route = { name: 'tocs', query: { urn: '' } };
+    const $scaife = { endpoints: { tocEndpoint: endpoint } };
 
     const store = new Vuex.Store({
       modules: {
@@ -64,7 +68,7 @@ describe('TOCWidget.vue', () => {
       store,
       localVue,
       methods: { fetchData },
-      mocks: { $route },
+      mocks: { $route, $scaife },
     });
     wrapper.setData({ toc });
 
@@ -83,6 +87,7 @@ describe('TOCWidget.vue', () => {
       name: 'tocs',
       query: { urn: 'urn:cite:scaife-viewer:toc.oaf-1' },
     };
+    const $scaife = { endpoints: { tocEndpoint: endpoint } };
 
     const store = new Vuex.Store({
       modules: {
@@ -93,7 +98,7 @@ describe('TOCWidget.vue', () => {
       store,
       localVue,
       methods: { fetchData },
-      mocks: { $route },
+      mocks: { $route, $scaife },
     });
     wrapper.setData({ toc });
 
