@@ -48,9 +48,8 @@ describe('TOCWidget.vue', () => {
 
     expect(global.fetch).toBeCalledWith(`${endpoint}/tocs/toc.demo-root.json`);
 
-    const container = wrapper.find('div');
-    expect(container.classes()).toContain('toc-widget');
-    expect(wrapper.find(TOC).exists()).toBeFalsy();
+    const container = wrapper.find('div.toc-widget');
+    expect(container.exists()).toBeFalsy();
   });
 
   it('Parses a URL, fetches data and renders a reader TOC.', async () => {

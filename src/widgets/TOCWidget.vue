@@ -1,12 +1,12 @@
 <template>
-  <div class="toc-widget u-widget u-flex">
+  <div class="toc-widget u-widget u-flex" v-if="toc">
     <Lookahead
       :placeholder="placeholder"
       :reducer="reducer"
       :data="toc"
       @filter-data="filterData"
     />
-    <TOC :toc="filtered || toc" v-if="toc" />
+    <TOC :toc="filtered || toc" />
   </div>
 </template>
 
