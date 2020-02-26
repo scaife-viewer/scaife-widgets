@@ -1,6 +1,5 @@
 const defaultEndpoints = {
-  // 'https://mini-stack-a-feature-se-j47yu0.herokuapp.com';
-  tocEndpoint: 'https://sv-mini-atlas.scaife-viewer.org/graphql/',
+  tocEndpoint: 'https://sv-mini-atlas.scaife-viewer.org',
 };
 
 const install = (Vue, options) => {
