@@ -27,9 +27,6 @@
       query: 'updateData',
     },
     methods: {
-      onClear() {
-        this.query = '';
-      },
       updateData() {
         this.results = this.reducer(this.data, this.query);
         this.$emit('filter-data', this.results);
