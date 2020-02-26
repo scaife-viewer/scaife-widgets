@@ -14,7 +14,7 @@
       displayName: 'Table of Contents',
     },
     created() {
-      this.fetchData(this.url);
+      this.fetchData();
     },
     watch: {
       $route: 'fetchData',
@@ -50,8 +50,7 @@
             this.toc = data;
           })
           .catch(error => {
-            // eslint-disable-next-line no-console
-            console.error(error);
+            throw new Error(error.message);
           });
       },
     },
