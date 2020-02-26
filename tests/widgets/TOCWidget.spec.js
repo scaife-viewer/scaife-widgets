@@ -83,7 +83,6 @@ describe('TOCWidget.vue', () => {
   it('Renders a lookahead on the reader.', () => {
     const fetchData = jest.fn();
     const $route = { name: 'tocs' };
-    const lenses = { getField: item => item.field };
 
     const store = new Vuex.Store({
       modules: {
@@ -94,11 +93,6 @@ describe('TOCWidget.vue', () => {
       store,
       localVue,
       methods: { fetchData },
-      computed: {
-        lenses() {
-          return lenses;
-        },
-      },
       mocks: { $route },
     });
     wrapper.setData({ toc });
@@ -106,9 +100,9 @@ describe('TOCWidget.vue', () => {
     const lookahead = wrapper.find(Lookahead);
     expect(lookahead.exists()).toBeTruthy();
     expect(lookahead.props()).toEqual({
-      lenses,
       data: toc,
       placeholder: 'Search this table of contents...',
+      reducer: wrapper.vm.reducer,
     });
   });
 

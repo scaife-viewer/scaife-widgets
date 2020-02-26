@@ -16,7 +16,7 @@
   import debounce from 'lodash.debounce';
 
   export default {
-    props: ['placeholder', 'lenses', 'data'],
+    props: ['placeholder', 'reducer', 'data'],
     data() {
       return {
         query: '',
@@ -31,30 +31,13 @@
         this.query = '';
       },
       updateData() {
-        this.results = this.filter(this.data);
+        this.results = this.reducer(this.data, this.query);
         this.$emit('filter-data', this.results);
       },
       onInput() {
         debounce(e => {
           this.query = e.target.value;
         }, 500);
-      },
-      filter(data) {
-        return {
-          ...data,
-          items: this.reduce(data.items),
-        };
-      },
-      reduce(items) {
-        return items.filter(item =>
-          Object.values(this.lenses)
-            .map(getter =>
-              getter(item)
-                .toLowerCase()
-                .includes(this.query.toLowerCase()),
-            )
-            .some(Boolean),
-        );
       },
     },
   };

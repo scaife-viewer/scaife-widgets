@@ -2,7 +2,7 @@
   <div class="toc-widget u-widget u-flex">
     <Lookahead
       :placeholder="placeholder"
-      :lenses="lenses"
+      :reducer="reducer"
       :data="toc"
       @filter-data="filterData"
     />
@@ -14,6 +14,7 @@
   import Lookahead from '@/components/Lookahead.vue';
   import TOC from '@/components/TOC.vue';
   import { WIDGETS_NS } from '@/store/constants';
+  import reducers from '@/utils/reducers';
 
   export default {
     name: 'TOCWidget',
@@ -41,19 +42,19 @@
       metadata() {
         return this.$store.getters[`${WIDGETS_NS}/metadata`];
       },
-      defaultTocUrn() {
-        return this.metadata && this.metadata.defaultTocUrn
-          ? this.metadata.defaultTocUrn
-          : this.rootTocUrn;
+      reducer() {
+        return reducers.tocReducer;
       },
       placeholder() {
         return 'Search this table of contents...';
       },
-      lenses() {
-        return { getTitle: item => item.title, getUri: item => item.uri };
-      },
       endpoint() {
         return this.$scaife.endpoints.tocEndpoint;
+      },
+      defaultTocUrn() {
+        return this.metadata && this.metadata.defaultTocUrn
+          ? this.metadata.defaultTocUrn
+          : this.rootTocUrn;
       },
       rootTocUrn() {
         return 'urn:cite:scaife-viewer:toc.demo-root';
