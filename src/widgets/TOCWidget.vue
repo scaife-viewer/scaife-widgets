@@ -6,7 +6,7 @@
       :data="toc"
       @filter-data="filterData"
     />
-    <TOC :toc="filtered || toc" />
+    <TOC :toc="filtered || toc" :context="context" :passage="passage" />
   </div>
 </template>
 
@@ -39,6 +39,9 @@
       };
     },
     computed: {
+      context() {
+        return this.$route.name;
+      },
       metadata() {
         return this.$store.getters[`${WIDGETS_NS}/metadata`];
       },
@@ -63,13 +66,19 @@
         return this.getTocUrl(this.rootTocUrn);
       },
       url() {
-        if (this.$route.name === 'reader') {
+        if (this.$route.query.toc) {
+          return this.getTocUrl(this.$route.query.toc);
+        }
+        if (this.context === 'reader') {
           return this.getTocUrl(this.defaultTocUrn);
         }
         const urn = this.$route.query.urn
           ? this.$route.query.urn
           : this.rootTocUrn;
         return this.getTocUrl(urn);
+      },
+      passage() {
+        return this.$store.getters[`${WIDGETS_NS}/passage`];
       },
     },
     methods: {

@@ -6,12 +6,7 @@
       <li class="u-flex" v-for="(item, index) in toc.items" :key="index">
         <span class="ref">{{ index + 1 }}.</span>
         <div class="item u-flex">
-          <router-link
-            :to="{
-              path: isCiteUrn(item.uri) ? 'tocs' : 'reader',
-              query: { urn: item.uri },
-            }"
-          >
+          <router-link :to="getPayload(item.uri)">
             {{ item.title }}
           </router-link>
           <span>
@@ -27,10 +22,19 @@
 <script>
   export default {
     name: 'TOC',
-    props: ['toc'],
+    props: ['toc', 'context', 'passage'],
     methods: {
       isCiteUrn(urn) {
         return urn.startsWith('urn:cite:');
+      },
+      getPayload(urn) {
+        if (this.isCiteUrn(urn)) {
+          const passage = this.passage.absolute;
+          return this.context === 'tocs'
+            ? { path: 'tocs', query: { urn } }
+            : { path: 'reader', query: { urn: passage, toc: urn } };
+        }
+        return { path: 'reader', query: { urn } };
       },
     },
   };

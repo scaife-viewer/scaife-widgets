@@ -6,10 +6,12 @@ import scaifeWidgets from '@/store';
 import TOCWidget from '@/widgets/TOCWidget.vue';
 import TOC from '@/components/TOC.vue';
 import Lookahead from '@/components/Lookahead.vue';
+import URN from '@/utils/URN';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
+const passage = new URN('urn:cts:1:1.1.3:1-2');
 const endpoint = 'https://mini-stack-a-feature-se-j47yu0.herokuapp.com';
 const toc = {
   '@id': 'urn:cite:scaife-viewer:toc.1',
@@ -29,7 +31,7 @@ const toc = {
 
 describe('TOCWidget.vue', () => {
   it('Parses a URL and catches a failed request.', async () => {
-    const $route = { name: 'reader' };
+    const $route = { name: 'reader', query: {} };
     const $scaife = { endpoints: { tocEndpoint: endpoint } };
     global.fetch = jest.fn().mockRejectedValue({ status: 500 });
 
@@ -42,6 +44,11 @@ describe('TOCWidget.vue', () => {
       store,
       localVue,
       mocks: { $route, $scaife },
+      computed: {
+        passage() {
+          return passage;
+        },
+      },
     });
 
     await wrapper.vm.$nextTick();
@@ -53,7 +60,7 @@ describe('TOCWidget.vue', () => {
   });
 
   it('Parses a URL, fetches data and renders a reader TOC.', async () => {
-    const $route = { name: 'reader' };
+    const $route = { name: 'reader', query: {} };
     const $scaife = { endpoints: { tocEndpoint: endpoint } };
     global.fetch = jest.fn().mockResolvedValue({ json: () => toc });
 
@@ -66,6 +73,11 @@ describe('TOCWidget.vue', () => {
       store,
       localVue,
       mocks: { $route, $scaife },
+      computed: {
+        passage() {
+          return passage;
+        },
+      },
     });
 
     await wrapper.vm.$nextTick();
@@ -76,7 +88,11 @@ describe('TOCWidget.vue', () => {
 
     const container = wrapper.find('div');
     expect(container.classes()).toContain('toc-widget');
-    expect(wrapper.find(TOC).props()).toEqual({ toc });
+    expect(wrapper.find(TOC).props()).toEqual({
+      toc,
+      passage,
+      context: 'reader',
+    });
   });
 
   it('Renders a lookahead on the reader.', () => {
@@ -119,6 +135,11 @@ describe('TOCWidget.vue', () => {
       store,
       localVue,
       mocks: { $route, $scaife },
+      computed: {
+        passage() {
+          return null;
+        },
+      },
     });
 
     await wrapper.vm.$nextTick();
@@ -129,7 +150,11 @@ describe('TOCWidget.vue', () => {
 
     const container = wrapper.find('div');
     expect(container.classes()).toContain('toc-widget');
-    expect(wrapper.find(TOC).props()).toEqual({ toc });
+    expect(wrapper.find(TOC).props()).toEqual({
+      toc,
+      passage: null,
+      context: 'tocs',
+    });
   });
 
   it('Conditionally renders a TOC based on the route and query.', async () => {
@@ -149,6 +174,11 @@ describe('TOCWidget.vue', () => {
       store,
       localVue,
       mocks: { $route, $scaife },
+      computed: {
+        passage() {
+          return null;
+        },
+      },
     });
 
     await wrapper.vm.$nextTick();
@@ -159,6 +189,50 @@ describe('TOCWidget.vue', () => {
 
     const container = wrapper.find('div');
     expect(container.classes()).toContain('toc-widget');
-    expect(wrapper.find(TOC).props()).toEqual({ toc });
+    expect(wrapper.find(TOC).props()).toEqual({
+      toc,
+      passage: null,
+      context: 'tocs',
+    });
+  });
+
+  it('Renders a TOC from the route query payload, if present.', async () => {
+    const $route = {
+      name: 'reader',
+      query: {
+        urn: 'urn:cts:1:1.1.1:1-2',
+        toc: 'urn:cite:scaife-viewer:toc.1',
+      },
+    };
+    const $scaife = { endpoints: { tocEndpoint: endpoint } };
+    global.fetch = jest.fn().mockResolvedValue({ json: () => toc });
+
+    const store = new Vuex.Store({
+      modules: {
+        [scaifeWidgets.namespace]: scaifeWidgets.store,
+      },
+    });
+    const wrapper = shallowMount(TOCWidget, {
+      store,
+      localVue,
+      mocks: { $route, $scaife },
+      computed: {
+        passage() {
+          return passage;
+        },
+      },
+    });
+
+    await wrapper.vm.$nextTick();
+
+    expect(global.fetch).toHaveBeenCalledWith(`${endpoint}/tocs/toc.1.json`);
+
+    const container = wrapper.find('div');
+    expect(container.classes()).toContain('toc-widget');
+    expect(wrapper.find(TOC).props()).toEqual({
+      toc,
+      passage,
+      context: 'reader',
+    });
   });
 });

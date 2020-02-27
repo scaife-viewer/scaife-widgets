@@ -1,7 +1,10 @@
 /* global describe, expect, it  */
 import { shallowMount, RouterLinkStub } from '@vue/test-utils';
-import TOC from '@/components/TOC.vue';
 
+import TOC from '@/components/TOC.vue';
+import URN from '@/utils/URN';
+
+const passage = new URN('urn:cts:1:1.1.3:1-2');
 const toc = {
   '@id': 'urn:cite:scaife-viewer:toc.1',
   title: 'Some Table of Contents',
@@ -9,7 +12,7 @@ const toc = {
   items: [
     {
       title: 'Title 1',
-      uri: 'urn:cts:1:1.1.1:1-2',
+      uri: 'urn:cite:scaife-viewer:1.1:',
     },
     {
       title: 'Title 2',
@@ -19,9 +22,9 @@ const toc = {
 };
 
 describe('TOC.vue', () => {
-  it('It renders a toc.', () => {
+  it('It renders a toc on a Reader.', () => {
     const wrapper = shallowMount(TOC, {
-      propsData: { toc },
+      propsData: { toc, passage, context: 'reader' },
       stubs: { RouterLink: RouterLinkStub },
     });
 
@@ -40,7 +43,10 @@ describe('TOC.vue', () => {
     expect(titles.at(0).text()).toBe('Title 1');
     expect(titles.at(0).props('to')).toEqual({
       path: 'reader',
-      query: { urn: 'urn:cts:1:1.1.1:1-2' },
+      query: {
+        urn: 'urn:cts:1:1.1.3:1-2',
+        toc: 'urn:cite:scaife-viewer:1.1:',
+      },
     });
     expect(titles.at(1).text()).toBe('Title 2');
     expect(titles.at(1).props('to')).toEqual({
@@ -50,7 +56,69 @@ describe('TOC.vue', () => {
 
     const urns = wrapper.findAll('tt');
     expect(urns.length).toBe(2);
-    expect(urns.at(0).text()).toBe('urn:cts:1:1.1.1:1-2');
+    expect(urns.at(0).text()).toBe('urn:cite:scaife-viewer:1.1:');
     expect(urns.at(1).text()).toBe('urn:cts:1:1.1.2:1-2');
+  });
+
+  it('Identifies URNs correctly.', () => {
+    const wrapper = shallowMount(TOC, {
+      propsData: { toc, passage, context: 'reader' },
+      stubs: { RouterLink: RouterLinkStub },
+    });
+
+    expect(wrapper.vm.isCiteUrn('urn:cite:scaife-viewer:1.1:')).toBe(true);
+    expect(wrapper.vm.isCiteUrn('urn:cts:1:1.1.2:1-2')).toBe(false);
+  });
+
+  it('Parses a CTS payload correctly in a reader context.', () => {
+    const wrapper = shallowMount(TOC, {
+      propsData: { toc, passage, context: 'reader' },
+      stubs: { RouterLink: RouterLinkStub },
+    });
+
+    const urn = 'urn:cts:1:1.1.2:1-2';
+    expect(wrapper.vm.getPayload(urn)).toEqual({
+      path: 'reader',
+      query: { urn },
+    });
+  });
+
+  it('Parses a CITE payload correctly in a reader context.', () => {
+    const wrapper = shallowMount(TOC, {
+      propsData: { toc, passage, context: 'reader' },
+      stubs: { RouterLink: RouterLinkStub },
+    });
+
+    const urn = 'urn:cite:scaife-viewer:1.1:';
+    expect(wrapper.vm.getPayload(urn)).toEqual({
+      path: 'reader',
+      query: { urn: passage.absolute, toc: urn },
+    });
+  });
+
+  it('Parses a CTS payload correctly in a TOCs context.', () => {
+    const wrapper = shallowMount(TOC, {
+      propsData: { toc, passage, context: 'tocs' },
+      stubs: { RouterLink: RouterLinkStub },
+    });
+
+    const urn = 'urn:cts:1:1.1.2:1-2';
+    expect(wrapper.vm.getPayload(urn)).toEqual({
+      path: 'reader',
+      query: { urn },
+    });
+  });
+
+  it('Parses a CITE payload correctly in a TOCs context.', () => {
+    const wrapper = shallowMount(TOC, {
+      propsData: { toc, passage, context: 'tocs' },
+      stubs: { RouterLink: RouterLinkStub },
+    });
+
+    const urn = 'urn:cite:scaife-viewer:1.1.1:';
+    expect(wrapper.vm.getPayload(urn)).toEqual({
+      path: 'tocs',
+      query: { urn },
+    });
   });
 });
