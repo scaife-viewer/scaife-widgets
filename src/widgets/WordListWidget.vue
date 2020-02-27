@@ -63,7 +63,8 @@
             }));
           })
           .catch(error => {
-            throw new Error(error.message);
+            // eslint-disable-next-line no-console
+            console.log(error.message);
           });
       },
     },

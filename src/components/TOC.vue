@@ -2,7 +2,7 @@
   <aside class="toc-container u-flex">
     <h3>{{ toc.title }}</h3>
     <p>{{ toc.description }}</p>
-    <ul>
+    <ul v-if="toc.items.length">
       <li class="u-flex" v-for="(item, index) in toc.items" :key="index">
         <span class="ref">{{ index + 1 }}.</span>
         <div class="item u-flex">
@@ -20,6 +20,7 @@
         </div>
       </li>
     </ul>
+    <h4 v-else>No results.</h4>
   </aside>
 </template>
 
