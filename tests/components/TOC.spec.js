@@ -23,9 +23,11 @@ const toc = {
 
 describe('TOC.vue', () => {
   it('It renders a toc on a Reader.', () => {
+    const $route = { name: 'reader', query: {} };
     const wrapper = shallowMount(TOC, {
       propsData: { toc, passage, context: 'reader' },
       stubs: { RouterLink: RouterLinkStub },
+      mocks: { $route },
     });
 
     expect(wrapper.html()).toContain('<h3>Some Table of Contents</h3>');
@@ -61,9 +63,11 @@ describe('TOC.vue', () => {
   });
 
   it('Identifies URNs correctly.', () => {
+    const $route = { name: 'reader', query: {} };
     const wrapper = shallowMount(TOC, {
       propsData: { toc, passage, context: 'reader' },
       stubs: { RouterLink: RouterLinkStub },
+      mocks: { $route },
     });
 
     expect(wrapper.vm.isCiteUrn('urn:cite:scaife-viewer:1.1:')).toBe(true);
@@ -71,9 +75,11 @@ describe('TOC.vue', () => {
   });
 
   it('Parses a CTS payload correctly in a reader context.', () => {
+    const $route = { name: 'reader', query: {} };
     const wrapper = shallowMount(TOC, {
       propsData: { toc, passage, context: 'reader' },
       stubs: { RouterLink: RouterLinkStub },
+      mocks: { $route },
     });
 
     const urn = 'urn:cts:1:1.1.2:1-2';
@@ -83,10 +89,30 @@ describe('TOC.vue', () => {
     });
   });
 
-  it('Parses a CITE payload correctly in a reader context.', () => {
+  it('Parses a CTS payload and preserves a TOC query parameter.', () => {
+    const $route = {
+      name: 'reader',
+      query: { toc: 'urn:cite:scaife-viewer:1.1:' },
+    };
     const wrapper = shallowMount(TOC, {
       propsData: { toc, passage, context: 'reader' },
       stubs: { RouterLink: RouterLinkStub },
+      mocks: { $route },
+    });
+
+    const urn = 'urn:cts:1:1.1.2:1-2';
+    expect(wrapper.vm.getPayload(urn)).toEqual({
+      path: 'reader',
+      query: { urn, toc: 'urn:cite:scaife-viewer:1.1:' },
+    });
+  });
+
+  it('Parses a CITE payload correctly in a reader context.', () => {
+    const $route = { name: 'reader', query: {} };
+    const wrapper = shallowMount(TOC, {
+      propsData: { toc, passage, context: 'reader' },
+      stubs: { RouterLink: RouterLinkStub },
+      mocks: { $route },
     });
 
     const urn = 'urn:cite:scaife-viewer:1.1:';
@@ -97,9 +123,11 @@ describe('TOC.vue', () => {
   });
 
   it('Parses a CTS payload correctly in a TOCs context.', () => {
+    const $route = { name: 'tocs', query: {} };
     const wrapper = shallowMount(TOC, {
       propsData: { toc, passage, context: 'tocs' },
       stubs: { RouterLink: RouterLinkStub },
+      mocks: { $route },
     });
 
     const urn = 'urn:cts:1:1.1.2:1-2';
@@ -110,9 +138,11 @@ describe('TOC.vue', () => {
   });
 
   it('Parses a CITE payload correctly in a TOCs context.', () => {
+    const $route = { name: 'tocs', query: {} };
     const wrapper = shallowMount(TOC, {
       propsData: { toc, passage, context: 'tocs' },
       stubs: { RouterLink: RouterLinkStub },
+      mocks: { $route },
     });
 
     const urn = 'urn:cite:scaife-viewer:1.1.1:';

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <HelloWorld msg="hi!"></HelloWorld>
-    <Icon name="chevron-left" fixed-width />
+    <Icon name="chevron-left" />
     <Metadata workTitle="test" />
     <Paginator :urn="previous" direction="left" />
     <TextSize :value="textSize" @input="changeTextSize" size="xs" />{{ " " }}

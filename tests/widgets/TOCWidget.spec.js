@@ -1,5 +1,5 @@
 /* global jest, describe, expect, it  */
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { shallowMount, createLocalVue, RouterLinkStub } from '@vue/test-utils';
 import Vuex from 'vuex';
 
 import scaifeWidgets from '@/store';
@@ -43,6 +43,7 @@ describe('TOCWidget.vue', () => {
     const wrapper = shallowMount(TOCWidget, {
       store,
       localVue,
+      stubs: { RouterLink: RouterLinkStub },
       mocks: { $route, $scaife },
       computed: {
         passage() {
@@ -72,6 +73,7 @@ describe('TOCWidget.vue', () => {
     const wrapper = shallowMount(TOCWidget, {
       store,
       localVue,
+      stubs: { RouterLink: RouterLinkStub },
       mocks: { $route, $scaife },
       computed: {
         passage() {
@@ -97,7 +99,7 @@ describe('TOCWidget.vue', () => {
 
   it('Renders a lookahead on the reader.', () => {
     const fetchData = jest.fn();
-    const $route = { name: 'tocs' };
+    const $route = { name: 'tocs', query: {} };
 
     const store = new Vuex.Store({
       modules: {
@@ -108,6 +110,7 @@ describe('TOCWidget.vue', () => {
       store,
       localVue,
       methods: { fetchData },
+      stubs: { RouterLink: RouterLinkStub },
       mocks: { $route },
     });
     wrapper.setData({ toc });
@@ -134,6 +137,7 @@ describe('TOCWidget.vue', () => {
     const wrapper = shallowMount(TOCWidget, {
       store,
       localVue,
+      stubs: { RouterLink: RouterLinkStub },
       mocks: { $route, $scaife },
       computed: {
         passage() {
@@ -173,6 +177,7 @@ describe('TOCWidget.vue', () => {
     const wrapper = shallowMount(TOCWidget, {
       store,
       localVue,
+      stubs: { RouterLink: RouterLinkStub },
       mocks: { $route, $scaife },
       computed: {
         passage() {
@@ -215,6 +220,7 @@ describe('TOCWidget.vue', () => {
     const wrapper = shallowMount(TOCWidget, {
       store,
       localVue,
+      stubs: { RouterLink: RouterLinkStub },
       mocks: { $route, $scaife },
       computed: {
         passage() {

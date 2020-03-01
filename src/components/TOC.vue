@@ -29,12 +29,16 @@
       },
       getPayload(urn) {
         if (this.isCiteUrn(urn)) {
-          const passage = this.passage.absolute;
           return this.context === 'tocs'
             ? { path: 'tocs', query: { urn } }
-            : { path: 'reader', query: { urn: passage, toc: urn } };
+            : {
+              path: 'reader',
+              query: { urn: this.passage.absolute, toc: urn },
+            };
         }
-        return { path: 'reader', query: { urn } };
+        return this.$route.query.toc
+          ? { path: 'reader', query: { urn, toc: this.$route.query.toc } }
+          : { path: 'reader', query: { urn } };
       },
     },
   };
