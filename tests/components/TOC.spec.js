@@ -22,23 +22,24 @@ const toc = {
 };
 
 describe('TOC.vue', () => {
-  it('It renders a toc on a Reader.', () => {
+  it('It renders a toc on a Reader with URNs.', () => {
     const $route = { name: 'reader', query: {} };
     const wrapper = shallowMount(TOC, {
-      propsData: { toc, passage, context: 'reader' },
+      propsData: { toc, passage, context: 'reader', showURNs: true },
       stubs: { RouterLink: RouterLinkStub },
       mocks: { $route },
     });
 
-    expect(wrapper.html()).toContain('<h3>Some Table of Contents</h3>');
-    expect(wrapper.html()).toContain(
-      '<p>A test fixture for a table of contents.</p>',
-    );
+    const header = wrapper.find('h3');
+    expect(header.text()).toEqual('Some Table of Contents');
 
-    const refs = wrapper.findAll('span');
-    expect(refs.length).toBe(4);
+    const legend = wrapper.find('p');
+    expect(legend.text()).toEqual('A test fixture for a table of contents.');
+
+    const refs = wrapper.findAll('span.ref');
+    expect(refs.length).toBe(2);
     expect(refs.at(0).text()).toBe('1.');
-    expect(refs.at(2).text()).toBe('2.');
+    expect(refs.at(1).text()).toBe('2.');
 
     const titles = wrapper.findAll('a');
     expect(titles.length).toBe(2);
@@ -60,6 +61,45 @@ describe('TOC.vue', () => {
     expect(urns.length).toBe(2);
     expect(urns.at(0).text()).toBe('urn:cite:scaife-viewer:1.1:');
     expect(urns.at(1).text()).toBe('urn:cts:1:1.1.2:1-2');
+  });
+
+  it('It renders a toc on a Reader without URNs.', () => {
+    const $route = { name: 'reader', query: {} };
+    const wrapper = shallowMount(TOC, {
+      propsData: { toc, passage, context: 'reader', showURNs: false },
+      stubs: { RouterLink: RouterLinkStub },
+      mocks: { $route },
+    });
+
+    const header = wrapper.find('h3');
+    expect(header.text()).toEqual('Some Table of Contents');
+
+    const legend = wrapper.find('p');
+    expect(legend.text()).toEqual('A test fixture for a table of contents.');
+
+    const refs = wrapper.findAll('span.ref');
+    expect(refs.length).toBe(2);
+    expect(refs.at(0).text()).toBe('1.');
+    expect(refs.at(1).text()).toBe('2.');
+
+    const titles = wrapper.findAll('a');
+    expect(titles.length).toBe(2);
+    expect(titles.at(0).text()).toBe('Title 1');
+    expect(titles.at(0).props('to')).toEqual({
+      path: 'reader',
+      query: {
+        urn: 'urn:cts:1:1.1.3:1-2',
+        toc: 'urn:cite:scaife-viewer:1.1:',
+      },
+    });
+    expect(titles.at(1).text()).toBe('Title 2');
+    expect(titles.at(1).props('to')).toEqual({
+      path: 'reader',
+      query: { urn: 'urn:cts:1:1.1.2:1-2' },
+    });
+
+    const urns = wrapper.findAll('tt');
+    expect(urns.length).toBe(0);
   });
 
   it('Identifies URNs correctly.', () => {

@@ -94,6 +94,7 @@ describe('TOCWidget.vue', () => {
       toc,
       passage,
       context: 'reader',
+      showURNs: false,
     });
   });
 
@@ -158,6 +159,7 @@ describe('TOCWidget.vue', () => {
       toc,
       passage: null,
       context: 'tocs',
+      showURNs: false,
     });
   });
 
@@ -198,6 +200,7 @@ describe('TOCWidget.vue', () => {
       toc,
       passage: null,
       context: 'tocs',
+      showURNs: false,
     });
   });
 
@@ -239,6 +242,7 @@ describe('TOCWidget.vue', () => {
       toc,
       passage,
       context: 'reader',
+      showURNs: false,
     });
   });
 });

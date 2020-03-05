@@ -9,7 +9,7 @@
           <router-link :to="getPayload(item.uri)">
             {{ item.title }}
           </router-link>
-          <span>
+          <span v-if="showURNs">
             <tt>{{ item.uri }}</tt>
           </span>
         </div>
@@ -22,7 +22,7 @@
 <script>
   export default {
     name: 'TOC',
-    props: ['toc', 'context', 'passage'],
+    props: ['toc', 'context', 'passage', 'showURNs'],
     methods: {
       isCiteUrn(urn) {
         return urn.startsWith('urn:cite:');

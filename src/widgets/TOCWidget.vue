@@ -7,12 +7,21 @@
         :data="toc"
         @filter-data="filterData"
       />
-      <Icon class="root-toc-icon" name="home" v-if="showingRootToc" disabled />
-      <router-link class="root-toc-icon" :to="returnToRootPayload" v-else>
+      <Icon class="icon" name="home" v-if="showingRootToc" disabled />
+      <router-link class="icon" :to="returnToRootPayload" v-else>
         <Icon name="home" />
       </router-link>
+      <span @click.prevent="toggleURNs">
+        <Icon class="icon urn" name="eye" v-if="!showURNs" />
+        <Icon class="icon urn" name="eye-slash" v-else />
+      </span>
     </div>
-    <TOC :toc="filtered || toc" :context="context" :passage="passage" />
+    <TOC
+      :toc="filtered || toc"
+      :context="context"
+      :passage="passage"
+      :showURNs="showURNs"
+    />
   </div>
 </template>
 
@@ -44,6 +53,7 @@
       return {
         toc: null,
         filtered: null,
+        showURNs: false,
       };
     },
     computed: {
@@ -100,6 +110,9 @@
       },
     },
     methods: {
+      toggleURNs() {
+        this.showURNs = !this.showURNs;
+      },
       filterData(data) {
         this.filtered = data;
       },
@@ -135,8 +148,11 @@
       width: 90%;
     }
   }
-  .root-toc-icon {
+  .icon {
     color: black;
     margin-left: 0.66em;
+    &.urn {
+      cursor: pointer;
+    }
   }
 </style>
