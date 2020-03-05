@@ -53,13 +53,13 @@ svg[disabled] {
   display: flex;
 }
 
+.u-grid {
+  display: grid;
+}
+
 .u-widget {
   margin: 0 2em;
   overflow-y: auto;
-}
-
-.main-layout .u-widget {
-  max-height: none;
 }
 
 .u-legend {
