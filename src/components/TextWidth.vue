@@ -22,8 +22,6 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/_variables.scss';
-
   .text-width-control {
     font-family: $font-family-serif;
     cursor: pointer;

@@ -1,9 +1,6 @@
 // constants
 import { WIDGETS_NS } from '@/store/constants';
 
-// global styles
-import '@/styles/default.css';
-
 // components
 export { default as HelloWorld } from '@/components/HelloWorld.vue';
 export { default as Icon } from '@/components/Icon.vue';

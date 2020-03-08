@@ -73,8 +73,6 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/_variables.scss';
-
   li {
     margin-top: 0.33em;
   }
