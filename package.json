@@ -9,7 +9,7 @@
   "homepage": "https://github.com/scaife-viewer/scaife-widgets#readme",
   "main": "./dist/scaife-widgets.common.js",
   "scripts": {
-    "prepare": "npm run build",
+    "prepare": "yarn build",
     "build": "vue-cli-service build --target lib --name scaife-widgets ./src/index.js",
     "watch": "vue-cli-service build --mode production --formats commonjs --target lib --name scaife-widgets ./src/index.js --watch",
     "lint": "vue-cli-service lint",
