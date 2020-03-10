@@ -29,6 +29,96 @@ const toc = {
   ],
 };
 
+describe('TOCWidget.vue computed', () => {
+  it('The TOC knows when it is showing the root TOC.', () => {
+    const localThis = { context: 'tocs', $route: { path: 'tocs', query: {} } };
+    expect(TOCWidget.computed.showingRootToc.call(localThis)).toBe(true);
+  });
+
+  it('The TOC knows when it is not showing the root TOC.', () => {
+    const localThis = {
+      context: 'tocs',
+      $route: {
+        path: 'tocs',
+        query: { urn: 'urn:cite:scaife-viewer:toc.not-root-1' },
+      },
+    };
+    expect(TOCWidget.computed.showingRootToc.call(localThis)).toBe(false);
+  });
+
+  it('The Reader knows the query and default TOCs are the same.', () => {
+    const localThis = {
+      context: 'reader',
+      $route: {
+        path: 'reader',
+        query: { toc: 'urn:cite:scaife-viewer:toc.oaf-1' },
+      },
+      defaultTocUrn: 'urn:cite:scaife-viewer:toc.oaf-1',
+    };
+    expect(TOCWidget.computed.showingRootToc.call(localThis)).toBe(true);
+  });
+
+  it('The Reader knows the query and default TOCs are different.', () => {
+    const localThis = {
+      context: 'reader',
+      $route: {
+        path: 'reader',
+        query: { toc: 'urn:cite:scaife-viewer:toc.not-default' },
+      },
+      defaultTocUrn: 'urn:cite:scaife-viewer:toc.oaf-1',
+    };
+    expect(TOCWidget.computed.showingRootToc.call(localThis)).toBe(false);
+  });
+
+  it('The Reader knows when it is showing the default TOC.', () => {
+    const localThis = {
+      context: 'reader',
+      $route: { path: 'reader', query: {} },
+      defaultTocUrn: 'urn:cite:scaife-viewer:toc.oaf-1',
+      endpoint: 'example.com',
+      getTocUrl: TOCWidget.methods.getTocUrl,
+      url: 'example.com/tocs/toc.oaf-1.json',
+    };
+    expect(TOCWidget.computed.showingRootToc.call(localThis)).toBe(true);
+  });
+
+  it('The Reader knows when it is not showing the default TOC.', () => {
+    const localThis = {
+      context: 'reader',
+      $route: { path: 'reader', query: {} },
+      defaultTocUrn: 'urn:cite:scaife-viewer:toc.oaf-1',
+      endpoint: 'example.com',
+      getTocUrl: TOCWidget.methods.getTocUrl,
+      url: 'example.com/tocs/toc.not-default.json',
+    };
+    expect(TOCWidget.computed.showingRootToc.call(localThis)).toBe(false);
+  });
+
+  it('The Reader knows when it is showing the root TOC.', () => {
+    const localThis = {
+      context: 'reader',
+      $route: { path: 'reader', query: {} },
+      endpoint: 'example.com',
+      getTocUrl: TOCWidget.methods.getTocUrl,
+      rootTocUrn: 'urn:cite:scaife-viewer:toc.demo-root',
+      url: 'example.com/tocs/toc.demo-root.json',
+    };
+    expect(TOCWidget.computed.showingRootToc.call(localThis)).toBe(true);
+  });
+
+  it('The Reader knows when it is not showing the root TOC.', () => {
+    const localThis = {
+      context: 'reader',
+      $route: { path: 'reader', query: {} },
+      endpoint: 'example.com',
+      getTocUrl: TOCWidget.methods.getTocUrl,
+      rootTocUrn: 'urn:cite:scaife-viewer:toc.demo-root',
+      url: 'example.com/tocs/toc.not-root.json',
+    };
+    expect(TOCWidget.computed.showingRootToc.call(localThis)).toBe(false);
+  });
+});
+
 describe('TOCWidget.vue', () => {
   it('Parses a URL and catches a failed request.', async () => {
     const $route = { name: 'reader', query: {} };

@@ -72,41 +72,41 @@
       reducer() {
         return reducers.tocReducer;
       },
-      showingRootToc() {
-        return this.context == 'tocs'
-          ? !this.$route.query.urn
-          : !this.$route.query.toc;
+      endpoint() {
+        return this.$scaife.endpoints.tocEndpoint;
       },
       returnToRootPayload() {
         return this.context == 'tocs'
           ? { path: 'tocs' }
           : { path: 'reader', query: { urn: this.passage.absolute } };
       },
-      endpoint() {
-        return this.$scaife.endpoints.tocEndpoint;
+      showingRootToc() {
+        if (this.context == 'tocs') {
+          return !this.$route.query.urn;
+        }
+        if (this.$route.query.toc) {
+          return this.$route.query.toc === this.defaultTocUrn ? true : false;
+        }
+        return this.defaultTocUrn
+          ? this.url === this.getTocUrl(this.defaultTocUrn)
+          : this.url === this.getTocUrl(this.rootTocUrn);
       },
       defaultTocUrn() {
         return this.metadata && this.metadata.defaultTocUrn
           ? this.metadata.defaultTocUrn
-          : this.rootTocUrn;
+          : null;
       },
       rootTocUrn() {
         return 'urn:cite:scaife-viewer:toc.demo-root';
-      },
-      rootTocUrl() {
-        return this.getTocUrl(this.rootTocUrn);
       },
       url() {
         if (this.$route.query.toc) {
           return this.getTocUrl(this.$route.query.toc);
         }
         if (this.context === 'reader') {
-          return this.getTocUrl(this.defaultTocUrn);
+          return this.getTocUrl(this.defaultTocUrn || this.rootTocUrn);
         }
-        const urn = this.$route.query.urn
-          ? this.$route.query.urn
-          : this.rootTocUrn;
-        return this.getTocUrl(urn);
+        return this.getTocUrl(this.$route.query.urn || this.rootTocUrn);
       },
     },
     methods: {
