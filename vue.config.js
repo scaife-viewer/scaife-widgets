@@ -4,7 +4,7 @@ module.exports = {
   pluginOptions: {
     'style-resources-loader': {
       preProcessor: 'scss',
-      patterns: ['/Users/jhrr/code/eldarion/scaife-widgets/src/styles/globals.scss'],
+      patterns: [path.resolve(__dirname, './src/styles/globals.scss')],
     },
   },
 };
