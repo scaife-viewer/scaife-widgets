@@ -5,6 +5,8 @@ front-end component library for the Scaife Viewer ecosystem
 [![npm version](https://badge.fury.io/js/%40scaife-viewer%2Fscaife-widgets.svg)](https://badge.fury.io/js/%40scaife-viewer%2Fscaife-widgets)
 [![github actions](https://github.com/scaife-viewer/scaife-widgets/workflows/Node%20CI/badge.svg)](https://github.com/scaife-viewer/scaife-widgets/actions?query=workflow%3A%22Node+CI%22)
 
+This repository is part of the [Scaife Viewer](https://scaife-viewer.org) project, an open-source ecosystem for building rich online reading environments.
+
 ## Citizens
 
 Everything is a component in the Vue sense but we try to distinguish between:
