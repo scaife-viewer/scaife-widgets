@@ -23,8 +23,6 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/_variables.scss';
-
   aside {
     flex-direction: column;
     width: 100%;

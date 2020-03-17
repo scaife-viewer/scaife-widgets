@@ -18,7 +18,7 @@ Everything is a component in the Vue sense but we try to distinguish between:
 ## Getting Started
 
 ```sh
-$ npm install @scaife-viewer/scaife-widgets
+$ yarn add @scaife-viewer/scaife-widgets
 ```
 
 Import components and widgets like so:
@@ -107,25 +107,25 @@ Example:
 Project setup:
 
 ```sh
-$ npm install
+$ yarn install
 ```
 
 Compile and minify for production:
 
 ```sh
-$ npm run build
+$ yarn build
 ```
 
 Run unit tests:
 
 ```sh
-$ npm run test
+$ yarn test
 ```
 
 Lint:
 
 ```sh
-$ npm run lint
+$ yarn lint
 ```
 
 
@@ -134,8 +134,8 @@ $ npm run lint
 Within the `scaife-widgets` repo root directory:
 
 ```sh
-$ yarn link # @@@ resolve npm / yarn difference between projects
-$ npm run watch
+$ yarn link
+$ yarn watch
 ```
 
 Within the Scaife Viewer front end directory:

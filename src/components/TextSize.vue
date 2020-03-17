@@ -20,8 +20,6 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/_variables.scss';
-
   .text-size-control {
     cursor: pointer;
     font-family: $font-family-serif;
