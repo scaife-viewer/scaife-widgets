@@ -5,7 +5,7 @@
       :key="urn.absolute"
       :to="{ path: 'reader', query: { urn: `${urn.absolute}` } }"
     >
-      <Icon :name="icon" fixed-width />
+      <Icon :name="icon" />
     </router-link>
   </nav>
 </template>

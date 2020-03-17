@@ -21,15 +21,25 @@
       return {
         query: '',
         results: null,
+        reduce: true,
       };
     },
     watch: {
+      $route: 'resetQuery',
       query: 'updateData',
     },
     methods: {
       updateData() {
-        this.results = this.reducer(this.data, this.query);
-        this.$emit('filter-data', this.results);
+        // Prevents intermediate flash reload of stale data on query reset.
+        if (this.reduce) {
+          this.results = this.reducer(this.data, this.query);
+          this.$emit('filter-data', this.results);
+        }
+        this.reduce = true;
+      },
+      resetQuery() {
+        this.query = '';
+        this.reduce = false;
       },
       onInput() {
         debounce(e => {
@@ -39,9 +49,3 @@
     },
   };
 </script>
-
-<style lang="scss" scoped>
-  .form-group {
-    margin-bottom: 0.66em;
-  }
-</style>

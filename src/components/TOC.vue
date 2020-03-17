@@ -1,25 +1,20 @@
 <template>
-  <aside class="toc-container u-flex">
+  <aside class="toc-container">
     <h3>{{ toc.title }}</h3>
-    <p>{{ toc.description }}</p>
-    <ul v-if="toc.items.length">
-      <li class="u-flex" v-for="(item, index) in toc.items" :key="index">
-        <span class="ref">{{ index + 1 }}.</span>
-        <div class="item u-flex">
-          <router-link
-            :to="{
-              path: isCiteUrn(item.uri) ? 'tocs' : 'reader',
-              query: { urn: item.uri },
-            }"
-          >
+    <p class="u-legend">{{ toc.description }}</p>
+    <div class="u-grid toc-grid" v-if="toc.items.length">
+      <template v-for="(item, index) in toc.items">
+        <span :key="`index-${index}`" class="ref">{{ index + 1 }}.</span>
+        <div :key="`item-${index}`" class="item u-flex">
+          <router-link :to="getPayload(item.uri)">
             {{ item.title }}
           </router-link>
-          <span>
+          <span v-if="showURNs">
             <tt>{{ item.uri }}</tt>
           </span>
         </div>
-      </li>
-    </ul>
+      </template>
+    </div>
     <h4 v-else>No results.</h4>
   </aside>
 </template>
@@ -27,10 +22,23 @@
 <script>
   export default {
     name: 'TOC',
-    props: ['toc'],
+    props: ['toc', 'context', 'passage', 'showURNs'],
     methods: {
       isCiteUrn(urn) {
         return urn.startsWith('urn:cite:');
+      },
+      getPayload(urn) {
+        if (this.isCiteUrn(urn)) {
+          return this.context === 'tocs'
+            ? { path: 'tocs', query: { urn } }
+            : {
+              path: 'reader',
+              query: { urn: this.passage.absolute, toc: urn },
+            };
+        }
+        return this.$route.query.toc
+          ? { path: 'reader', query: { urn, toc: this.$route.query.toc } }
+          : { path: 'reader', query: { urn } };
       },
     },
   };
@@ -42,32 +50,24 @@
     flex-direction: column;
     width: 100%;
   }
+  .toc-grid {
+    align-items: baseline;
+    grid-template-columns: auto 9.25fr;
+    grid-column-gap: 1em;
+    > * {
+      margin-bottom: 0.33em;
+    }
+  }
   p {
     margin: 0.66em 0;
   }
-  ul {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-  }
-  li {
-    align-items: baseline;
-    margin-bottom: 0.33em;
-    span.ref {
-      font-size: 10pt;
-      color: #69c;
-      font-family: 'Noto Sans';
-      text-align: right;
-      min-width: 2em;
-    }
+  span.ref {
+    font-size: 10pt;
+    color: #69c;
+    font-family: 'Noto Sans';
+    text-align: left;
   }
   .item {
-    flex-wrap: wrap;
-    width: 100%;
-    > * {
-      margin-left: 1em;
-      flex-shrink: 0;
-      flex: 1 0 48%;
-    }
+    flex-direction: column;
   }
 </style>

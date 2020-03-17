@@ -3,7 +3,7 @@
     <div class="node-container u-flex">
       <template v-if="hasChildren">
         <span class="open-toggle" @click.prevent="toggle">
-          <Icon :name="icon" class="fa-xs" fixed-width />
+          <Icon :name="icon" class="fa-xs" />
         </span>
       </template>
 

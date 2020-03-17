@@ -11,6 +11,9 @@ import { faSquare } from '@fortawesome/free-solid-svg-icons/faSquare';
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons/faMinusCircle';
 import { faExpand } from '@fortawesome/free-solid-svg-icons/faExpand';
 import { faCompress } from '@fortawesome/free-solid-svg-icons/faCompress';
+import { faHome } from '@fortawesome/free-solid-svg-icons/faHome';
+import { faEye } from '@fortawesome/free-solid-svg-icons/faEye';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons/faEyeSlash';
 
 const iconMap = [
   faChevronDown,
@@ -25,6 +28,9 @@ const iconMap = [
   faMinusCircle,
   faExpand,
   faCompress,
+  faHome,
+  faEye,
+  faEyeSlash,
 ].reduce((map, obj) => {
   map[obj.iconName] = obj;
   return map;
