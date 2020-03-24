@@ -26,6 +26,7 @@
 </template>
 
 <script>
+  import gql from 'graphql-tag';
   import Icon from '@/components/Icon.vue';
   import Lookahead from '@/components/Lookahead.vue';
   import TOC from '@/components/TOC.vue';
@@ -42,16 +43,13 @@
     scaifeConfig: {
       displayName: 'Table of Contents',
     },
-    created() {
-      this.fetchData();
-    },
-    watch: {
-      $route: 'fetchData',
-      defaultTocUrn: 'fetchData',
-    },
+    // @@@ remove watchers in favor of tocUrn computed property
+    // watch: {
+    //   $route: 'fetchData',
+    //   defaultTocUrn: 'fetchData',
+    // },
     data() {
       return {
-        toc: null,
         filtered: null,
         showURNs: false,
       };
@@ -64,7 +62,11 @@
         return 'Search this table of contents...';
       },
       passage() {
-        return this.$store.getters[`${WIDGETS_NS}/passage`];
+        // @@@ we may need to tie this to leftUrn
+        // return this.$store.getters[`${WIDGETS_NS}/passage`];
+        return {
+          absolute: this.$route.params.leftUrn,
+        };
       },
       metadata() {
         return this.$store.getters[`${WIDGETS_NS}/metadata`];
@@ -73,7 +75,32 @@
         return reducers.tocReducer;
       },
       endpoint() {
-        return this.$scaife.endpoints.tocEndpoint;
+        // @@@ cannot get the $scaife.endpoints option to work
+        // at the moment.
+        // return this.$scaife.endpoints.tocEndpoint;
+        return '//localhost:8000/atlas/graphql/';
+      },
+      gqlQuery() {
+        return gql`
+          {
+            tocs(urn:  "${this.tocUrn}") {
+              edges {
+                node {
+                  title
+                  urn
+                  entries {
+                    edges {
+                      node {
+                        title
+                        uri
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        `;
       },
       returnToRootPayload() {
         return this.context == 'tocs'
@@ -97,7 +124,11 @@
           : null;
       },
       rootTocUrn() {
-        return 'urn:cite:scaife-viewer:toc.demo-root';
+        return 'urn:cite:scholarlyeditions:toc.fgrh-root';
+      },
+      tocUrn() {
+        // @@@ refactor similar to what we're doing with getTocUrl
+        return this.rootTocUrn;
       },
       url() {
         if (this.$route.query.toc) {
@@ -108,6 +139,16 @@
         }
         return this.getTocUrl(this.$route.query.urn || this.rootTocUrn);
       },
+      toc() {
+        if (!this.gqlData) {
+          return null;
+        }
+        const toc = {
+          ...this.gqlData.tocs.edges[0].node,
+        };
+        toc.items = toc.entries.edges.map(entry => entry.node);
+        return toc;
+      },
     },
     methods: {
       toggleURNs() {
@@ -116,18 +157,18 @@
       filterData(data) {
         this.filtered = data;
       },
-      fetchData() {
-        fetch(this.url)
-          .then(response => response.json())
-          .then(data => {
-            this.toc = data;
-            this.filtered = null;
-          })
-          .catch(error => {
-            // eslint-disable-next-line no-console
-            console.log(error.message);
-          });
-      },
+      // fetchData() {
+      //   // fetch(this.url)
+      //   //   .then(response => response.json())
+      //   //   .then(data => {
+      //   //     this.toc = data;
+      //   //     this.filtered = null;
+      //   //   })
+      //   //   .catch(error => {
+      //   //     // eslint-disable-next-line no-console
+      //   //     console.log(error.message);
+      //   //   });
+      // },
       getTocUrl(tocUrn) {
         return `${this.endpoint}/tocs/${tocUrn.split(':').slice(-1)}.json`;
       },

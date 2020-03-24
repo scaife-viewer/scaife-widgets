@@ -28,17 +28,21 @@
         return urn.startsWith('urn:cite:');
       },
       getPayload(urn) {
-        if (this.isCiteUrn(urn)) {
-          return this.context === 'tocs'
-            ? { path: 'tocs', query: { urn } }
-            : {
-              path: 'reader',
-              query: { urn: this.passage.absolute, toc: urn },
-            };
-        }
+        // @@@ support top level tocs endpoint
+        // if (this.isCiteUrn(urn)) {
+        //   return this.context === 'tocs'
+        //     ? { path: 'tocs', query: { urn } }
+        //     : {
+        //       path: 'reader',
+        //       query: { urn: this.passage.absolute, toc: urn },
+        //     };
+        // }
+        // return this.$route.query.toc
+        //   ? { path: 'reader', query: { urn, toc: this.$route.query.toc } }
+        //   : { path: 'reader', query: { urn } };
         return this.$route.query.toc
-          ? { path: 'reader', query: { urn, toc: this.$route.query.toc } }
-          : { path: 'reader', query: { urn } };
+          ? { path: '', query: { urn, toc: this.$route.query.toc } }
+          : { path: `/reader/${urn}/` };
       },
     },
   };
