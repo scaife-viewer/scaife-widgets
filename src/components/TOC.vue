@@ -22,27 +22,56 @@
 <script>
   export default {
     name: 'TOC',
+    data: function() {
+      return {
+        // @@@ ssvt or scaife-skeleton, passed via $scaife
+        readerKind: 'ssvt',
+      };
+    },
     props: ['toc', 'context', 'passage', 'showURNs'],
     methods: {
       isCiteUrn(urn) {
         return urn.startsWith('urn:cite:');
       },
+      getTocsContextPayload(tocUrn) {
+        return { path: 'tocs', query: { tocUrn } };
+      },
+      getReaderContextWithToc(passageUrn, tocUrn) {
+        if (this.readerKind === 'ssvt') {
+          return {
+            path: `/reader/${passageUrn}/`,
+            query: { toc: tocUrn },
+          };
+        }
+        return {
+          path: 'reader',
+          query: { urn: passageUrn, toc: tocUrn },
+        };
+      },
+      getReaderContextWithoutToc(passageUrn) {
+        if (this.readerKind === 'ssvt') {
+          return {
+            path: `/reader/${passageUrn}/`,
+          };
+        }
+        return {
+          path: 'reader',
+          query: { urn: passageUrn },
+        };
+      },
+      getReaderContextPayload(urn, tocUrn) {
+        return tocUrn
+          ? this.getReaderContextWithToc(urn, tocUrn)
+          : this.getReaderContextWithoutToc(urn);
+      },
       getPayload(urn) {
         // @@@ support top level tocs endpoint
-        // if (this.isCiteUrn(urn)) {
-        //   return this.context === 'tocs'
-        //     ? { path: 'tocs', query: { urn } }
-        //     : {
-        //       path: 'reader',
-        //       query: { urn: this.passage.absolute, toc: urn },
-        //     };
-        // }
-        // return this.$route.query.toc
-        //   ? { path: 'reader', query: { urn, toc: this.$route.query.toc } }
-        //   : { path: 'reader', query: { urn } };
-        return this.$route.query.toc
-          ? { path: '', query: { urn, toc: this.$route.query.toc } }
-          : { path: `/reader/${urn}/` };
+        if (this.isCiteUrn(urn)) {
+          return this.context === 'tocs'
+            ? this.getTocsContextPayload(urn)
+            : this.getReaderContextPayload(this.passage.absolute, urn);
+        }
+        return this.getReaderContextPayload(urn, this.$route.query.toc);
       },
     },
   };
