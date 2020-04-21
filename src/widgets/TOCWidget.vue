@@ -130,7 +130,9 @@
       },
       tocUrn() {
         // @@@ refactor similar to what we're doing with getTocUrl
-        return this.rootTocUrn;
+        return this.$route.query.toc
+          ? this.$route.query.toc
+          : this.defaultTocUrn || this.rootTocUrn;
       },
       url() {
         if (this.$route.query.toc) {
