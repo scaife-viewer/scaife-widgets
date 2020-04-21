@@ -87,6 +87,7 @@
               edges {
                 node {
                   title
+                  description
                   urn
                   entries {
                     edges {
