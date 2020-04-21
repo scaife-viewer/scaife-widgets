@@ -50,6 +50,7 @@
     // },
     data() {
       return {
+        readerKind: 'ssvt',
         filtered: null,
         showURNs: false,
       };
@@ -106,7 +107,7 @@
       returnToRootPayload() {
         return this.context == 'tocs'
           ? { path: 'tocs' }
-          : { path: 'reader', query: { urn: this.passage.absolute } };
+          : this.getReaderContextWithoutToc(this.passage.absolute);
       },
       showingRootToc() {
         if (this.context == 'tocs') {
@@ -172,6 +173,17 @@
       // },
       getTocUrl(tocUrn) {
         return `${this.endpoint}/tocs/${tocUrn.split(':').slice(-1)}.json`;
+      },
+      getReaderContextWithoutToc(passageUrn) {
+        if (this.readerKind === 'ssvt') {
+          return {
+            path: `/reader/${passageUrn}/`,
+          };
+        }
+        return {
+          path: 'reader',
+          query: { urn: passageUrn },
+        };
       },
     },
   };
