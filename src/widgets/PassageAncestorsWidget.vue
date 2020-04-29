@@ -32,7 +32,7 @@
         return this.passage
           ? gql`
             {
-              passageTextParts(reference: "${this.passage.absolute}") {
+              passageTextParts(reference: "${this.passage}") {
                 metadata
               }
             }`

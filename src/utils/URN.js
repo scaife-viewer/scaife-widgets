@@ -87,4 +87,8 @@ export default class URN {
         : false;
     }
   }
+
+  toString() {
+    return this.absolute;
+  }
 }

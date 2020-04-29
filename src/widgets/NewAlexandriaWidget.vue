@@ -45,7 +45,7 @@
         return this.passage
           ? qs.stringify({
             query: `{
-          commentsOn(urn: "${this.passage.absolute}") {
+          commentsOn(urn: "${this.passage}") {
             _id
             updated
             latestRevision {

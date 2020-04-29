@@ -42,7 +42,7 @@ describe('WordListWidget.vue', () => {
     await wrapper.vm.$nextTick();
 
     expect(global.fetch).toBeCalledWith(
-      `${endpoint}/word-list/${passage.absolute}/json/?page=all&amp;o=1`,
+      `${endpoint}/word-list/${passage}/json/?page=all&amp;o=1`,
     );
     const container = wrapper.find('div');
     expect(container.classes()).toContain('word-list-widget');
@@ -79,7 +79,7 @@ describe('WordListWidget.vue', () => {
 
     expect(global.fetch).toBeCalledTimes(1);
     expect(global.fetch).toBeCalledWith(
-      `${endpoint}/word-list/${passage.absolute}/json/?page=all&amp;o=1`,
+      `${endpoint}/word-list/${passage}/json/?page=all&amp;o=1`,
     );
 
     const container = wrapper.find('div');
