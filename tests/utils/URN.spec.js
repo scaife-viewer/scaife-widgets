@@ -16,7 +16,6 @@ const urns = [
 ];
 
 describe('URN.js', () => {
-
   it.each([
     [urns[0], 'urn:cts:greekLit:tlg0012.tlg001.msA:'],
     [urns[7], 'urn:cts:greekLit:tlg0012.tlg001.msA:'],
