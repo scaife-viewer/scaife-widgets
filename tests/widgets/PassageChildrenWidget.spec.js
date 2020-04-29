@@ -4,7 +4,6 @@ import Vuex from 'vuex';
 
 import PassageChildrenWidget from '@/widgets/PassageChildrenWidget.vue';
 import scaifeWidgets from '@/store';
-import URN from '@/utils/URN';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -44,7 +43,12 @@ describe('PassageChildrenWidget.vue', () => {
       store,
       computed: {
         children() {
-          return [new URN('urn:cts:greekLit:tlg0012.tlg001.msA:1.1')];
+          return [
+            {
+              lsb: '1',
+              urn: 'urn:cts:greekLit:tlg0012.tlg001.msA:1.1',
+            },
+          ];
         },
       },
       stubs: {
@@ -76,8 +80,14 @@ describe('PassageChildrenWidget.vue', () => {
       computed: {
         children() {
           return [
-            new URN('urn:cts:greekLit:tlg0012.tlg001.msA:1.1'),
-            new URN('urn:cts:greekLit:tlg0012.tlg001.msA:1.2'),
+            {
+              lsb: '1',
+              urn: 'urn:cts:greekLit:tlg0012.tlg001.msA:1.1',
+            },
+            {
+              lsb: '2',
+              urn: 'urn:cts:greekLit:tlg0012.tlg001.msA:1.2',
+            },
           ];
         },
       },

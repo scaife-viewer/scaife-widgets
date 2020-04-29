@@ -3,13 +3,13 @@
     <div
       class="grid-cell-square"
       v-for="ancestor in ancestors"
-      :key="ancestor.absolute"
+      :key="ancestor.urn"
     >
       <router-link
-        :key="`${ancestor.absolute}`"
-        :to="{ path: 'reader', query: { urn: `${ancestor.absolute}` } }"
+        :key="ancestor.urn"
+        :to="{ path: 'reader', query: { urn: ancestor.urn } }"
       >
-        {{ ancestor.node }}
+        {{ ancestor.ref }}
       </router-link>
     </div>
   </div>
@@ -17,7 +17,6 @@
 
 <script>
   import gql from 'graphql-tag';
-  import URN from '@/utils/URN';
   import { WIDGETS_NS } from '@/store/constants';
 
   export default {
@@ -44,7 +43,7 @@
       },
       ancestors() {
         return this.gqlData && this.ancestorsLens
-          ? this.ancestorsLens.map(node => new URN(node.urn))
+          ? this.ancestorsLens.map(node => node)
           : [];
       },
     },
