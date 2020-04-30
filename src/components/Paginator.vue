@@ -34,5 +34,11 @@
     position: sticky;
     top: 2em;
     text-align: center;
+    a {
+      &:hover {
+        color: $gray-800;
+      }
+      color: $gray-500;
+    }
   }
 </style>
