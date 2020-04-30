@@ -4,7 +4,6 @@ import Vuex from 'vuex';
 
 import PassageAncestorsWidget from '@/widgets/PassageAncestorsWidget.vue';
 import scaifeWidgets from '@/store';
-import URN from '@/utils/URN';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -44,7 +43,12 @@ describe('PassageAncestorsWidget.vue', () => {
       store,
       computed: {
         ancestors() {
-          return [new URN('urn:cts:greekLit:tlg0012.tlg001.msA:1')];
+          return [
+            {
+              ref: '1',
+              urn: 'urn:cts:greekLit:tlg0012.tlg001.msA:1',
+            },
+          ];
         },
       },
       stubs: {
@@ -76,8 +80,14 @@ describe('PassageAncestorsWidget.vue', () => {
       computed: {
         ancestors() {
           return [
-            new URN('urn:cts:greekLit:tlg0012.tlg001.msA:1'),
-            new URN('urn:cts:greekLit:tlg0012.tlg001.msA:2'),
+            {
+              ref: '1',
+              urn: 'urn:cts:greekLit:tlg0012.tlg001.msA:1',
+            },
+            {
+              ref: '2',
+              urn: 'urn:cts:greekLit:tlg0012.tlg001.msA:2',
+            },
           ];
         },
       },

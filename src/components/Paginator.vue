@@ -2,8 +2,8 @@
   <nav class="paginator">
     <router-link
       v-if="urn"
-      :key="urn.absolute"
-      :to="{ path: 'reader', query: { urn: `${urn.absolute}` } }"
+      :key="urn.toString()"
+      :to="{ path: 'reader', query: { urn: urn.toString() } }"
     >
       <Icon :name="icon" />
     </router-link>

@@ -47,7 +47,7 @@
       url() {
         const params = 'page=all&amp;o=1';
         return this.passage
-          ? `${this.endpoint}/${this.passage.absolute}/json/?${params}`
+          ? `${this.endpoint}/${this.passage}/json/?${params}`
           : null;
       },
     },

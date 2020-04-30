@@ -33,7 +33,7 @@
             ? { path: 'tocs', query: { urn } }
             : {
               path: 'reader',
-              query: { urn: this.passage.absolute, toc: urn },
+              query: { urn: this.passage.toString(), toc: urn.toString() },
             };
         }
         return this.$route.query.toc

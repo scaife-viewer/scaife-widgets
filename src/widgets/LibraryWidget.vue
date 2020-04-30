@@ -27,7 +27,7 @@
 </script>
 
 <style lang="scss">
-  .library-widget {
+  .u-widget.library-widget {
     margin: 0 auto 0 2em;
     overflow: auto;
   }

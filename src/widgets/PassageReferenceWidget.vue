@@ -50,7 +50,7 @@
             query: {
               urn: this.reference
                 ? `${this.passage.version}${this.reference}`
-                : this.firstPassageUrn.absolute,
+                : this.firstPassageUrn.toString(),
             },
           });
         } else {

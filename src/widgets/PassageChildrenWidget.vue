@@ -1,14 +1,8 @@
 <template v-if="children">
   <div class="passage-children-widget u-widget u-grid">
-    <div
-      class="grid-cell-square"
-      v-for="child in children"
-      :key="child.absolute"
-    >
-      <router-link
-        :to="{ path: 'reader', query: { urn: `${child.absolute}` } }"
-      >
-        {{ child.node }}
+    <div class="grid-cell-square" v-for="child in children" :key="child.urn">
+      <router-link :to="{ path: 'reader', query: { urn: `${child.urn}` } }">
+        {{ child.lsb }}
       </router-link>
     </div>
   </div>
@@ -16,7 +10,6 @@
 
 <script>
   import gql from 'graphql-tag';
-  import URN from '@/utils/URN';
   import { WIDGETS_NS } from '@/store/constants';
 
   export default {
@@ -32,7 +25,7 @@
         return this.passage
           ? gql`
             {
-              passageTextParts(reference: "${this.passage.absolute}") {
+              passageTextParts(reference: "${this.passage}") {
                 metadata
               }
             }`
@@ -43,7 +36,7 @@
       },
       children() {
         return this.gqlData && this.childrenLens
-          ? this.childrenLens.map(node => new URN(node.urn))
+          ? this.childrenLens.map(node => node)
           : [];
       },
     },

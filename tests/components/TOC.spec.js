@@ -158,7 +158,7 @@ describe('TOC.vue', () => {
     const urn = 'urn:cite:scaife-viewer:1.1:';
     expect(wrapper.vm.getPayload(urn)).toEqual({
       path: 'reader',
-      query: { urn: passage.absolute, toc: urn },
+      query: { urn: passage.toString(), toc: urn },
     });
   });
 
