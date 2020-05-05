@@ -26,7 +26,6 @@
 </template>
 
 <script>
-  import gql from 'graphql-tag';
   import Icon from '@/components/Icon.vue';
   import Lookahead from '@/components/Lookahead.vue';
   import TOC from '@/components/TOC.vue';
@@ -50,7 +49,7 @@
     // },
     data() {
       return {
-        readerKind: 'ssvt',
+        readerKind: '',
         filtered: null,
         showURNs: false,
       };
@@ -82,7 +81,7 @@
         return '//localhost:8000/atlas/graphql/';
       },
       gqlQuery() {
-        return gql`
+        return `
           {
             tocs(urn:  "${this.tocUrn}") {
               edges {
@@ -126,7 +125,7 @@
           : null;
       },
       rootTocUrn() {
-        return 'urn:cite:scholarlyeditions:toc.fgrh-root';
+        return 'urn:cite:dsp-dar:toc.events';
       },
       tocUrn() {
         // @@@ refactor similar to what we're doing with getTocUrl

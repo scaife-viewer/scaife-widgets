@@ -25,7 +25,7 @@
     data: function() {
       return {
         // @@@ ssvt or scaife-skeleton, passed via $scaife
-        readerKind: 'ssvt',
+        readerKind: '',
       };
     },
     props: ['toc', 'context', 'passage', 'showURNs'],
