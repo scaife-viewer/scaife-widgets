@@ -129,9 +129,11 @@
       },
       tocUrn() {
         // @@@ refactor similar to what we're doing with getTocUrl
-        return this.$route.query.toc
-          ? this.$route.query.toc
-          : this.defaultTocUrn || this.rootTocUrn;
+        const tocUrn =
+          this.context === 'tocs'
+            ? this.$route.query.urn
+            : this.$route.query.toc;
+        return tocUrn ? tocUrn : this.defaultTocUrn || this.rootTocUrn;
       },
       url() {
         if (this.$route.query.toc) {
