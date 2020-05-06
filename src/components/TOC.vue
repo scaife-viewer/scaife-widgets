@@ -6,7 +6,7 @@
       <template v-for="(item, index) in toc.items">
         <span :key="`index-${index}`" class="ref">{{ index + 1 }}.</span>
         <div :key="`item-${index}`" class="item u-flex">
-          <router-link :to="getPayload(item.uri)">
+          <router-link :to="getTargetRoute(item.uri)">
             {{ item.title }}
           </router-link>
           <span v-if="showURNs">
@@ -33,45 +33,50 @@
       isCiteUrn(urn) {
         return urn.startsWith('urn:cite:');
       },
-      getTocsContextPayload(tocUrn) {
-        return { path: 'tocs', query: { tocUrn } };
-      },
-      getReaderContextWithToc(passageUrn, tocUrn) {
-        if (this.readerKind === 'ssvt') {
-          return {
-            path: `/reader/${passageUrn}/`,
-            query: { toc: tocUrn },
-          };
+      getReaderDescriptorObjSSVT(uri) {
+        const passageUrn = this.isCiteUrn(uri) ? this.passage.absolute : uri;
+        const path = `/reader/${passageUrn}/`;
+        const queryParams = {
+          ...this.$route.query,
+        };
+        if (this.isCiteUrn('uri')) {
+          queryParams.toc = uri;
         }
         return {
-          path: 'reader',
-          query: { urn: passageUrn, toc: tocUrn },
+          path: path,
+          query: queryParams,
         };
       },
-      getReaderContextWithoutToc(passageUrn) {
-        if (this.readerKind === 'ssvt') {
-          return {
-            path: `/reader/${passageUrn}/`,
-          };
+      getReaderDescriptorObj(uri) {
+        const queryParams = { ...this.$route.query };
+        if (this.isCiteUrn(uri)) {
+          queryParams.toc = uri;
+        } else {
+          queryParams.urn = uri;
+        }
+        return { path: 'reader', query: queryParams };
+      },
+      getTargetRouteTocs(uri) {
+        if (!this.isCiteUrn(uri)) {
+          return this.getTargetRouteReader(uri);
         }
         return {
-          path: 'reader',
-          query: { urn: passageUrn },
+          path: 'tocs',
+          query: {
+            ...this.$route.query,
+            urn: uri,
+          },
         };
       },
-      getReaderContextPayload(urn, tocUrn) {
-        return tocUrn
-          ? this.getReaderContextWithToc(urn, tocUrn)
-          : this.getReaderContextWithoutToc(urn);
+      getTargetRouteReader(uri) {
+        return this.readerKind === 'ssvt'
+          ? this.getReaderDescriptorObjSSVT(uri)
+          : this.getReaderDescriptorObj(uri);
       },
-      getPayload(urn) {
-        // @@@ support top level tocs endpoint
-        if (this.isCiteUrn(urn)) {
-          return this.context === 'tocs'
-            ? this.getTocsContextPayload(urn)
-            : this.getReaderContextPayload(this.passage.absolute, urn);
-        }
-        return this.getReaderContextPayload(urn, this.$route.query.toc);
+      getTargetRoute(uri) {
+        return this.context === 'tocs'
+          ? this.getTargetRouteTocs(uri)
+          : this.getTargetRouteReader(uri);
       },
     },
   };
