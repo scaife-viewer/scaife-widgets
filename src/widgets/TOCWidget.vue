@@ -125,7 +125,8 @@
           : null;
       },
       rootTocUrn() {
-        return 'urn:cite:dsp-dar:toc.events';
+        // @@@ site level or dynamic from ATLAS
+        return 'urn:cite:dsp-dar:toc.root';
       },
       tocUrn() {
         // @@@ refactor similar to what we're doing with getTocUrl
