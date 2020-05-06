@@ -54,6 +54,15 @@
         } else {
           queryParams.urn = uri;
         }
+        if (
+          !queryParams.toc &&
+          this.context === 'tocs' &&
+          this.$route.query.urn
+        ) {
+          // pass the toc to keep the context from the TOCS
+          // page
+          queryParams.toc = this.$route.query.urn;
+        }
         return { path: 'reader', query: queryParams };
       },
       getTargetRouteTocs(uri) {
@@ -69,6 +78,8 @@
         };
       },
       getTargetRouteReader(uri) {
+        // @@@ carry a selected TOC urn through to the reader
+        // via `tocs` param
         return this.readerKind === 'ssvt'
           ? this.getReaderDescriptorObjSSVT(uri)
           : this.getReaderDescriptorObj(uri);
