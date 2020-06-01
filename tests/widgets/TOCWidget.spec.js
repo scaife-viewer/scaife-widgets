@@ -210,7 +210,7 @@ describe('TOCWidget.vue', () => {
     expect(lookahead.exists()).toBeTruthy();
     expect(lookahead.props()).toEqual({
       data: toc,
-      placeholder: 'Search this table of contents...',
+      placeholder: 'Filter this table of contents...',
       reducer: wrapper.vm.reducer,
     });
   });
