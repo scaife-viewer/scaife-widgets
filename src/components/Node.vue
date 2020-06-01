@@ -11,11 +11,11 @@
         <router-link
           :to="{ path: 'reader', query: { urn: metadata.firstPassageUrn } }"
         >
-          {{ metadata.workTitle }}
+          {{ metadata.label }}
         </router-link>
       </span>
       <span v-else class="node monospace">
-        <tt>{{ urn }}</tt>
+        <tt>{{ metadata.label }}</tt>
       </span>
     </div>
 
