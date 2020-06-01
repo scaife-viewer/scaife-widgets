@@ -61,7 +61,7 @@
         return this.$route.name;
       },
       placeholder() {
-        return 'Search this table of contents...';
+        return 'Filter this table of contents...';
       },
       passage() {
         return this.$store.getters[`${WIDGETS_NS}/passage`];

@@ -2,7 +2,6 @@
   <div class="form-group">
     <div class="input-group u-flex">
       <input
-        type="search"
         class="form-control"
         v-model="query"
         :placeholder="placeholder"
