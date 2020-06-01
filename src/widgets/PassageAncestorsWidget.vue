@@ -1,17 +1,15 @@
 <template v-if="ancestors">
-  <div class="passage-ancestors-widget u-widget u-grid">
-    <div
-      class="grid-cell-square"
-      v-for="ancestor in ancestors"
-      :key="ancestor.urn"
-    >
-      <router-link
-        :key="ancestor.urn"
-        :to="{ path: 'reader', query: { urn: ancestor.urn } }"
-      >
-        {{ ancestor.ref }}
-      </router-link>
-    </div>
+  <div class="passage-ancestors-widget u-widget">
+    <ol class="ancestors">
+      <li class="ancestor" v-for="ancestor in ancestors" :key="ancestor.urn">
+        <router-link
+          :key="ancestor.urn"
+          :to="{ path: 'reader', query: { urn: ancestor.urn } }"
+        >
+          {{ ancestor.ref }}
+        </router-link>
+      </li>
+    </ol>
   </div>
 </template>
 
@@ -56,19 +54,22 @@
   }
   .passage-ancestors-widget {
     width: 100%;
-    margin: 0 2em;
-    grid-auto-rows: 1fr;
-    grid-template-columns: repeat(auto-fill, minmax(1.6em, 1fr));
-    grid-gap: 0.0825em;
   }
   .passage-ancestors-widget * {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #e9ecef;
     font-size: 0.75rem;
   }
   .passage-ancestors-widget a {
     border: none;
+  }
+  .ancestors {
+    padding: 0;
+    list-style: none;
+  }
+  .ancestor + .ancestor::before {
+    display: inline-block;
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
+    content: '>';
   }
 </style>
