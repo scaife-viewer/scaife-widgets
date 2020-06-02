@@ -5,7 +5,11 @@ import Node from '@/components/Node.vue';
 describe('Node.vue', () => {
   it('It renders nodes without children.', () => {
     const node = {
-      data: { urn: 'urn:cts:1:', kind: 'node', metadata: {} },
+      data: {
+        urn: 'urn:cts:1:',
+        kind: 'node',
+        metadata: { label: 'urn:cts:1:' },
+      },
       children: [],
     };
     const wrapper = shallowMount(Node, { propsData: { node } });
@@ -24,7 +28,7 @@ describe('Node.vue', () => {
         urn: 'urn:cts:1:1.1.1:',
         kind: 'version',
         metadata: {
-          workTitle: 'some title',
+          label: 'some title',
           firstPassageUrn: 'urn:cts:1:1.1.1:1',
         },
       },
@@ -50,14 +54,18 @@ describe('Node.vue', () => {
 
   it('It does not render children when parent node not expanded.', () => {
     const node = {
-      data: { urn: 'urn:cts:1:1.1:', kind: 'node', metadata: {} },
+      data: {
+        urn: 'urn:cts:1:1.1:',
+        kind: 'node',
+        metadata: { label: 'urn:cts:1:1.1:' },
+      },
       children: [
         {
           data: {
             urn: 'urn:cts:1:1.1.1:',
             kind: 'version',
             metadata: {
-              workTitle: 'some title',
+              label: 'some title',
               firstPassageUrn: 'urn:cts:1:1.1.1:1',
             },
           },
@@ -83,14 +91,18 @@ describe('Node.vue', () => {
 
   it('It renders all nodes when expanded.', async () => {
     const node = {
-      data: { urn: 'urn:cts:1:1.1:', kind: 'node', metadata: {} },
+      data: {
+        urn: 'urn:cts:1:1.1:',
+        kind: 'node',
+        metadata: { label: 'urn:cts:1:1.1:' },
+      },
       children: [
         {
           data: {
             urn: 'urn:cts:1:1.1.1:',
             kind: 'version',
             metadata: {
-              workTitle: 'some title',
+              label: 'some title',
               firstPassageUrn: 'urn:cts:1:1.1.1:1',
             },
           },
