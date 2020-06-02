@@ -27,14 +27,20 @@
       isCiteUrn(urn) {
         return urn.startsWith('urn:cite:');
       },
+      getCitePayloadInTocsContext(urn) {
+        return { path: 'tocs', query: { urn } };
+      },
+      getCitePayloadInReaderContext(urn) {
+        return {
+          path: 'reader',
+          query: { urn: this.passage.toString(), toc: urn.toString() },
+        };
+      },
       getPayload(urn) {
         if (this.isCiteUrn(urn)) {
           return this.context === 'tocs'
-            ? { path: 'tocs', query: { urn } }
-            : {
-              path: 'reader',
-              query: { urn: this.passage.toString(), toc: urn.toString() },
-            };
+            ? this.getCitePayloadInTocsContext(urn)
+            : this.getCitePayloadInReaderContext(urn);
         }
         return this.$route.query.toc
           ? { path: 'reader', query: { urn, toc: this.$route.query.toc } }
