@@ -8,7 +8,7 @@
 
 <script>
   import Node from '@/components/Node.vue';
-  import { WIDGETS_NS } from '@/store/constants';
+  import gql from 'graphql-tag';
 
   export default {
     name: 'LibraryWidget',
@@ -18,9 +18,26 @@
     scaifeConfig: {
       displayName: 'Library',
     },
+    methods: {
+      getTextGroupsTree() {
+        const nid = this.gqlData.tree.tree[0];
+        return nid.children.reduce((a, b) => {
+          return a.concat(b.children);
+        }, []);
+      },
+    },
     computed: {
+      gqlQuery() {
+        return gql`
+          {
+            tree(urn: "urn:cts:", upTo: "version") {
+              tree
+            }
+          }
+        `;
+      },
       libraryTree() {
-        return this.$store.getters[`${WIDGETS_NS}/libraryTree`];
+        return this.gqlData ? this.getTextGroupsTree() : [];
       },
     },
   };
