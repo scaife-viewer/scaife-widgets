@@ -42,9 +42,7 @@
         return 'https://commentary-api.chs.harvard.edu/graphql';
       },
       params() {
-        return this.passage
-          ? qs.stringify({
-            query: `{
+        const gqlQuery = `{
           commentsOn(urn: "${this.passage}") {
             _id
             updated
@@ -57,9 +55,8 @@
               name
             }
           }
-        }`,
-          })
-          : null;
+        }`;
+        return this.passage ? qs.stringify({ query: gqlQuery }) : null;
       },
       url() {
         return `${this.endpoint}?${this.params}`;

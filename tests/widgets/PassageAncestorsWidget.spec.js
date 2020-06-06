@@ -27,6 +27,7 @@ describe('PassageAncestorsWidget.vue', () => {
     });
 
     expect(wrapper.html()).toBe(
+      // eslint-disable-next-line max-len
       '<div class="passage-ancestors-widget u-widget"><ol class="ancestors"></ol></div>',
     );
   });

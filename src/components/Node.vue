@@ -11,11 +11,11 @@
         <router-link
           :to="{ path: 'reader', query: { urn: metadata.firstPassageUrn } }"
         >
-          {{ metadata.workTitle }}
+          {{ metadata.label }}
         </router-link>
       </span>
-      <span v-else class="node monospace">
-        <tt>{{ urn }}</tt>
+      <span v-else class="node parent">
+        <tt>{{ metadata.label }}</tt>
       </span>
     </div>
 
@@ -89,6 +89,12 @@
   .node {
     &.version {
       margin-left: 1em;
+      font-size: 0.8em;
+    }
+    &.parent {
+      > tt {
+        font-family: inherit;
+      }
     }
   }
 </style>
