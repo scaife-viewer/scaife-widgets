@@ -48,7 +48,6 @@
     margin: 0 auto 0 2em;
     width: 100%;
     overflow: auto;
-    max-height: unset;
   }
   ul.node-tree {
     padding: 0;
