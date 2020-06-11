@@ -1,6 +1,6 @@
 {
   "name": "@scaife-viewer/scaife-widgets",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "private": false,
   "scripts": {
     "build": "vue-cli-service build --target lib --name scaife-widgets ./src/index.js",
