@@ -6,9 +6,9 @@
       <template v-for="(item, index) in toc.items">
         <span :key="`index-${index}`" class="ref">{{ index + 1 }}.</span>
         <div :key="`item-${index}`" class="item u-flex">
-          <router-link :to="getPayload(item.uri)">
+          <a href @click.prevent="onItemClick(item)">
             {{ item.title }}
-          </router-link>
+          </a>
           <span v-if="showURNs">
             <tt>{{ item.uri }}</tt>
           </span>
@@ -24,6 +24,10 @@
     name: 'TOC',
     props: ['toc', 'context', 'passage', 'showURNs'],
     methods: {
+      onItemClick(item) {
+        const payload = this.getPayload(item.uri);
+        this.$router.push(payload);
+      },
       isCiteUrn(urn) {
         return urn.startsWith('urn:cite:');
       },
