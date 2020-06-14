@@ -30,26 +30,54 @@
     scaifeConfig: {
       displayName: 'Table of Contents',
     },
-    created() {
-      this.fetchData();
-    },
-    watch: {
-      $route: 'fetchData',
-      defaultTocUrn: 'fetchData',
-    },
+    // determine which watchers we still need and when to invoke
+    // watch: {
+    //   $route: 'fetchData',
+    //   defaultTocUrn: 'fetchData',
+    // },
     data() {
       return {
-        toc: null,
         filtered: null,
         showURNs: false,
       };
     },
     computed: {
+      gqlQuery() {
+        return `
+          {
+            tocs(urn:  "${this.tocUrn}") {
+              edges {
+                node {
+                  title
+                  description
+                  urn
+                  entries {
+                    edges {
+                      node {
+                        title
+                        uri
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        `;
+      },
+      toc() {
+        if (!this.gqlData) {
+          return null;
+        }
+        debugger;
+        const toc = {
+          ...this.gqlData.tocs.edges[0].node,
+        };
+        toc.items = toc.entries.edges.map(entry => entry.node);
+        return toc;
+      },
       metadata() {
         return this.$store.getters[`${WIDGETS_NS}/metadata`];
-      },
-      endpoint() {
-        return this.$scaife.endpoints.tocEndpoint;
       },
       showingRootToc() {
         if (!this.$route.query.toc && this.initialTocUrn === this.rootTocUrn) {
@@ -69,10 +97,11 @@
         return this.defaultTocUrn || this.rootTocUrn;
       },
       rootTocUrn() {
-        return 'urn:cite:scaife-viewer:toc.demo-root';
+        // @@@ site level or dynamic from ATLAS
+        return 'urn:cite:dsp-dar:toc.root';
       },
-      url() {
-        return this.getTocUrl(this.$route.query.toc || this.initialTocUrn);
+      tocUrn() {
+        return this.$route.query.toc || this.initialTocUrn;
       },
     },
     methods: {
@@ -109,21 +138,6 @@
       },
       filterData(data) {
         this.filtered = data;
-      },
-      fetchData() {
-        fetch(this.url)
-          .then(response => response.json())
-          .then(data => {
-            this.toc = data;
-            this.filtered = null;
-          })
-          .catch(error => {
-            // eslint-disable-next-line no-console
-            console.log(error.message);
-          });
-      },
-      getTocUrl(tocUrn) {
-        return `${this.endpoint}/tocs/${tocUrn.split(':').slice(-1)}.json`;
       },
     },
   };
