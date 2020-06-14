@@ -45,9 +45,6 @@
       };
     },
     computed: {
-      context() {
-        return this.$route.name;
-      },
       metadata() {
         return this.$store.getters[`${WIDGETS_NS}/metadata`];
       },
