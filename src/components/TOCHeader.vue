@@ -7,7 +7,7 @@
       @filter-data="data => $emit('filter-data', data)"
     />
     <Icon class="icon" name="home" v-if="showingRootToc" disabled />
-    <router-link class="icon" :to="returnToRootPayload" v-else>
+    <router-link class="icon" :to="getRootTOCPayload()" v-else>
       <Icon name="home" />
     </router-link>
     <span @click.prevent="$emit('toggle-urns')">
@@ -24,7 +24,7 @@
 
   export default {
     name: 'TOCHeader',
-    props: ['toc', 'showURNs', 'showingRootToc', 'returnToRootPayload'],
+    props: ['toc', 'showURNs', 'showingRootToc', 'getRootTOCPayload'],
     components: {
       Icon,
       Lookahead,

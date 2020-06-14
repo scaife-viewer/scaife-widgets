@@ -4,7 +4,7 @@
       :toc="toc"
       :showURNs="showURNs"
       :showingRootToc="showingRootToc"
-      :returnToRootPayload="returnToRootPayload"
+      :getRootTOCPayload="getRootTOCPayload"
       @filter-data="filterData"
       @toggle-urns="toggleURNs"
     />
@@ -54,38 +54,28 @@
       endpoint() {
         return this.$scaife.endpoints.tocEndpoint;
       },
-      returnToRootPayload() {
-        return this.context == 'tocs'
-          ? { path: 'tocs' }
-          : {query: { urn: this.$route.query.urn} };
-      },
       showingRootToc() {
-        if (this.context == 'tocs') {
-          return !this.$route.query.urn;
+        if (!this.$route.query.toc && this.initialTocUrn === this.rootTocUrn) {
+          return true;
         }
-        if (this.$route.query.toc) {
-          return this.$route.query.toc === this.defaultTocUrn ? true : false;
+        if (this.$route.query.toc === this.rootTocUrn) {
+          return true;
         }
-        return this.defaultTocUrn
-          ? this.url === this.getTocUrl(this.defaultTocUrn)
-          : this.url === this.getTocUrl(this.rootTocUrn);
+        return false;
       },
       defaultTocUrn() {
         return this.metadata && this.metadata.defaultTocUrn
           ? this.metadata.defaultTocUrn
           : null;
       },
+      initialTocUrn() {
+        return this.defaultTocUrn || this.rootTocUrn;
+      },
       rootTocUrn() {
         return 'urn:cite:scaife-viewer:toc.demo-root';
       },
       url() {
-        if (this.$route.query.toc) {
-          return this.getTocUrl(this.$route.query.toc);
-        }
-        if (this.context === 'reader') {
-          return this.getTocUrl(this.defaultTocUrn || this.rootTocUrn);
-        }
-        return this.getTocUrl(this.$route.query.urn || this.rootTocUrn);
+        return this.getTocUrl(this.$route.query.toc || this.initialTocUrn);
       },
     },
     methods: {
@@ -109,6 +99,13 @@
             urn: urn,
           },
         };
+      },
+      getRootTOCPayload() {
+        const query = {
+          ...this.$route.query,
+          toc: this.rootTocUrn,
+        };
+        return { query };
       },
       toggleURNs() {
         this.showURNs = !this.showURNs;
