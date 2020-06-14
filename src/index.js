@@ -26,6 +26,7 @@ export { default as PassageReferenceWidget } from '@/widgets/PassageReferenceWid
 export { default as TextSizeWidget } from '@/widgets/TextSizeWidget.vue';
 export { default as TextWidthWidget } from '@/widgets/TextWidthWidget.vue';
 export { default as TOCWidget } from '@/widgets/TOCWidget.vue';
+export { default as TOCViewWidget } from '@/widgets/TOCViewWidget.vue';
 export { default as WordListWidget } from '@/widgets/WordListWidget.vue';
 
 // store
