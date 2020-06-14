@@ -6,9 +6,11 @@
       <template v-for="(item, index) in toc.items">
         <span :key="`index-${index}`" class="ref">{{ index + 1 }}.</span>
         <div :key="`item-${index}`" class="item u-flex">
-          <a href @click.prevent="onItemClick(item)">
-            {{ item.title }}
-          </a>
+          <slot name="item-link">
+            <router-link :to="getItemPayload(item.uri)">
+              {{ item.title }}
+            </router-link>
+          </slot>
           <span v-if="showURNs">
             <tt>{{ item.uri }}</tt>
           </span>
@@ -22,35 +24,7 @@
 <script>
   export default {
     name: 'TOC',
-    props: ['toc', 'context', 'passage', 'showURNs'],
-    methods: {
-      onItemClick(item) {
-        const payload = this.getPayload(item.uri);
-        this.$router.push(payload);
-      },
-      isCiteUrn(urn) {
-        return urn.startsWith('urn:cite:');
-      },
-      getCitePayloadInTocsContext(urn) {
-        return { path: 'tocs', query: { urn } };
-      },
-      getCitePayloadInReaderContext(urn) {
-        return {
-          path: 'reader',
-          query: { urn: this.passage.toString(), toc: urn.toString() },
-        };
-      },
-      getPayload(urn) {
-        if (this.isCiteUrn(urn)) {
-          return this.context === 'tocs'
-            ? this.getCitePayloadInTocsContext(urn)
-            : this.getCitePayloadInReaderContext(urn);
-        }
-        return this.$route.query.toc
-          ? { path: 'reader', query: { urn, toc: this.$route.query.toc } }
-          : { path: 'reader', query: { urn } };
-      },
-    },
+    props: ['toc', 'showURNs', 'getItemPayload'],
   };
 </script>
 

@@ -18,9 +18,8 @@
     </div>
     <TOC
       :toc="filtered || toc"
-      :context="context"
-      :passage="passage"
       :showURNs="showURNs"
+      :getItemPayload="getItemPayload"
     />
   </div>
 </template>
@@ -62,9 +61,6 @@
       },
       placeholder() {
         return 'Filter this table of contents...';
-      },
-      passage() {
-        return this.$store.getters[`${WIDGETS_NS}/passage`];
       },
       metadata() {
         return this.$store.getters[`${WIDGETS_NS}/metadata`];
@@ -110,6 +106,27 @@
       },
     },
     methods: {
+      isCiteUrn(urn) {
+        return urn.startsWith('urn:cite:');
+      },
+      getItemPayload(urn) {
+        if (this.isCiteUrn(urn)) {
+          return {
+            path: 'reader',
+            query: {
+              ...this.$route.query,
+              toc: urn,
+            },
+          };
+        }
+        return {
+          path: 'reader',
+          query: {
+            ...this.$route.query,
+            urn: urn,
+          },
+        };
+      },
       toggleURNs() {
         this.showURNs = !this.showURNs;
       },
