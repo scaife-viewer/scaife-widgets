@@ -1,21 +1,13 @@
 <template>
   <div class="toc-widget u-widget u-flex" v-if="toc">
-    <div class="lookahead-container u-flex">
-      <Lookahead
-        :placeholder="placeholder"
-        :reducer="reducer"
-        :data="toc"
-        @filter-data="filterData"
-      />
-      <Icon class="icon" name="home" v-if="showingRootToc" disabled />
-      <router-link class="icon" :to="returnToRootPayload" v-else>
-        <Icon name="home" />
-      </router-link>
-      <span @click.prevent="toggleURNs">
-        <Icon class="icon urn" name="eye" v-if="!showURNs" />
-        <Icon class="icon urn" name="eye-slash" v-else />
-      </span>
-    </div>
+    <TOCHeader
+      :toc="toc"
+      :showURNs="showURNs"
+      :showingRootToc="showingRootToc"
+      :returnToRootPayload="returnToRootPayload"
+      @filter-data="filterData"
+      @toggle-urns="toggleURNs"
+    />
     <TOC
       :toc="filtered || toc"
       :showURNs="showURNs"
@@ -25,17 +17,14 @@
 </template>
 
 <script>
-  import Icon from '@/components/Icon.vue';
-  import Lookahead from '@/components/Lookahead.vue';
   import TOC from '@/components/TOC.vue';
+  import TOCHeader from '@/components/TOCHeader.vue';
   import { WIDGETS_NS } from '@/store/constants';
-  import reducers from '@/utils/reducers';
 
   export default {
     name: 'TOCWidget',
     components: {
-      Icon,
-      Lookahead,
+      TOCHeader,
       TOC,
     },
     scaifeConfig: {
@@ -59,14 +48,8 @@
       context() {
         return this.$route.name;
       },
-      placeholder() {
-        return 'Filter this table of contents...';
-      },
       metadata() {
         return this.$store.getters[`${WIDGETS_NS}/metadata`];
-      },
-      reducer() {
-        return reducers.tocReducer;
       },
       endpoint() {
         return this.$scaife.endpoints.tocEndpoint;
@@ -74,7 +57,7 @@
       returnToRootPayload() {
         return this.context == 'tocs'
           ? { path: 'tocs' }
-          : { path: 'reader', query: { urn: this.passage.absolute } };
+          : {query: { urn: this.$route.query.urn} };
       },
       showingRootToc() {
         if (this.context == 'tocs') {
