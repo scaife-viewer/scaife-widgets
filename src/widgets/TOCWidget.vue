@@ -32,6 +32,11 @@
     scaifeConfig: {
       displayName: 'Table of Contents',
     },
+    watch: {
+      $route: function() {
+        this.filtered = null;
+      },
+    },
     data() {
       return {
         filtered: null,
