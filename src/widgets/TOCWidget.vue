@@ -149,18 +149,4 @@
     justify-content: flex-start;
     width: 100%;
   }
-  .lookahead-container {
-    align-items: center;
-    margin-bottom: 0.66em;
-    .form-group {
-      width: 90%;
-    }
-  }
-  .icon {
-    color: black;
-    margin-left: 0.66em;
-    &.urn {
-      cursor: pointer;
-    }
-  }
 </style>
