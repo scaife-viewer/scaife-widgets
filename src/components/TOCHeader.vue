@@ -10,7 +10,7 @@
     <router-link class="icon" :to="getRootTOCPayload()" v-else>
       <Icon name="home" />
     </router-link>
-    <span @click.prevent="$emit('toggle-urns')">
+    <span v-if="showToggle" @click.prevent="$emit('toggle-urns')">
       <Icon class="icon urn" name="eye" v-if="!showURNs" />
       <Icon class="icon urn" name="eye-slash" v-else />
     </span>
@@ -24,7 +24,14 @@
 
   export default {
     name: 'TOCHeader',
-    props: ['toc', 'showURNs', 'showingRootToc', 'getRootTOCPayload'],
+    props: [
+      'toc',
+      'showURNs',
+      'showToggle',
+      'showingRootToc',
+      'getRootTOCPayload',
+      'placeholder',
+    ],
     components: {
       Icon,
       Lookahead,
@@ -32,9 +39,6 @@
     computed: {
       reducer() {
         return reducers.tocReducer;
-      },
-      placeholder() {
-        return 'Filter this table of contents...';
       },
     },
   };

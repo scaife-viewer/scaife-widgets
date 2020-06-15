@@ -5,6 +5,8 @@
       :showURNs="showURNs"
       :showingRootToc="showingRootToc"
       :getRootTOCPayload="getRootTOCPayload"
+      :placeholder="placeholder"
+      :show-toggle="showToggle"
       @filter-data="filterData"
       @toggle-urns="toggleURNs"
     />
@@ -39,6 +41,7 @@
       return {
         filtered: null,
         showURNs: false,
+        showToggle: true,
       };
     },
     computed: {
@@ -75,6 +78,9 @@
         };
         toc.items = toc.entries.edges.map(entry => entry.node);
         return toc;
+      },
+      placeholder() {
+        return 'Filter this table of contents...';
       },
       metadata() {
         return this.$store.getters[`${WIDGETS_NS}/metadata`];
