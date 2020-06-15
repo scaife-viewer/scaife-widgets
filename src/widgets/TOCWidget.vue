@@ -111,7 +111,7 @@
       getItemPayload(urn) {
         if (this.isCiteUrn(urn)) {
           return {
-            path: 'reader',
+            name: 'reader',
             query: {
               ...this.$route.query,
               toc: urn,
@@ -119,7 +119,7 @@
           };
         }
         return {
-          path: 'reader',
+          name: 'reader',
           query: {
             ...this.$route.query,
             urn: urn,
