@@ -32,11 +32,6 @@
     scaifeConfig: {
       displayName: 'Table of Contents',
     },
-    // determine which watchers we still need and when to invoke
-    // watch: {
-    //   $route: 'fetchData',
-    //   defaultTocUrn: 'fetchData',
-    // },
     data() {
       return {
         filtered: null,
@@ -72,7 +67,6 @@
         if (!this.gqlData) {
           return null;
         }
-        debugger;
         const toc = {
           ...this.gqlData.tocs.edges[0].node,
         };
