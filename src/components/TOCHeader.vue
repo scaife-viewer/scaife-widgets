@@ -54,7 +54,7 @@
   }
   .icon {
     color: black;
-    margin-left: 0.66em;
+    margin-inline-start: 0.66em;
     &.urn {
       cursor: pointer;
     }
