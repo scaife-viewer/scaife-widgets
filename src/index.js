@@ -11,6 +11,7 @@ export { default as TextSize } from '@/components/TextSize.vue';
 export { default as TextWidth } from '@/components/TextWidth.vue';
 export { default as TOC } from '@/components/TOC.vue';
 export { default as WordList } from '@/components/WordList.vue';
+export { default as Lookahead } from '@/components/Lookahead.vue';
 
 // widgets
 export { default as LibraryWidget } from '@/widgets/LibraryWidget.vue';
@@ -38,3 +39,6 @@ export default WIDGETS_NS;
 
 // endpoints
 export { default as EndpointsPlugin } from '@/endpoints/plugin';
+
+// reducers
+export { default as tocReducer } from '@/utils/reducers';
