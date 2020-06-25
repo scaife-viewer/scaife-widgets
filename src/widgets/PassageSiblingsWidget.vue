@@ -61,19 +61,20 @@
     width: 100%;
     grid-auto-rows: 1fr;
     grid-template-columns: repeat(auto-fill, minmax(1.6em, 1fr));
-    grid-gap: 0.0825em;
   }
   .passage-siblings-widget * {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #e9ecef;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
+    padding: 0.1rem 0.3rem;
   }
   .passage-siblings-widget a {
     border: none;
   }
   .active-sibling {
     font-weight: bold;
+    color: $white;
+    background: $gray-800;
   }
 </style>
