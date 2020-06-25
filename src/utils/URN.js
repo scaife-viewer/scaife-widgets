@@ -20,4 +20,13 @@ export default class URN {
   toString() {
     return this.absolute;
   }
+
+  get lsb() {
+    return this.reference
+      ? this.reference
+          .split('-')[0]
+          .split('.')
+          .slice(-1)[0]
+      : null;
+  }
 }

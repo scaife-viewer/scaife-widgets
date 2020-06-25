@@ -20,6 +20,8 @@ export { default as NewAlexandriaWidget } from '@/widgets/NewAlexandriaWidget.vu
 // eslint-disable-next-line max-len
 export { default as PassageAncestorsWidget } from '@/widgets/PassageAncestorsWidget.vue';
 // eslint-disable-next-line max-len
+export { default as PassageSiblingsWidget } from '@/widgets/PassageSiblingsWidget.vue';
+// eslint-disable-next-line max-len
 export { default as PassageChildrenWidget } from '@/widgets/PassageChildrenWidget.vue';
 // eslint-disable-next-line max-len
 export { default as PassageReferenceWidget } from '@/widgets/PassageReferenceWidget.vue';
