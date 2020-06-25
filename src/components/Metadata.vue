@@ -9,14 +9,14 @@
     <dt>Language:</dt>
     <dd>{{ metadata.humanLang }}</dd>
     <dt>URN:</dt>
-    <dd>{{ metadata.versionUrn }}</dd>
+    <dd>{{ versionUrn }}</dd>
   </dl>
 </template>
 
 <script>
   export default {
     name: 'Metadata',
-    props: ['metadata'],
+    props: ['metadata', 'versionUrn'],
   };
 </script>
 
