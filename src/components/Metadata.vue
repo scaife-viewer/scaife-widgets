@@ -1,8 +1,16 @@
 <template>
-  <aside class="metadata-container u-flex">
-    <h3 class="work-title">{{ metadata.workTitle }}</h3>
-    <tt class="work-urn">{{ metadata.workUrn }}</tt>
-  </aside>
+  <dl class="metadata-container u-flex">
+    <dt>Text Group:</dt>
+    <dd>{{ metadata.textGroupLabel }}</dd>
+    <dt>Work:</dt>
+    <dd>{{ metadata.workLabel }}</dd>
+    <dt>Version:</dt>
+    <dd>{{ metadata.label }}</dd>
+    <dt>Language:</dt>
+    <dd>{{ metadata.humanLang }}</dd>
+    <dt>URN:</dt>
+    <dd>{{ metadata.versionUrn }}</dd>
+  </dl>
 </template>
 
 <script>
@@ -16,7 +24,7 @@
   .metadata-container {
     flex-direction: column;
     > * {
-      margin: 0 0 0.33em 0;
+      font-size: 0.8em;
     }
   }
 </style>

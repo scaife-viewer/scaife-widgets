@@ -17,8 +17,14 @@
       displayName: 'Metadata',
     },
     computed: {
+      passage() {
+        return this.$store.getters[`${WIDGETS_NS}/passage`];
+      },
       metadata() {
-        return this.$store.getters[`${WIDGETS_NS}/metadata`];
+        return {
+          ...this.$store.getters[`${WIDGETS_NS}/metadata`],
+          versionUrn: this.passage.version,
+        };
       },
     },
   };
@@ -30,3 +36,4 @@
     width: 100%;
   }
 </style>
+
