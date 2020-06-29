@@ -21,7 +21,7 @@ export default class URN {
     return this.absolute;
   }
 
-  get lsb() {
+  get lcp() {
     return this.reference
       ? this.reference
           .split('-')[0]

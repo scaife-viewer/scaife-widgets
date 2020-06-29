@@ -5,14 +5,14 @@
       v-for="sibling in siblings"
       :key="sibling.urn"
     >
-      <a v-if="sibling.lsb === passage.lsb" class="active-sibling">
-        {{ sibling.lsb }}
+      <a v-if="sibling.lcp === passage.lcp" class="active-sibling">
+        {{ sibling.lcp }}
       </a>
       <router-link
         v-else
         :to="{ path: 'reader', query: { urn: `${sibling.urn}` } }"
       >
-        {{ sibling.lsb }}
+        {{ sibling.lcp }}
       </router-link>
     </div>
   </div>
