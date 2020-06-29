@@ -1,5 +1,5 @@
 <template>
-<div class="metadata-container u-flex">
+  <div class="metadata-container u-flex">
     <div class="metadata-row">
       <div class="label">Text Group:</div>
       <div class="value">{{ metadata.textGroupLabel }}</div>
@@ -43,7 +43,8 @@
       > .value {
         font-family: $font-family-serif;
       }
-      > .version-urn, .value {
+      > .version-urn,
+      .value {
         margin-top: 0.25em;
       }
       flex-flow: row nowrap;
