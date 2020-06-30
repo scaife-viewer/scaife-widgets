@@ -75,6 +75,6 @@
   .active-sibling {
     font-weight: bold;
     color: $white;
-    background: $gray-800;
+    background: var(--scaife-brand-color, $gray-800);
   }
 </style>
