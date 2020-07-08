@@ -3,6 +3,7 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 
 import scaifeWidgets from '@/store';
+import URN from '@/utils/URN';
 import MetadataWidget from '@/widgets/MetadataWidget.vue';
 import Metadata from '@/components/Metadata.vue';
 
@@ -20,8 +21,14 @@ describe('MetadataWidget.vue', () => {
       store,
       localVue,
       computed: {
+        passage() {
+          return new URN('urn:cts:greekLit:tlg0012.tlg001.msA:1.2.3');
+        },
+        versionUrn() {
+          return 'urn:cts:greekLit:tlg0012.tlg001.msA:';
+        },
         metadata() {
-          return { workTitle: 'some title', workUrn: 'urn:cts:1:1.1:' };
+          return { textGroupLabel: 'text group' };
         },
       },
     });
@@ -29,7 +36,8 @@ describe('MetadataWidget.vue', () => {
     expect(container.classes()).toContain('metadata-widget');
 
     expect(wrapper.find(Metadata).props()).toEqual({
-      metadata: { workTitle: 'some title', workUrn: 'urn:cts:1:1.1:' },
+      metadata: { textGroupLabel: 'text group' },
+      versionUrn: 'urn:cts:greekLit:tlg0012.tlg001.msA:',
     });
   });
 });

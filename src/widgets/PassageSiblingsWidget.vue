@@ -1,8 +1,18 @@
-<template v-if="children">
-  <div class="passage-children-widget u-widget u-grid">
-    <div class="grid-cell-square" v-for="child in children" :key="child.urn">
-      <router-link :to="{ path: 'reader', query: { urn: `${child.urn}` } }">
-        {{ child.lcp }}
+<template v-if="siblings">
+  <div class="passage-siblings-widget u-widget u-grid">
+    <div
+      class="grid-cell-square"
+      v-for="sibling in siblings"
+      :key="sibling.urn"
+    >
+      <a v-if="sibling.lcp === passage.lcp" class="active-sibling">
+        {{ sibling.lcp }}
+      </a>
+      <router-link
+        v-else
+        :to="{ path: 'reader', query: { urn: `${sibling.urn}` } }"
+      >
+        {{ sibling.lcp }}
       </router-link>
     </div>
   </div>
@@ -13,9 +23,9 @@
   import { WIDGETS_NS } from '@/store/constants';
 
   export default {
-    name: 'PassageChildrenWidget',
+    name: 'PassageSiblingsWidget',
     scaifeConfig: {
-      displayName: 'Children',
+      displayName: 'Siblings',
     },
     computed: {
       passage() {
@@ -31,12 +41,12 @@
             }`
           : null;
       },
-      childrenLens() {
-        return this.gqlData.passageTextParts.metadata.children;
+      siblingsLens() {
+        return this.gqlData.passageTextParts.metadata.siblings;
       },
-      children() {
-        return this.gqlData && this.childrenLens
-          ? this.childrenLens.map(node => node)
+      siblings() {
+        return this.gqlData && this.siblingsLens
+          ? this.siblingsLens.map(node => node)
           : [];
       },
     },
@@ -47,19 +57,24 @@
   a {
     text-decoration: none;
   }
-  .passage-children-widget {
+  .passage-siblings-widget {
     width: 100%;
     grid-auto-rows: 1fr;
     grid-template-columns: repeat(auto-fill, minmax(1.6em, 1fr));
   }
-  .passage-children-widget * {
+  .passage-siblings-widget * {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 0.7rem;
     padding: 0.1rem 0.3rem;
   }
-  .passage-children-widget a {
+  .passage-siblings-widget a {
     border: none;
+  }
+  .active-sibling {
+    font-weight: bold;
+    color: $white;
+    background: var(--scaife-brand-color, $gray-800);
   }
 </style>

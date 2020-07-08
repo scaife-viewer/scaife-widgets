@@ -1,6 +1,6 @@
 <template>
   <div class="metadata-widget u-widget u-flex">
-    <Metadata v-if="metadata" :metadata="metadata" />
+    <Metadata v-if="metadata" :metadata="metadata" :version-urn="versionUrn" />
   </div>
 </template>
 
@@ -17,6 +17,12 @@
       displayName: 'Metadata',
     },
     computed: {
+      passage() {
+        return this.$store.getters[`${WIDGETS_NS}/passage`];
+      },
+      versionUrn() {
+        return this.passage.version;
+      },
       metadata() {
         return this.$store.getters[`${WIDGETS_NS}/metadata`];
       },

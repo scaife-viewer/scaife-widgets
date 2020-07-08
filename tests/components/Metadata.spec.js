@@ -3,16 +3,17 @@ import { shallowMount } from '@vue/test-utils';
 import Metadata from '@/components/Metadata.vue';
 
 describe('Metadata.vue', () => {
-  it('it renders the work title', () => {
+  it('it renders the text group label', () => {
     const wrapper = shallowMount(Metadata, {
       propsData: {
-        metadata: { workTitle: 'some title', workUrn: 'urn:cts:1:1.1:' },
+        metadata: { textGroupLabel: 'text group' },
+        versionUrn: 'urn:cts:greekLit:tlg0012.tlg001.msA:',
       },
     });
 
-    expect(wrapper.html()).toContain('<h3 class="work-title">some title</h3>');
+    expect(wrapper.html()).toContain('<div class="value">text group</div>');
     expect(wrapper.html()).toContain(
-      '<tt class="work-urn">urn:cts:1:1.1:</tt>',
+      '<tt class="version-urn">urn:cts:greekLit:tlg0012.tlg001.msA:</tt>',
     );
   });
 });

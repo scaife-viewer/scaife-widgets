@@ -57,7 +57,7 @@
   }
   .passage-ancestors-widget * {
     display: flex;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
   }
   .passage-ancestors-widget a {
     border: none;

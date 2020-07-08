@@ -45,7 +45,7 @@ describe('PassageChildrenWidget.vue', () => {
         children() {
           return [
             {
-              lsb: '1',
+              lcp: '1',
               urn: 'urn:cts:greekLit:tlg0012.tlg001.msA:1.1',
             },
           ];
@@ -81,11 +81,11 @@ describe('PassageChildrenWidget.vue', () => {
         children() {
           return [
             {
-              lsb: '1',
+              lcp: '1',
               urn: 'urn:cts:greekLit:tlg0012.tlg001.msA:1.1',
             },
             {
-              lsb: '2',
+              lcp: '2',
               urn: 'urn:cts:greekLit:tlg0012.tlg001.msA:1.2',
             },
           ];
